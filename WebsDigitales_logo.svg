@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" width="560" height="160">
+  <rect width="560" height="160" rx="14" fill="#FAFAFA"/>
+
+  <!-- webs en negro, sans black -->
+  <text x="40" y="105" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="72" font-weight="900" fill="#111111" letter-spacing="-3">webs</text>
+
+  <!-- punto verde separador -->
+  <circle cx="260" cy="90" r="9" fill="#16C784"/>
+
+  <!-- digitales en gris oscuro, sans thin -->
+  <text x="283" y="105" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="58" font-weight="200" fill="#333333" letter-spacing="-1">digitales</text>
+</svg>

@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmaciasUY — Tu salud, cerca de casa</title>
+<meta name="description" content="Farmacia en Montevideo con envío a domicilio gratis desde $500. Pedí por WhatsApp, recibí en el día.">
+<meta name="keywords" content="farmacia montevideo, envío a domicilio, medicamentos online, farmacia 24 horas, farmaciasuy">
+<meta property="og:title" content="FarmaciasUY — Tu salud, cerca de casa">
+<meta property="og:description" content="Farmacia en Montevideo con envío a domicilio gratis desde $500. Pedí por WhatsApp, recibí en el día.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; color: #2D2D2D; background: #fff; line-height: 1.5; }
+
+/* ===================== CSS VARIABLES ===================== */
+:root {
+  --green: #00A86B;
+  --green-dark: #006B44;
+  --white: #FFFFFF;
+  --gray-light: #F4F7F5;
+  --gray-text: #2D2D2D;
+  --red: #D94F3D;
+  --border: #E2EAE6;
+}
+
+/* ===================== TOP BAR ===================== */
+.top-bar {
+  background: var(--green-dark);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+  text-align: center;
+  padding: 7px 16px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* ===================== HEADER ===================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+.header-main {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--green-dark);
+  letter-spacing: -0.02em;
+}
+
+.search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #D4DDD8;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 200ms;
+  background: #fff;
+}
+
+.search-bar:focus-within { border-color: var(--green); }
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 10px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--gray-text);
+  background: transparent;
+}
+
+.search-bar input::placeholder { color: #AAB5AF; }
+
+.search-bar button {
+  background: var(--green);
+  border: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 200ms;
+  flex-shrink: 0;
+}
+
+.search-bar button:hover { background: var(--green-dark); }
+
+.header-actions { flex-shrink: 0; }
+
+.cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 200ms;
+  position: relative;
+}
+
+.cart-btn:hover { background: var(--green-dark); }
+
+.cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: var(--red);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+}
+
+.cart-badge.visible { display: flex; }
+
+/* ===================== NAV CATEGORIES ===================== */
+.nav-categories {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-categories ul {
+  display: flex;
+  list-style: none;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-categories ul::-webkit-scrollbar { display: none; }
+
+.nav-categories li a {
+  display: block;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #666;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 200ms, border-color 200ms;
+  cursor: pointer;
+}
+
+.nav-categories li a:hover { color: var(--green-dark); }
+.nav-categories li a.active { color: var(--green-dark); border-bottom-color: var(--green); }
+
+/* ===================== HERO SLIDER ===================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 380px;
+}
+
+.slides-track {
+  display: flex;
+  height: 100%;
+  transition: transform 500ms ease;
+}
+
+.slide {
+  flex: 0 0 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+  overflow: hidden;
+}
+
+.slide-dark { background: var(--green-dark); }
+.slide-light { background: var(--gray-light); }
+.slide-white { background: #fff; border-bottom: 1px solid var(--border); }
+
+.slide-content { max-width: 520px; position: relative; z-index: 2; }
+
+.slide-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.slide-dark .slide-tag { color: rgba(255,255,255,0.6); }
+.slide-light .slide-tag { color: var(--green); }
+.slide-white .slide-tag { color: var(--green); }
+
+.slide-h1 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.08;
+  margin-bottom: 16px;
+}
+
+.slide-dark .slide-h1 { color: #fff; }
+.slide-light .slide-h1 { color: var(--gray-text); }
+.slide-white .slide-h1 { color: var(--gray-text); }
+
+.slide-sub {
+  font-size: 15.5px;
+  line-height: 1.55;
+  margin-bottom: 28px;
+}
+
+.slide-dark .slide-sub { color: rgba(255,255,255,0.75); }
+.slide-light .slide-sub { color: #555; }
+.slide-white .slide-sub { color: #555; }
+
+.slide-cta {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 200ms;
+}
+
+.slide-dark .slide-cta { background: var(--green); color: #fff; }
+.slide-dark .slide-cta:hover { background: #00c07a; }
+.slide-light .slide-cta, .slide-white .slide-cta { background: var(--green-dark); color: #fff; }
+.slide-light .slide-cta:hover, .slide-white .slide-cta:hover { background: var(--green); }
+
+.slide-deco {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.07;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.slide-dots {
+  position: absolute;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.45);
+  border: none;
+  cursor: pointer;
+  transition: background 250ms, width 250ms;
+  padding: 0;
+}
+
+.dot.active { width: 24px; background: rgba(255,255,255,0.95); }
+.hero.slide-is-light .dot { background: rgba(0,107,68,0.2); }
+.hero.slide-is-light .dot.active { background: var(--green-dark); }
+
+/* ===================== SERVICES STRIP ===================== */
+.services {
+  background: var(--gray-light);
+  border-bottom: 1px solid var(--border);
+}
+
+.services-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 20px;
+  border-right: 1px solid var(--border);
+}
+
+.service-item:last-child { border-right: none; }
+
+.service-icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  background: rgba(0,168,107,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-title { font-size: 13.5px; font-weight: 600; color: var(--gray-text); margin-bottom: 2px; }
+.service-desc { font-size: 12px; color: #888; line-height: 1.4; }
+
+/* ===================== SHARED SECTION LAYOUT ===================== */
+.section-wrap { padding: 56px 0; }
+.section-wrap.gray { background: var(--gray-light); }
+.section-wrap.white { background: #fff; }
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-title {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--gray-text);
+  margin-bottom: 5px;
+}
+
+.section-sub { font-size: 13.5px; color: #999; margin-bottom: 30px; }
+
+/* ===================== OFFERS CAROUSEL ===================== */
+.offers-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green) #E8EDE9;
+  padding: 4px 4px 10px;
+}
+
+.offers-scroll::-webkit-scrollbar { height: 4px; }
+.offers-scroll::-webkit-scrollbar-track { background: #E8EDE9; border-radius: 2px; }
+.offers-scroll::-webkit-scrollbar-thumb { background: var(--green); border-radius: 2px; }
+
+.offers-row { display: flex; gap: 16px; }
+
+.offers-row .product-card {
+  min-width: 218px;
+  max-width: 218px;
+  flex-shrink: 0;
+}
+
+/* ===================== PRODUCT CARD ===================== */
+.product-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 250ms ease, transform 250ms ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 22px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+
+.product-img-wrap {
+  position: relative;
+  background: #f7faf8;
+  overflow: hidden;
+}
+
+.product-img-wrap img {
+  width: 100%;
+  height: 165px;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-cat {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0,168,107,0.12);
+  color: var(--green-dark);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.badge-offer {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.badge-rx {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #1a3f6f;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* Cuando hay oferta Y receta, desplazamos rx badge para no superponerse */
+.badge-offer ~ .badge-rx {
+  top: 34px;
+}
+
+.product-body {
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--gray-text);
+  margin-bottom: 3px;
+  line-height: 1.35;
+}
+
+.product-brand { font-size: 12px; color: #AAB5AF; margin-bottom: 8px; }
+
+.product-rating {
+  font-size: 13px;
+  color: #E8A800;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.product-rating .review-count { color: #AAB5AF; font-size: 11px; }
+
+.price-old { font-size: 12px; color: #BCC4C0; text-decoration: line-through; margin-bottom: 2px; }
+
+.price-current {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 21px;
+  color: var(--green-dark);
+  margin-bottom: 12px;
+}
+
+.add-btn {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background 200ms;
+  margin-top: auto;
+  text-align: center;
+}
+
+.add-btn:hover { background: var(--green-dark); }
+
+/* Botón para productos con receta médica */
+.rx-btn {
+  display: block;
+  background: #1a3f6f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms;
+  margin-top: auto;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.rx-btn:hover { background: #0f2a4a; }
+
+/* ===================== PRODUCTS GRID ===================== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.product-card.hidden { display: none; }
+
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 56px 16px;
+  color: #999;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.no-results a { color: var(--green-dark); }
+
+/* ===================== WHY US ===================== */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.why-item { display: flex; gap: 18px; align-items: flex-start; }
+
+.why-icon-wrap {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--green);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-title { font-weight: 700; font-size: 15px; color: var(--gray-text); margin-bottom: 6px; }
+.why-desc { font-size: 13.5px; color: #777; line-height: 1.55; }
+
+/* ===================== BRANDS ===================== */
+.brands-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+.brand-badge {
+  padding: 8px 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #666;
+  transition: border-color 200ms, color 200ms;
+  cursor: default;
+}
+
+.brand-badge:hover { border-color: var(--green); color: var(--green-dark); }
+
+/* ===================== CONTACT ===================== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 32px;
+}
+
+.contact-info h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.contact-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px; }
+
+.contact-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(0,168,107,0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #AAB5AF;
+  margin-bottom: 3px;
+}
+
+.contact-value { font-size: 14px; color: var(--gray-text); font-weight: 500; line-height: 1.5; }
+.contact-value a { color: var(--green-dark); text-decoration: none; }
+.contact-value a:hover { text-decoration: underline; }
+.contact-highlight { color: var(--green); font-size: 13px; }
+
+.map-placeholder {
+  background: var(--gray-light);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.map-text { font-size: 13.5px; color: #AAB5AF; }
+
+.map-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  background: var(--green-dark);
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 200ms;
+}
+
+.map-btn:hover { background: var(--green); }
+
+/* ===================== FOOTER ===================== */
+.site-footer { background: var(--green-dark); color: #fff; }
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 52px 40px 40px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 52px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+.footer-legal { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+.footer-col h4 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 18px;
+  color: rgba(255,255,255,0.85);
+}
+
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+
+.footer-col ul li a {
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13.5px;
+  transition: color 200ms;
+}
+
+.footer-col ul li a:hover { color: #fff; }
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ===================== CART OVERLAY & DRAWER ===================== */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.cart-overlay.open { opacity: 1; pointer-events: all; }
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 420px;
+  background: #fff;
+  z-index: 201;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 250ms ease;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+}
+
+.cart-drawer.open { transform: translateX(0); }
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.drawer-header h2 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  color: #666;
+  display: flex;
+  align-items: center;
+  transition: background 200ms;
+}
+
+.icon-btn:hover { background: var(--gray-light); }
+
+.cart-list { flex: 1; overflow-y: auto; padding: 8px 24px; }
+
+.cart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+  color: #CCC;
+}
+
+.cart-empty-state span { font-size: 14px; color: #BBB; }
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.cart-item:last-child { border-bottom: none; }
+
+.ci-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.ci-body { flex: 1; min-width: 0; }
+
+.ci-name {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ci-unit { font-size: 12.5px; color: #999; margin-bottom: 9px; }
+
+.qty-controls { display: flex; align-items: center; gap: 8px; }
+
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-text);
+  transition: border-color 200ms, color 200ms;
+  flex-shrink: 0;
+}
+
+.qty-btn:hover { border-color: var(--green); color: var(--green); }
+
+.qty-val { font-size: 14px; font-weight: 600; min-width: 22px; text-align: center; }
+.ci-subtotal { font-size: 13px; font-weight: 600; color: var(--green-dark); }
+
+.ci-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #CCC;
+  padding: 4px;
+  align-self: flex-start;
+  transition: color 200ms;
+  flex-shrink: 0;
+}
+
+.ci-remove:hover { color: var(--red); }
+
+.drawer-footer {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.totals-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.totals-row.total-row {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gray-text);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: var(--green-dark);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 200ms;
+}
+
+.checkout-btn:hover { background: var(--green); }
+
+.continue-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--green-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 6px;
+  text-align: center;
+  transition: color 200ms;
+}
+
+.continue-btn:hover { color: var(--green); }
+
+/* ===================== ORDER MODAL ===================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms;
+  padding: 16px;
+}
+
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 520px;
+  max-width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.modal h3 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 22px;
+}
+
+.modal-summary {
+  background: var(--gray-light);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  color: #555;
+  max-height: 130px;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+
+.modal-summary .summary-total {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--gray-text);
+  font-size: 14px;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.form-group label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"] {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--gray-text);
+  outline: none;
+  transition: border-color 200ms;
+}
+
+.form-group input:focus { border-color: var(--green); }
+
+.radio-group { display: flex; gap: 20px; }
+
+.radio-opt {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #444;
+}
+
+.radio-opt input { accent-color: var(--green); }
+
+.wsp-btn {
+  width: 100%;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.wsp-btn:hover { background: #1ebe58; }
+
+.modal-cancel {
+  display: block;
+  text-align: center;
+  margin-top: 13px;
+  color: #AAB5AF;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+.modal-cancel:hover { color: var(--gray-text); }
+
+/* ===================== TOAST ===================== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  background: #1A1A1A;
+  color: #fff;
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  z-index: 500;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 220ms, transform 220ms;
+  pointer-events: none;
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* ===================== FLOATING BUTTON ===================== */
+.float-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 52px;
+  height: 52px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,168,107,0.38);
+  text-decoration: none;
+  z-index: 50;
+  transition: background 200ms, box-shadow 200ms;
+}
+
+.float-btn:hover {
+  background: var(--green-dark);
+  box-shadow: 0 6px 20px rgba(0,107,68,0.4);
+}
+
+.float-tooltip {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #1A1A1A;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms;
+}
+
+.float-btn:hover .float-tooltip { opacity: 1; }
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1199px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero { height: 320px; }
+  .slide-h1 { font-size: 36px; }
+}
+
+@media (max-width: 900px) {
+  .why-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .header-main { padding: 12px 16px; gap: 10px; }
+  .logo-text { font-size: 18px; }
+  .search-bar { display: none; }
+  .nav-categories ul { padding: 0 16px; }
+  .hero { height: 270px; }
+  .slide-h1 { font-size: 26px; }
+  .slide-sub { font-size: 13px; }
+  .slide-cta { padding: 10px 20px; font-size: 13px; }
+  .slide-deco { display: none; }
+  .services-inner { grid-template-columns: repeat(2, 1fr); padding: 0 16px; }
+  .service-item { border-right: none; border-bottom: 1px solid var(--border); padding: 16px; }
+  .service-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .service-item:nth-child(3), .service-item:nth-child(4) { border-bottom: none; }
+  .section-inner { padding: 0 16px; }
+  .section-wrap { padding: 40px 0; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+  .map-placeholder { min-height: 200px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; padding: 40px 16px 32px; }
+  .footer-bottom { padding: 16px; flex-direction: column; gap: 8px; text-align: center; }
+  .cart-drawer { width: 100vw; }
+}
+
+@media (max-width: 480px) {
+  .slide-h1 { font-size: 22px; }
+  .products-grid { gap: 10px; }
+  .product-img-wrap img { height: 130px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">Envío gratis en pedidos mayores a $500 &mdash; Atención 24hs</div>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+  <div class="header-main">
+    <a href="#" class="logo" aria-label="FarmaciasUY inicio">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <rect x="12" y="2" width="8" height="28" rx="2.5" fill="#00A86B"/>
+        <rect x="2" y="12" width="28" height="8" rx="2.5" fill="#00A86B"/>
+      </svg>
+      <span class="logo-text">FarmaciasUY</span>
+    </a>
+
+    <div class="search-bar" role="search">
+      <input type="text" id="search-input" placeholder="Buscar medicamentos, vitaminas, dermocosméticos..." aria-label="Buscar productos">
+      <button aria-label="Buscar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="header-actions">
+      <button class="cart-btn" id="cart-btn" aria-label="Abrir carrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        Carrito
+        <span class="cart-badge" id="cart-badge" aria-live="polite">0</span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-categories" aria-label="Categorías">
+    <ul>
+      <li><a href="#catalogo" class="active" data-cat="todos">Todos</a></li>
+      <li><a href="#catalogo" data-cat="medicamentos">Medicamentos</a></li>
+      <li><a href="#catalogo" data-cat="vitaminas">Vitaminas</a></li>
+      <li><a href="#catalogo" data-cat="dermocosmeticos">Dermocosméticos</a></li>
+      <li><a href="#catalogo" data-cat="bebe-mama">Bebé y Mamá</a></li>
+      <li><a href="#catalogo" data-cat="ortopedia">Ortopedia</a></li>
+      <li><a href="#catalogo" data-cat="higiene">Higiene</a></li>
+      <li><a href="#catalogo" data-cat="ofertas">Ofertas</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ===== HERO SLIDER ===== -->
+<section class="hero" id="hero" aria-label="Banners promocionales">
+  <div class="slides-track" id="slides-track">
+    <div class="slide slide-dark">
+      <div class="slide-content">
+        <p class="slide-tag">Servicio express</p>
+        <h1 class="slide-h1">Envío a domicilio<br>en Montevideo</h1>
+        <p class="slide-sub">Pedí antes de las 18hs y recibís hoy mismo en tu puerta</p>
+        <a href="#catalogo" class="slide-cta">Ver productos</a>
+      </div>
+      <svg class="slide-deco" width="320" height="320" viewBox="0 0 320 320" aria-hidden="true">
+        <rect x="136" y="10" width="48" height="300" rx="16" fill="#fff"/>
+        <rect x="10" y="136" width="300" height="48" rx="16" fill="#fff"/>
+      </svg>
+    </div>
+
+    <div class="slide slide-light">
+      <div class="slide-content">
+        <p class="slide-tag">Oferta de la semana</p>
+        <h1 class="slide-h1">Vitaminas y<br>suplementos</h1>
+        <p class="slide-sub">Hasta 30% de descuento esta semana en toda la línea de suplementos</p>
+        <a href="#catalogo" class="slide-cta">Ver ofertas</a>
+      </div>
+      <svg class="slide-deco" width="280" height="280" viewBox="0 0 280 280" aria-hidden="true">
+        <circle cx="140" cy="140" r="130" fill="#00A86B"/>
+        <circle cx="140" cy="140" r="90" fill="white"/>
+        <circle cx="140" cy="140" r="50" fill="#00A86B"/>
+        <circle cx="140" cy="140" r="20" fill="white"/>
+      </svg>
+    </div>
+
+    <div class="slide slide-white">
+      <div class="slide-content">
+        <p class="slide-tag">Atención farmacéutica</p>
+        <h1 class="slide-h1">Enviá tu receta<br>por WhatsApp</h1>
+        <p class="slide-sub">Te asesoramos sin cargo con farmacéuticos matriculados disponibles</p>
+        <a href="https://wa.me/59891234567" class="slide-cta" target="_blank" rel="noopener">Escribir ahora</a>
+      </div>
+      <svg class="slide-deco" width="260" height="260" viewBox="0 0 260 260" aria-hidden="true">
+        <rect x="20" y="20" width="220" height="220" rx="32" fill="#006B44"/>
+        <rect x="60" y="60" width="140" height="140" rx="20" fill="white"/>
+        <rect x="100" y="100" width="60" height="60" rx="10" fill="#006B44"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="slide-dots" role="tablist" aria-label="Navegar banners">
+    <button class="dot active" data-idx="0" aria-label="Banner 1" role="tab"></button>
+    <button class="dot" data-idx="1" aria-label="Banner 2" role="tab"></button>
+    <button class="dot" data-idx="2" aria-label="Banner 3" role="tab"></button>
+  </div>
+</section>
+
+<!-- ===== SERVICES STRIP ===== -->
+<div class="services">
+  <div class="services-inner">
+    <div class="service-item">
+      <div class="service-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+        </svg>
+      </div>
+      <div><div class="service-title">Envío a domicilio</div><div class="service-desc">Montevideo y área metropolitana</div></div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </div>
+      <div><div class="service-title">Recetas online</div><div class="service-desc">Enviá foto por WhatsApp</div></div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <div><div class="service-title">Turno permanente</div><div class="service-desc">Abierto las 24 horas</div></div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+        </svg>
+      </div>
+      <div><div class="service-title">Mutual y FONASA</div><div class="service-desc">Todas las tarjetas aceptadas</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OFFERS ===== -->
+<div class="section-wrap white">
+  <div class="section-inner">
+    <h2 class="section-title">Ofertas de la semana</h2>
+    <p class="section-sub">Precios válidos hasta agotar stock</p>
+    <div class="offers-scroll"><div class="offers-row" id="offers-row"></div></div>
+  </div>
+</div>
+
+<!-- ===== CATALOG ===== -->
+<div class="section-wrap gray" id="catalogo">
+  <div class="section-inner">
+    <h2 class="section-title">Nuestro catálogo</h2>
+    <p class="section-sub">Todos los productos al mejor precio</p>
+    <div class="products-grid" id="products-grid"></div>
+    <div class="no-results" id="no-results">
+      No encontramos resultados para ese término. Podés consultarnos por
+      <a href="https://wa.me/59891234567" target="_blank" rel="noopener">WhatsApp</a>.
+    </div>
+  </div>
+</div>
+
+<!-- ===== WHY US ===== -->
+<div class="section-wrap white">
+  <div class="section-inner">
+    <h2 class="section-title">Por qué elegirnos</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="why-title">Productos originales y certificados</div>
+          <div class="why-desc">Trabajamos exclusivamente con laboratorios habilitados por el MSP, garantizando trazabilidad y autenticidad en cada producto que comercializamos.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <div class="why-title">Farmacéuticos matriculados</div>
+          <div class="why-desc">Nuestro equipo de farmacéuticos matriculados te asesora de lunes a domingo para que tomes las mejores decisiones sobre tu salud.</div>
+        </div>
+      </div>
+      <div class="why-item">
+        <div class="why-icon-wrap" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="why-title">Entrega el mismo día</div>
+          <div class="why-desc">Pedidos realizados antes de las 18hs se entregan el mismo día en Montevideo y zona metropolitana, sin costo adicional en pedidos desde $500.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== BRANDS ===== -->
+<div class="section-wrap gray">
+  <div class="section-inner">
+    <h2 class="section-title">Trabajamos con los mejores laboratorios</h2>
+    <p class="section-sub">Productos originales directo de distribuidores oficiales</p>
+    <div class="brands-row">
+      <div class="brand-badge">Bayer</div>
+      <div class="brand-badge">Roemmers</div>
+      <div class="brand-badge">La Roche-Posay</div>
+      <div class="brand-badge">Eucerin</div>
+      <div class="brand-badge">Johnson's</div>
+      <div class="brand-badge">Pampers</div>
+      <div class="brand-badge">Omron</div>
+      <div class="brand-badge">CeraVe</div>
+      <div class="brand-badge">Bioderma</div>
+      <div class="brand-badge">Natrol</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="section-wrap white">
+  <div class="section-inner">
+    <h2 class="section-title">Dónde encontrarnos</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Información de contacto</h3>
+        <div class="contact-row">
+          <div class="contact-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div><div class="contact-label">Dirección</div><div class="contact-value">Av. 18 de Julio 1234, Montevideo</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/></svg>
+          </div>
+          <div><div class="contact-label">Teléfono</div><div class="contact-value">2900 1234</div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div><div class="contact-label">WhatsApp</div><div class="contact-value"><a href="https://wa.me/59891234567" target="_blank" rel="noopener">+598 91 234 567</a></div></div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00A86B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Horario de atención</div>
+            <div class="contact-value">
+              Lun&ndash;Vie 8:00&ndash;22:00<br>
+              Sáb 9:00&ndash;20:00<br>
+              Dom 10:00&ndash;18:00<br>
+              <span class="contact-highlight">Turno 24hs disponible</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-placeholder">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#CCC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <p class="map-text">Av. 18 de Julio 1234, Montevideo</p>
+        <a href="https://maps.google.com/?q=Av.+18+de+Julio+1234+Montevideo" target="_blank" rel="noopener" class="map-btn">Ver en Google Maps</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="12" y="2" width="8" height="28" rx="2.5" fill="rgba(255,255,255,0.88)"/>
+          <rect x="2" y="12" width="28" height="8" rx="2.5" fill="rgba(255,255,255,0.88)"/>
+        </svg>
+        FarmaciasUY
+      </div>
+      <p class="footer-tagline">Tu salud, cerca de casa</p>
+      <p class="footer-legal">Habilitación MSP N&deg; XXXX</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#catalogo">Medicamentos</a></li>
+        <li><a href="#catalogo">Vitaminas</a></li>
+        <li><a href="#catalogo">Dermocosméticos</a></li>
+        <li><a href="#catalogo">Ofertas</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Términos y condiciones</a></li>
+        <li><a href="#">Política de devoluciones</a></li>
+        <li><a href="#">Envíos y entregas</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 FarmaciasUY &mdash; Todos los derechos reservados</span>
+    <span>Visa &middot; Mastercard &middot; OCA &middot; BROU &middot; Redpagos</span>
+  </div>
+</footer>
+
+<!-- ===== CART OVERLAY ===== -->
+<div class="cart-overlay" id="cart-overlay" aria-hidden="true"></div>
+
+<!-- ===== CART DRAWER ===== -->
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Tu carrito">
+  <div class="drawer-header">
+    <h2>Tu carrito</h2>
+    <button class="icon-btn" id="cart-close" aria-label="Cerrar carrito">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-list" id="cart-list"></div>
+  <div class="drawer-footer" id="drawer-footer" style="display:none;">
+    <div class="totals-row"><span>Subtotal</span><span id="val-subtotal">$0</span></div>
+    <div class="totals-row"><span>Envío</span><span id="val-shipping">$150</span></div>
+    <div class="totals-row total-row"><span>Total</span><span id="val-total">$0</span></div>
+    <button class="checkout-btn" id="checkout-btn">Finalizar pedido</button>
+    <button class="continue-btn" id="continue-btn">Seguir comprando</button>
+  </div>
+</aside>
+
+<!-- ===== ORDER MODAL ===== -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-label="Confirmar pedido">
+  <div class="modal">
+    <h3>Confirmá tu pedido</h3>
+    <div class="modal-summary" id="modal-summary"></div>
+    <div class="form-group">
+      <label for="order-name">Nombre completo</label>
+      <input type="text" id="order-name" placeholder="Tu nombre y apellido">
+    </div>
+    <div class="form-group">
+      <label for="order-phone">Teléfono</label>
+      <input type="tel" id="order-phone" placeholder="+598 9X XXX XXX">
+    </div>
+    <div class="form-group">
+      <label for="order-address">Dirección de entrega</label>
+      <input type="text" id="order-address" placeholder="Calle, número, apartamento, barrio">
+    </div>
+    <div class="form-group">
+      <label>Método de pago</label>
+      <div class="radio-group">
+        <label class="radio-opt"><input type="radio" name="payment" value="Efectivo" checked> Efectivo</label>
+        <label class="radio-opt"><input type="radio" name="payment" value="Tarjeta"> Tarjeta</label>
+        <label class="radio-opt"><input type="radio" name="payment" value="Transferencia"> Transferencia</label>
+      </div>
+    </div>
+    <button class="wsp-btn" id="wsp-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+      </svg>
+      Confirmar pedido por WhatsApp
+    </button>
+    <span class="modal-cancel" id="modal-cancel" role="button" tabindex="0">Cancelar</span>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===== FLOATING WA BUTTON ===== -->
+<a href="https://wa.me/59891234567" target="_blank" rel="noopener" class="float-btn" aria-label="Contactar por WhatsApp">
+  <span class="float-tooltip">Escribinos por WhatsApp</span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+// ===================== IMÁGENES POR CATEGORÍA (Unsplash) =====================
+// Una o dos fotos genéricas por categoría — más honesto que simular una foto por producto
+const CAT_IMGS = {
+  medicamentos:    [
+    'photo-1584308666744-24d5c474f2ae', // pastillas blancas
+    'photo-1471864190281-a93a3070b6de', // comprimidos variados
+  ],
+  vitaminas:       [
+    'photo-1556909114-f6e7ad7d3136', // cápsulas suplementos
+    'photo-1612817288484-6f916006741a', // frascos vitaminas
+  ],
+  dermocosmeticos: [
+    'photo-1556228720-195a672e8a03', // productos skincare
+    'photo-1620916566398-39f1143ab7be', // crema facial
+  ],
+  'bebe-mama':     [
+    'photo-1515488042361-ee00e0ddd4e4', // artículos bebé
+    'photo-1519689680058-324335c77eba', // cuidado bebé
+  ],
+  ortopedia:       [
+    'photo-1576091160399-112ba8d25d1d', // equipo médico
+    'photo-1559757175-5700dde675bc',    // dispositivo ortopédico
+  ],
+  higiene:         [
+    'photo-1571781926291-c477ebfd024b', // jabón / higiene
+    'photo-1545205597-3d9d02c29597',    // artículos baño
+  ],
+};
+
+function catImg(cat, id) {
+  const arr = CAT_IMGS[cat] || CAT_IMGS.medicamentos;
+  return 'https://images.unsplash.com/' + arr[id % arr.length]
+    + '?w=560&h=330&fit=crop&auto=format&q=75';
+}
+
+// ===================== PRODUCT DATA =====================
+const PRODUCTS = [
+  // --- Medicamentos ---
+  { id: 1,  name: 'Paracetamol 500mg x 20 comp',               brand: 'Roemmers',       cat: 'medicamentos',    price: 185,  oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 38  },
+  { id: 2,  name: 'Ibuprofeno 400mg x 20 comp',                brand: 'Gador',          cat: 'medicamentos',    price: 220,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 52  },
+  { id: 3,  name: 'Aspirina 500mg x 20 comp',                  brand: 'Bayer',          cat: 'medicamentos',    price: 195,  oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 61  },
+  { id: 4,  name: 'Amoxicilina 500mg x 12 caps',               brand: 'Normon',         cat: 'medicamentos',    price: 680,  oldPrice: null, offer: null, rx: true,  rating: 4.4, reviews: 29  },
+  { id: 5,  name: 'Omeprazol 20mg x 14 caps',                  brand: 'Mintlab',        cat: 'medicamentos',    price: 420,  oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 44  },
+  { id: 6,  name: 'Losartan 50mg x 30 comp',                   brand: 'Andrómaco',      cat: 'medicamentos',    price: 590,  oldPrice: null, offer: null, rx: true,  rating: 4.3, reviews: 18  },
+  { id: 7,  name: 'Metformina 850mg x 30 comp',                brand: 'Urufarma',       cat: 'medicamentos',    price: 340,  oldPrice: null, offer: null, rx: true,  rating: 4.4, reviews: 23  },
+  { id: 8,  name: 'Loratadina 10mg x 10 comp',                 brand: 'Roemmers',       cat: 'medicamentos',    price: 310,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 35  },
+  // --- Vitaminas ---
+  { id: 9,  name: 'Vitamina C 1000mg x 30 comp efervescentes', brand: 'Bayer',          cat: 'vitaminas',       price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 72  },
+  { id: 10, name: 'Vitamina D3 2000 UI x 60 caps',             brand: 'Now Foods',      cat: 'vitaminas',       price: 1250, oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 58  },
+  { id: 11, name: 'Complejo B x 60 comp',                      brand: 'Solgar',         cat: 'vitaminas',       price: 980,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 41  },
+  { id: 12, name: 'Omega 3 1000mg x 60 caps',                  brand: 'Natrol',         cat: 'vitaminas',       price: 1607, oldPrice: 1890, offer: 15,   rx: false, rating: 4.8, reviews: 89  },
+  { id: 13, name: 'Magnesio 400mg x 60 comp',                  brand: 'Now Foods',      cat: 'vitaminas',       price: 1100, oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 47  },
+  { id: 14, name: 'Zinc + Selenio x 30 comp',                  brand: 'Sundown',        cat: 'vitaminas',       price: 750,  oldPrice: null, offer: null, rx: false, rating: 4.4, reviews: 33  },
+  { id: 15, name: 'Colágeno Hidrolizado x 30 sobres',          brand: 'Verisol',        cat: 'vitaminas',       price: 1680, oldPrice: 2100, offer: 20,   rx: false, rating: 4.7, reviews: 64  },
+  { id: 16, name: 'Melatonina 5mg x 30 comp',                  brand: 'Natrol',         cat: 'vitaminas',       price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 55  },
+  // --- Dermocosméticos ---
+  { id: 17, name: 'Protector Solar SPF50 200ml',               brand: 'Eucerin',        cat: 'dermocosmeticos', price: 1701, oldPrice: 1890, offer: 10,   rx: false, rating: 4.8, reviews: 93  },
+  { id: 18, name: 'Crema Hidratante Facial 50ml',              brand: 'La Roche-Posay', cat: 'dermocosmeticos', price: 2350, oldPrice: null, offer: null, rx: false, rating: 4.9, reviews: 108 },
+  { id: 19, name: 'Sérum Vitamina C 30ml',                     brand: 'Neutrogena',     cat: 'dermocosmeticos', price: 2168, oldPrice: 2890, offer: 25,   rx: false, rating: 4.7, reviews: 76  },
+  { id: 20, name: 'Limpiador Facial Suave 200ml',              brand: 'CeraVe',         cat: 'dermocosmeticos', price: 1650, oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 84  },
+  { id: 21, name: 'Contorno de Ojos 15ml',                     brand: 'Vichy',          cat: 'dermocosmeticos', price: 3200, oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 42  },
+  { id: 22, name: 'Crema Corporal Urea 10% 250ml',             brand: 'Eucerin',        cat: 'dermocosmeticos', price: 1450, oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 67  },
+  { id: 23, name: 'Agua Micelar 400ml',                        brand: 'Bioderma',       cat: 'dermocosmeticos', price: 1980, oldPrice: null, offer: null, rx: false, rating: 4.9, reviews: 121 },
+  { id: 24, name: 'Base Fluida SPF15',                         brand: 'Dermablend',     cat: 'dermocosmeticos', price: 2200, oldPrice: 2750, offer: 20,   rx: false, rating: 4.5, reviews: 38  },
+  // --- Bebé y Mamá ---
+  { id: 25, name: 'Pañales RN x 30 unid',                      brand: 'Pampers',        cat: 'bebe-mama',       price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 147 },
+  { id: 26, name: 'Toallitas Húmedas x 80 unid',               brand: 'Huggies',        cat: 'bebe-mama',       price: 420,  oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 98  },
+  { id: 27, name: 'Crema para Pañalitis 75g',                  brand: 'Bepanthen',      cat: 'bebe-mama',       price: 680,  oldPrice: null, offer: null, rx: false, rating: 4.9, reviews: 203 },
+  { id: 28, name: 'Leche de Continuación 400g',                brand: 'Nan 2',          cat: 'bebe-mama',       price: 1450, oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 56  },
+  { id: 29, name: 'Termómetro Digital',                        brand: 'Microlife',      cat: 'bebe-mama',       price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 74  },
+  { id: 30, name: 'Chupete Ortodóntico 0-6m',                  brand: 'Avent',          cat: 'bebe-mama',       price: 590,  oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 88  },
+  { id: 31, name: 'Shampoo Bebé 200ml',                        brand: "Johnson's",      cat: 'bebe-mama',       price: 480,  oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 112 },
+  { id: 32, name: 'Vitamina D Bebé en Gotas 15ml',             brand: 'Lab. Chile',     cat: 'bebe-mama',       price: 780,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 43  },
+  // --- Ortopedia ---
+  { id: 33, name: 'Tobillera Elástica Talla M',                brand: 'Stoken',         cat: 'ortopedia',       price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.4, reviews: 27  },
+  { id: 34, name: 'Rodillera de Neoprene',                     brand: 'Orliman',        cat: 'ortopedia',       price: 1250, oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 34  },
+  { id: 35, name: 'Plantillas de Gel Talla 40-42',             brand: 'Scholl',         cat: 'ortopedia',       price: 780,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 51  },
+  { id: 36, name: 'Bastón Regulable de Aluminio',              brand: 'Drive',          cat: 'ortopedia',       price: 2100, oldPrice: null, offer: null, rx: false, rating: 4.3, reviews: 16  },
+  { id: 37, name: 'Termómetro Infrarrojo',                     brand: 'Microlife',      cat: 'ortopedia',       price: 2890, oldPrice: 3400, offer: 15,   rx: false, rating: 4.7, reviews: 63  },
+  { id: 38, name: 'Tensímetro Digital de Brazo',               brand: 'Omron',          cat: 'ortopedia',       price: 4890, oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 89  },
+  { id: 39, name: 'Faja Lumbar Talla M',                       brand: 'Thuasne',        cat: 'ortopedia',       price: 2350, oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 29  },
+  { id: 40, name: 'Nebulizador Compresor',                     brand: 'Medel',          cat: 'ortopedia',       price: 4160, oldPrice: 5200, offer: 20,   rx: false, rating: 4.7, reviews: 44  },
+  // --- Higiene ---
+  { id: 41, name: 'Alcohol en Gel 500ml',                      brand: 'Sanytol',        cat: 'higiene',         price: 390,  oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 88  },
+  { id: 42, name: 'Barbijo Quirúrgico x 50',                   brand: '3M',             cat: 'higiene',         price: 890,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 72  },
+  { id: 43, name: 'Hilo Dental 50m',                           brand: 'Oral-B',         cat: 'higiene',         price: 280,  oldPrice: null, offer: null, rx: false, rating: 4.7, reviews: 56  },
+  { id: 44, name: 'Enjuague Bucal 500ml',                      brand: 'Listerine',      cat: 'higiene',         price: 620,  oldPrice: null, offer: null, rx: false, rating: 4.6, reviews: 91  },
+  { id: 45, name: 'Preservativos x 12',                        brand: 'Tulipán',        cat: 'higiene',         price: 780,  oldPrice: null, offer: null, rx: false, rating: 4.5, reviews: 43  },
+  { id: 46, name: 'Test de Embarazo',                          brand: 'Clearblue',      cat: 'higiene',         price: 590,  oldPrice: null, offer: null, rx: false, rating: 4.8, reviews: 167 },
+  { id: 47, name: 'Alcohol 96° 1L',                            brand: 'UruFarma',       cat: 'higiene',         price: 450,  oldPrice: null, offer: null, rx: false, rating: 4.4, reviews: 38  },
+  { id: 48, name: 'Guantes Descartables Talla L x 50',         brand: 'Medline',        cat: 'higiene',         price: 780,  oldPrice: null, offer: null, rx: false, rating: 4.3, reviews: 29  },
+];
+
+// Asignar imagen Unsplash de categoría a cada producto
+PRODUCTS.forEach(p => { p.img = catImg(p.cat, p.id); });
+
+// ===================== HELPERS =====================
+
+function fmtPrice(n) {
+  return '$' + n.toLocaleString('es-UY');
+}
+
+function stars(r) {
+  const full  = Math.floor(r);
+  const half  = (r - full) >= 0.5 ? 1 : 0;
+  const empty = 5 - full - half;
+  return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+}
+
+const CAT_LABELS = {
+  medicamentos:    'Medicamentos',
+  vitaminas:       'Vitaminas',
+  dermocosmeticos: 'Dermocosméticos',
+  'bebe-mama':     'Bebé y Mamá',
+  ortopedia:       'Ortopedia',
+  higiene:         'Higiene',
+};
+
+// ===================== BUILD PRODUCT CARD =====================
+
+function buildCard(p) {
+  const card = document.createElement('div');
+  card.className = 'product-card';
+  card.dataset.id    = p.id;
+  card.dataset.cat   = p.cat;
+  card.dataset.name  = p.name.toLowerCase();
+  card.dataset.brand = p.brand.toLowerCase();
+
+  const offerBadge = p.offer
+    ? `<div class="badge-offer">OFERTA -${p.offer}%</div>`
+    : '';
+  // Badge de receta: siempre visible cuando aplica
+  const rxBadge = p.rx
+    ? `<div class="badge-rx">Requiere receta</div>`
+    : '';
+  const oldPriceHtml = p.oldPrice
+    ? `<div class="price-old">${fmtPrice(p.oldPrice)}</div>`
+    : '';
+
+  // Productos con receta: botón WA en vez de carrito
+  const waMsg = encodeURIComponent(
+    'Hola! Quiero comprar ' + p.name + ', que requiere receta. ¿Cómo la envío?'
+  );
+  const actionBtn = p.rx
+    ? `<a href="https://wa.me/59891234567?text=${waMsg}" class="add-btn rx-btn" target="_blank" rel="noopener">Enviá tu receta por WhatsApp</a>`
+    : `<button class="add-btn" data-id="${p.id}">Agregar al carrito</button>`;
+
+  card.innerHTML = `
+    <div class="product-img-wrap">
+      <img src="${p.img}" alt="${p.name}" loading="lazy" width="280" height="165">
+      <div class="badge-cat">${CAT_LABELS[p.cat] || p.cat}</div>
+      ${offerBadge}${rxBadge}
+    </div>
+    <div class="product-body">
+      <div class="product-name">${p.name}</div>
+      <div class="product-brand">${p.brand}</div>
+      <div class="product-rating">
+        ${stars(p.rating)}
+        <span class="review-count">(${p.reviews})</span>
+      </div>
+      <div class="product-prices">
+        ${oldPriceHtml}
+        <div class="price-current">${fmtPrice(p.price)}</div>
+      </div>
+      ${actionBtn}
+    </div>
+  `;
+  return card;
+}
+
+// ===================== RENDER OFFERS =====================
+
+const offersRow = document.getElementById('offers-row');
+PRODUCTS.filter(p => p.offer).forEach(p => offersRow.appendChild(buildCard(p)));
+
+// ===================== RENDER CATALOG =====================
+
+const grid = document.getElementById('products-grid');
+PRODUCTS.forEach(p => grid.appendChild(buildCard(p)));
+
+// ===================== HERO SLIDER =====================
+
+const track = document.getElementById('slides-track');
+const dots  = document.querySelectorAll('.dot');
+let current = 0;
+const TOTAL = 3;
+
+function goSlide(idx) {
+  current = ((idx % TOTAL) + TOTAL) % TOTAL;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+dots.forEach(d => d.addEventListener('click', () => goSlide(+d.dataset.idx)));
+setInterval(() => goSlide(current + 1), 5000);
+
+// ===================== CATEGORY FILTER =====================
+
+let activeCat = 'todos';
+
+document.querySelectorAll('[data-cat]').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    activeCat = el.dataset.cat;
+    document.querySelectorAll('[data-cat]').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll(`[data-cat="${activeCat}"]`).forEach(x => x.classList.add('active'));
+    applyFilters();
+    document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ===================== SEARCH =====================
+
+const searchInput = document.getElementById('search-input');
+let searchQ = '';
+
+searchInput.addEventListener('input', () => {
+  searchQ = searchInput.value.trim().toLowerCase();
+  applyFilters();
+});
+
+function applyFilters() {
+  const cards = grid.querySelectorAll('.product-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const matchCat = activeCat === 'todos'
+      ? true
+      : activeCat === 'ofertas'
+        ? card.querySelector('.badge-offer') !== null
+        : card.dataset.cat === activeCat;
+    const matchQ = !searchQ
+      || card.dataset.name.includes(searchQ)
+      || card.dataset.brand.includes(searchQ)
+      || card.dataset.cat.includes(searchQ)
+      || (CAT_LABELS[card.dataset.cat] || '').toLowerCase().includes(searchQ);
+    const show = matchCat && matchQ;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// ===================== CART STATE =====================
+
+let cart = (() => {
+  try { return JSON.parse(localStorage.getItem('fuy_cart') || '[]'); } catch(e) { return []; }
+})();
+
+function saveCart()    { localStorage.setItem('fuy_cart', JSON.stringify(cart)); }
+function cartCount()   { return cart.reduce((s, i) => s + i.qty, 0); }
+function cartSubtotal(){ return cart.reduce((s, i) => s + i.price * i.qty, 0); }
+
+function syncBadge() {
+  const n = cartCount();
+  const b = document.getElementById('cart-badge');
+  b.textContent = n;
+  b.classList.toggle('visible', n > 0);
+}
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) { existing.qty++; }
+  else { cart.push({ id: p.id, name: p.name, price: p.price, img: p.img, qty: 1 }); }
+  saveCart();
+  syncBadge();
+  showToast('Producto agregado');
+}
+
+function removeItem(id) {
+  cart = cart.filter(x => x.id !== id);
+  saveCart(); syncBadge(); renderCart();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(x => x.id === id);
+  if (!item) return;
+  item.qty = Math.max(0, item.qty + delta);
+  if (item.qty === 0) { removeItem(id); return; }
+  saveCart(); syncBadge(); renderCart();
+}
+
+// ===================== RENDER CART =====================
+
+function renderCart() {
+  const list   = document.getElementById('cart-list');
+  const footer = document.getElementById('drawer-footer');
+  list.innerHTML = '';
+
+  if (cart.length === 0) {
+    footer.style.display = 'none';
+    list.innerHTML = `
+      <div class="cart-empty-state">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#DDD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span>Tu carrito está vacío</span>
+      </div>`;
+    return;
+  }
+
+  footer.style.display = 'block';
+  cart.forEach(item => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <img class="ci-img" src="${item.img}" alt="${item.name}" width="64" height="64">
+      <div class="ci-body">
+        <div class="ci-name" title="${item.name}">${item.name}</div>
+        <div class="ci-unit">${fmtPrice(item.price)} c/u</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div class="qty-controls">
+            <button class="qty-btn" data-id="${item.id}" data-delta="-1" aria-label="Restar">&#8722;</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" data-id="${item.id}" data-delta="1" aria-label="Sumar">&#43;</button>
+          </div>
+          <span class="ci-subtotal">${fmtPrice(item.price * item.qty)}</span>
+        </div>
+      </div>
+      <button class="ci-remove" data-id="${item.id}" aria-label="Eliminar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+          <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/>
+        </svg>
+      </button>
+    `;
+    list.appendChild(div);
+  });
+
+  list.querySelectorAll('.qty-btn').forEach(b =>
+    b.addEventListener('click', () => changeQty(+b.dataset.id, +b.dataset.delta)));
+  list.querySelectorAll('.ci-remove').forEach(b =>
+    b.addEventListener('click', () => removeItem(+b.dataset.id)));
+
+  const sub      = cartSubtotal();
+  const shipping = sub >= 500 ? 0 : 150;
+  document.getElementById('val-subtotal').textContent = fmtPrice(sub);
+  document.getElementById('val-shipping').textContent = shipping === 0 ? 'Gratis' : fmtPrice(shipping);
+  document.getElementById('val-total').textContent    = fmtPrice(sub + shipping);
+}
+
+// ===================== OPEN / CLOSE CART =====================
+
+function openCart()  {
+  renderCart();
+  document.getElementById('cart-drawer').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart() {
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('cart-btn').addEventListener('click', openCart);
+document.getElementById('cart-close').addEventListener('click', closeCart);
+document.getElementById('cart-overlay').addEventListener('click', closeCart);
+document.getElementById('continue-btn').addEventListener('click', closeCart);
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.add-btn[data-id]');
+  if (btn) addToCart(+btn.dataset.id);
+});
+
+// ===================== TOAST =====================
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ===================== ORDER MODAL =====================
+
+document.getElementById('checkout-btn').addEventListener('click', () => {
+  if (cart.length === 0) return;
+  const sub      = cartSubtotal();
+  const shipping = sub >= 500 ? 0 : 150;
+  const total    = sub + shipping;
+  const summaryEl = document.getElementById('modal-summary');
+  summaryEl.innerHTML =
+    cart.map(i => `<div>${i.qty}× ${i.name} &mdash; ${fmtPrice(i.price * i.qty)}</div>`).join('') +
+    `<div class="summary-total">Total: ${fmtPrice(total)}</div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+  closeCart();
+});
+
+function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+
+document.getElementById('modal-cancel').addEventListener('click', closeModal);
+document.getElementById('modal-cancel').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') closeModal();
+});
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+
+document.getElementById('wsp-btn').addEventListener('click', () => {
+  const name    = document.getElementById('order-name').value.trim()    || 'Sin nombre';
+  const phone   = document.getElementById('order-phone').value.trim()   || 'Sin teléfono';
+  const address = document.getElementById('order-address').value.trim() || 'Sin dirección';
+  const payment = document.querySelector('input[name="payment"]:checked').value;
+  const sub      = cartSubtotal();
+  const shipping = sub >= 500 ? 0 : 150;
+  let msg = '*Nuevo pedido - FarmaciasUY*\n\n*Productos:*\n';
+  cart.forEach(i => { msg += `• ${i.qty}x ${i.name} — ${fmtPrice(i.price * i.qty)}\n`; });
+  msg += `\n*Subtotal:* ${fmtPrice(sub)}\n*Envío:* ${shipping === 0 ? 'Gratis' : fmtPrice(shipping)}\n*Total:* ${fmtPrice(sub + shipping)}`;
+  msg += `\n\n*Cliente:* ${name}\n*Teléfono:* ${phone}\n*Dirección:* ${address}\n*Pago:* ${payment}`;
+  window.open('https://wa.me/59891234567?text=' + encodeURIComponent(msg), '_blank');
+});
+
+// ===================== INIT =====================
+syncBadge();
+</script>
+</body>
+</html>

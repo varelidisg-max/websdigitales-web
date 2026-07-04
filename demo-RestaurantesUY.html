@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestaurantesUY — Cocina de mercado, Montevideo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --white:       #FFFFFF;
+      --bg-alt:      #F9F9F8;
+      --text-main:   #111111;
+      --text-sec:    #777777;
+      --green:       #2D5016;
+      --green-dark:  #213D10;
+      --black-deep:  #0A0A0A;
+      --border:      #E5E5E5;
+      --sep:         #1F1F1F;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui:      'DM Sans', system-ui, sans-serif;
+
+      --section-py: 96px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--white);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ============================================================
+       FADE-IN DE SECCIONES (JS añade .visible)
+    ============================================================ */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       HEADER
+    ============================================================ */
+    #header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--black-deep);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 200ms;
+    }
+    #header.scrolled {
+      border-bottom-color: var(--sep);
+    }
+
+    /* Logo */
+    .header-logo {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .header-logo .name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 22px;
+      color: var(--white);
+      line-height: 1;
+    }
+    .header-logo .tagline {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--text-sec);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    /* Nav */
+    .header-nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .header-nav a {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #888888;
+      transition: color 150ms;
+    }
+    .header-nav a:hover,
+    .header-nav a.active {
+      color: var(--white);
+    }
+
+    /* CTA header */
+    .header-cta {
+      flex-shrink: 0;
+    }
+    .btn-outline-green {
+      display: inline-block;
+      border: 1px solid var(--green);
+      color: var(--green);
+      background: transparent;
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 13px;
+      padding: 9px 20px;
+      cursor: pointer;
+      transition: background 150ms, color 150ms;
+      letter-spacing: 0.03em;
+    }
+    .btn-outline-green:hover {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    /* Hamburguesa */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--white);
+      transition: transform 200ms, opacity 200ms;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Menú mobile */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--black-deep);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      transition: color 150ms;
+    }
+    .mobile-menu a:hover { color: var(--green); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: #0A0A0A;
+      opacity: 0.50;
+    }
+    .hero-content {
+      position: absolute;
+      bottom: 80px;
+      left: 8vw;
+      max-width: 700px;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(58px, 7vw, 110px);
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 24px;
+    }
+    .hero-divider {
+      width: 48px;
+      height: 1px;
+      background: var(--green);
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 16px;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 36px;
+      max-width: 420px;
+      line-height: 1.7;
+    }
+    .btn-green {
+      display: inline-block;
+      background: var(--green);
+      color: var(--white);
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 13px 32px;
+      border: none;
+      cursor: pointer;
+      transition: background 150ms;
+      letter-spacing: 0.03em;
+    }
+    .btn-green:hover { background: var(--green-dark); }
+
+    .hero-hours {
+      position: absolute;
+      bottom: 40px;
+      right: 48px;
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 11px;
+      color: rgba(255,255,255,0.40);
+      line-height: 1.8;
+      text-align: right;
+    }
+
+    /* ============================================================
+       FRANJA DE DATOS
+    ============================================================ */
+    #datos {
+      background: var(--black-deep);
+      padding: 48px 80px;
+    }
+    .datos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .dato-item {
+      text-align: center;
+      padding: 0 32px;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--white);
+    }
+    .dato-item + .dato-item {
+      border-left: 1px solid #222222;
+    }
+
+    /* ============================================================
+       LA COCINA
+    ============================================================ */
+    #cocina {
+      background: var(--white);
+    }
+    .cocina-grid {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      min-height: 600px;
+    }
+    .cocina-img {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+    .cocina-content {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-sec);
+      margin-bottom: 20px;
+    }
+    .cocina-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 44px;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+    .cocina-body {
+      font-family: var(--font-ui);
+      font-size: 16px;
+      color: #555555;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .cocina-body p + p { margin-top: 16px; }
+
+    .chef-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: auto;
+    }
+    .chef-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      flex-shrink: 0;
+    }
+    .chef-info .chef-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .chef-info .chef-bio {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--text-sec);
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       EL MENÚ
+    ============================================================ */
+    #menu {
+      background: var(--bg-alt);
+      padding: var(--section-py) 80px;
+    }
+    .menu-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .menu-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 48px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .menu-subtitle {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--text-sec);
+    }
+
+    .menu-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 0;
+    }
+    .menu-col-left {
+      border-right: 1px solid var(--border);
+      padding-right: 60px;
+    }
+    .menu-col-right {
+      padding-left: 60px;
+    }
+
+    .menu-category {
+      margin-bottom: 48px;
+    }
+    .menu-category:last-child { margin-bottom: 0; }
+
+    .cat-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--green);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .menu-item {
+      margin-bottom: 18px;
+    }
+    .menu-item-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+    }
+    .item-name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+    .item-dots {
+      flex: 1;
+      border-bottom: 1px dotted #CCCCCC;
+      margin: 0 8px;
+      position: relative;
+      top: -4px;
+    }
+    .item-price {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 20px;
+      color: var(--text-main);
+      flex-shrink: 0;
+    }
+    .item-desc {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--text-sec);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* Vinos — precio doble */
+    .item-price-double {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--text-main);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .menu-footer {
+      text-align: center;
+      margin-top: 52px;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: #999999;
+    }
+
+    /* ============================================================
+       GALERÍA
+    ============================================================ */
+    #galeria {
+      background: var(--white);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: 380px 280px;
+      gap: 3px;
+    }
+    .gallery-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 300ms ease;
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      opacity: 0;
+      transition: opacity 200ms;
+      pointer-events: none;
+    }
+    .gallery-item:hover::after { opacity: 0.08; }
+
+    /* Imagen grande ocupa primera fila, primera columna */
+    .gallery-item.big {
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .gallery-item.small-top {
+      grid-column: 2;
+      grid-row: 1;
+    }
+    .gallery-item.third {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .gallery-item.fourth {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    /* La quinta imagen va en fila 2, col 1-2 dividida en tres — reajuste: usamos subgrid o subdivisión */
+    .gallery-row2 {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+    }
+
+    /* ============================================================
+       RESERVAS
+    ============================================================ */
+    #reservas {
+      background: var(--bg-alt);
+      padding: var(--section-py) 80px;
+    }
+    .reservas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .reservas-eyebrow {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-sec);
+      margin-bottom: 16px;
+    }
+    .reservas-title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 42px;
+      color: var(--text-main);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .reservas-text {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      color: #555555;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .contact-item .label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+      margin-bottom: 2px;
+    }
+    .contact-item .value {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      color: var(--text-main);
+    }
+
+    /* Formulario */
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .field label {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-sec);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #DDDDDD;
+      padding: 10px 0;
+      font-family: var(--font-ui);
+      font-size: 15px;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 150ms;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-bottom-color: var(--green);
+    }
+    .field.error input,
+    .field.error select,
+    .field.error textarea {
+      border-bottom-color: #C0392B;
+    }
+    .field .err-msg {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      color: #C0392B;
+      display: none;
+    }
+    .field.error .err-msg { display: block; }
+    .field textarea { resize: none; }
+    .field select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23777' stroke-width='1.2'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 20px;
+    }
+
+    .btn-green-full {
+      width: 100%;
+      background: var(--green);
+      color: var(--white);
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 15px;
+      padding: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background 150ms;
+      letter-spacing: 0.03em;
+    }
+    .btn-green-full:hover { background: var(--green-dark); }
+
+    /* ============================================================
+       CONTACTO Y UBICACIÓN
+    ============================================================ */
+    #contacto {
+      background: var(--black-deep);
+      padding: var(--section-py) 80px;
+    }
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contacto-name {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 32px;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .contacto-details {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .contacto-details p {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: #AAAAAA;
+      line-height: 1.6;
+    }
+    .contacto-details strong {
+      color: #DDDDDD;
+      font-weight: 400;
+    }
+    .hours-table {
+      border-top: 1px solid #1F1F1F;
+      padding-top: 24px;
+      margin-bottom: 28px;
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: #888888;
+      padding: 6px 0;
+      border-bottom: 1px solid #151515;
+    }
+    .hours-row .day { color: #BBBBBB; }
+    .contacto-social {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--green);
+      margin-bottom: 16px;
+    }
+    .contacto-parking {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: #555555;
+    }
+
+    /* Mapa placeholder */
+    .map-placeholder {
+      background: #1A1A1A;
+      border: 1px solid #2A2A2A;
+      height: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .map-placeholder p {
+      font-family: var(--font-ui);
+      font-size: 14px;
+      color: var(--text-sec);
+    }
+    .map-link {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .map-link:hover { color: #4A8028; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--black-deep);
+      border-top: 1px solid var(--sep);
+      padding: 40px 80px;
+    }
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: #444444;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: #444444;
+      transition: color 150ms;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-social {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-social a {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      color: var(--green);
+      transition: color 150ms;
+    }
+    .footer-social a:hover { color: #4A8028; }
+
+    /* ============================================================
+       BOTÓN FLOTANTE WHATSAPP
+    ============================================================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 13px;
+      padding: 12px 20px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 150ms;
+      letter-spacing: 0.02em;
+    }
+    .whatsapp-float:hover { background: var(--green-dark); }
+    .whatsapp-float svg { flex-shrink: 0; }
+
+    /* ============================================================
+       RESPONSIVE — TABLET (768–1199px)
+    ============================================================ */
+    @media (max-width: 1199px) {
+      :root { --section-py: 64px; }
+
+      #header { padding: 0 24px; }
+
+      #datos { padding: 40px 32px; }
+      .datos-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .dato-item { padding: 16px 24px; }
+      .dato-item:nth-child(2n+1) + .dato-item { border-left: 1px solid #222; }
+      .dato-item:nth-child(n+3) { border-top: 1px solid #222; }
+
+      .cocina-grid { grid-template-columns: 1fr; }
+      .cocina-img { min-height: 400px; height: 400px; }
+      .cocina-content { padding: 56px 40px; }
+
+      #menu { padding: var(--section-py) 40px; }
+      .menu-cols { grid-template-columns: 1fr; }
+      .menu-col-left { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 48px; margin-bottom: 48px; }
+      .menu-col-right { padding-left: 0; }
+
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 280px 280px; }
+
+      #reservas { padding: var(--section-py) 40px; }
+      .reservas-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      #contacto { padding: var(--section-py) 40px; }
+      .contacto-grid { grid-template-columns: 1fr; gap: 48px; }
+
+      #footer { padding: 40px 40px; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (<768px)
+    ============================================================ */
+    @media (max-width: 767px) {
+      :root { --section-py: 48px; }
+
+      #header { padding: 0 20px; }
+      .header-nav { display: none; }
+      .header-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-content { bottom: 60px; left: 24px; right: 24px; max-width: none; }
+      .hero-title { font-size: clamp(42px, 12vw, 72px); }
+      .hero-hours { display: none; }
+      .btn-green { width: 100%; text-align: center; display: block; }
+
+      #datos { padding: 32px 20px; }
+      .datos-grid { grid-template-columns: 1fr 1fr; }
+      .dato-item { padding: 14px 16px; font-size: 15px; }
+
+      .cocina-content { padding: 40px 20px; }
+      .cocina-title { font-size: 34px; }
+
+      #menu { padding: var(--section-py) 20px; }
+      .menu-title { font-size: 38px; }
+      .item-name, .item-price, .item-price-double { font-size: 17px; }
+
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+        gap: 3px;
+      }
+      /* Reposicionar para 2+2+1 */
+      .gallery-item.big { grid-column: 1; grid-row: 1; }
+      .gallery-item.small-top { grid-column: 2; grid-row: 1; }
+      .gallery-row2 { grid-column: 1 / -1; grid-row: 2 / 4; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; }
+      .gallery-row2 .gallery-item:nth-child(3) { grid-column: 1 / -1; }
+
+      #reservas { padding: var(--section-py) 20px; }
+      .reservas-grid { grid-template-columns: 1fr; gap: 40px; }
+      .reservas-title { font-size: 34px; }
+      .form-row { grid-template-columns: 1fr; gap: 24px; }
+
+      #contacto { padding: var(--section-py) 20px; }
+      .contacto-grid { grid-template-columns: 1fr; gap: 40px; }
+
+      #footer { padding: 32px 20px; }
+      .footer-row { flex-direction: column; gap: 20px; text-align: center; }
+
+      .whatsapp-float { bottom: 20px; right: 16px; left: 16px; justify-content: center; border-radius: 3px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="header">
+    <div class="header-logo">
+      <span class="name">RestaurantesUY</span>
+      <span class="tagline">Cocina de mercado</span>
+    </div>
+
+    <nav>
+      <ul class="header-nav" id="main-nav">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#cocina">La cocina</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#reservas">Reservas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-cta">
+      <a href="#reservas" class="btn-outline-green">Reservar mesa</a>
+    </div>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Menú mobile -->
+  <nav class="mobile-menu" id="mobile-menu">
+    <a href="#hero" class="mobile-link">Inicio</a>
+    <a href="#cocina" class="mobile-link">La cocina</a>
+    <a href="#menu" class="mobile-link">Menú</a>
+    <a href="#galeria" class="mobile-link">Galería</a>
+    <a href="#reservas" class="mobile-link">Reservas</a>
+    <a href="#contacto" class="mobile-link">Contacto</a>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <img class="hero-img"
+         src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80"
+         alt="Ambiente del restaurante" />
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">MONTEVIDEO, URUGUAY</p>
+      <h1 class="hero-title">Una mesa,<br>una historia.</h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">Cocina de estación con productos del mercado. Abrimos de martes a domingo.</p>
+      <a href="#menu" class="btn-green">Ver el menú</a>
+    </div>
+
+    <div class="hero-hours">
+      Mar — Vie &nbsp; 12:30 · 20:30<br>
+      Sáb — Dom &nbsp; 12:30 · 21:00
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FRANJA DE DATOS
+  ============================================================ -->
+  <section id="datos">
+    <div class="datos-grid fade-section">
+      <div class="dato-item">Abierto desde 2016</div>
+      <div class="dato-item">Cocina de mercado</div>
+      <div class="dato-item">Vinos naturales y de autor</div>
+      <div class="dato-item">Reserva recomendada</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LA COCINA
+  ============================================================ -->
+  <section id="cocina">
+    <div class="cocina-grid">
+      <img class="cocina-img"
+           src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80"
+           alt="Cocina de mercado" />
+      <div class="cocina-content fade-section">
+        <p class="eyebrow">NUESTRA COCINA</p>
+        <h2 class="cocina-title">El producto manda.</h2>
+        <div class="cocina-body">
+          <p>Trabajamos con productores de Canelones, San José y Rocha. El menú cambia cada semana según lo que llega al mercado. Nada de ingredientes de temporada cuando no es su temporada.</p>
+          <p>La cocina es abierta. Podés ver cómo trabajan los cocineros desde cualquier mesa del salón.</p>
+        </div>
+        <div class="chef-row">
+          <img class="chef-photo"
+               src="https://images.unsplash.com/photo-1583394293214-dce9c5b8b27a?w=600&q=80"
+               alt="Chef Andrés Fontana" />
+          <div class="chef-info">
+            <p class="chef-name">Chef Andrés Fontana</p>
+            <p class="chef-bio">15 años de trayectoria · Ex Espacio Gourmet, Buenos Aires</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EL MENÚ
+  ============================================================ -->
+  <section id="menu">
+    <div class="menu-header fade-section">
+      <h2 class="menu-title">LA CARTA</h2>
+      <p class="menu-subtitle">Menú de estación — actualizado semanalmente</p>
+    </div>
+
+    <div class="menu-cols fade-section">
+
+      <!-- Columna izquierda: Entradas + Principales -->
+      <div class="menu-col-left">
+
+        <div class="menu-category">
+          <p class="cat-name">Entradas</p>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Burrata</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$490</span>
+            </div>
+            <p class="item-desc">Con tomates cherry asados y aceite de albahaca</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Ceviche de corvina</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$550</span>
+            </div>
+            <p class="item-desc">Leche de tigre y batata frita</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Tabla de quesos uruguayos</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$620</span>
+            </div>
+            <p class="item-desc">Con membrillo y pan de campo</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Sopa de zapallo asado</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$380</span>
+            </div>
+            <p class="item-desc">Con crema y semillas tostadas</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Carpaccio de res</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$510</span>
+            </div>
+            <p class="item-desc">Rúcula, alcaparras y parmesano</p>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <p class="cat-name">Principales</p>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Cordero braseado</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$980</span>
+            </div>
+            <p class="item-desc">Puré de coliflor y salsa de romero</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Risotto de hongos silvestres</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$760</span>
+            </div>
+            <p class="item-desc">Con parmesano añejo</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Trucha de río</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$890</span>
+            </div>
+            <p class="item-desc">Con manteca de limón y espárragos</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Entraña al carbón</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$850</span>
+            </div>
+            <p class="item-desc">Con chimichurri de la casa</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Ravioles de ricota y espinaca</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$720</span>
+            </div>
+            <p class="item-desc">Con salsa de nuez</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Suprema de pollo rellena</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$780</span>
+            </div>
+            <p class="item-desc">Con provolone y vegetales de estación</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha: Guarniciones + Postres + Vinos -->
+      <div class="menu-col-right">
+
+        <div class="menu-category">
+          <p class="cat-name">Guarniciones</p>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Puré de papa rústico</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$180</span>
+            </div>
+            <p class="item-desc">Con manteca</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Ensalada verde</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$190</span>
+            </div>
+            <p class="item-desc">De temporada</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Papas al romero</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$170</span>
+            </div>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Vegetales asados a la plancha</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$200</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <p class="cat-name">Postres</p>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Flan casero</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$320</span>
+            </div>
+            <p class="item-desc">Con dulce de leche y crema</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Torta de chocolate amargo</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$380</span>
+            </div>
+            <p class="item-desc">Con helado de vainilla</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Frutos rojos</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$290</span>
+            </div>
+            <p class="item-desc">Con crema chantilly</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Tabla de frutas</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$260</span>
+            </div>
+            <p class="item-desc">De estación</p>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <p class="cat-name">Vinos</p>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Pisano RPF Tannat 2021</span>
+              <span class="item-dots"></span>
+              <span class="item-price-double">$290 · $1.490</span>
+            </div>
+            <p class="item-desc">Copa · Botella</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Bouza Albariño 2022</span>
+              <span class="item-dots"></span>
+              <span class="item-price-double">$320 · $1.650</span>
+            </div>
+            <p class="item-desc">Copa · Botella</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Garzon Reserva Merlot 2020</span>
+              <span class="item-dots"></span>
+              <span class="item-price-double">$310 · $1.580</span>
+            </div>
+            <p class="item-desc">Copa · Botella</p>
+          </div>
+
+          <div class="menu-item">
+            <div class="menu-item-row">
+              <span class="item-name">Vino de la casa</span>
+              <span class="item-dots"></span>
+              <span class="item-price">$220</span>
+            </div>
+            <p class="item-desc">Tinto o blanco — copa</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="menu-footer fade-section">
+      Los precios incluyen IVA. Aceptamos todas las tarjetas. Consultanos por opciones vegetarianas y alergias.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       GALERÍA
+  ============================================================ -->
+  <section id="galeria">
+    <div class="gallery-grid">
+      <div class="gallery-item big">
+        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=700&q=80" alt="Ambiente del restaurante" />
+      </div>
+      <div class="gallery-item small-top">
+        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=700&q=80" alt="Detalle de plato" />
+      </div>
+      <div class="gallery-row2">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?w=700&q=80" alt="Plato del restaurante" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=700&q=80" alt="Plato principal" />
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=700&q=80" alt="Postre del restaurante" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       RESERVAS
+  ============================================================ -->
+  <section id="reservas">
+    <div class="reservas-grid">
+      <div class="fade-section">
+        <p class="reservas-eyebrow">RESERVAS</p>
+        <h2 class="reservas-title">Reservá tu mesa</h2>
+        <p class="reservas-text">Recomendamos reservar con al menos 48 horas de anticipación, especialmente los fines de semana. Para grupos de más de 8 personas, escribinos directamente.</p>
+        <div class="contact-block">
+          <div class="contact-item">
+            <p class="label">Teléfono</p>
+            <p class="value">2710 3344</p>
+          </div>
+          <div class="contact-item">
+            <p class="label">WhatsApp</p>
+            <p class="value">+598 98 444 222</p>
+          </div>
+          <div class="contact-item">
+            <p class="label">Email</p>
+            <p class="value">reservas@restaurantesuy.com.uy</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-grid fade-section" id="reserva-form" novalidate>
+        <div class="field" id="field-nombre">
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre" placeholder="" />
+          <span class="err-msg">Este campo es obligatorio</span>
+        </div>
+
+        <div class="form-row">
+          <div class="field" id="field-telefono">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="" />
+            <span class="err-msg">Este campo es obligatorio</span>
+          </div>
+          <div class="field" id="field-fecha">
+            <label for="fecha">Fecha</label>
+            <input type="date" id="fecha" name="fecha" />
+            <span class="err-msg">Este campo es obligatorio</span>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field" id="field-hora">
+            <label for="hora">Hora</label>
+            <select id="hora" name="hora">
+              <option value="">Seleccioná</option>
+              <option value="12:30">12:30</option>
+              <option value="13:00">13:00</option>
+              <option value="13:30">13:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+            </select>
+            <span class="err-msg">Seleccioná una hora</span>
+          </div>
+          <div class="field" id="field-personas">
+            <label for="personas">Cantidad de personas</label>
+            <select id="personas" name="personas">
+              <option value="">Seleccioná</option>
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+              <option value="7">7 personas</option>
+              <option value="8">8 personas</option>
+              <option value="9">9 personas</option>
+              <option value="10">10 personas</option>
+              <option value="11">11 personas</option>
+              <option value="12+">12 o más</option>
+            </select>
+            <span class="err-msg">Seleccioná la cantidad</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="comentarios">Comentarios o pedidos especiales (opcional)</label>
+          <textarea id="comentarios" name="comentarios" rows="3" placeholder=""></textarea>
+        </div>
+
+        <button type="submit" class="btn-green-full">Confirmar por WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACTO Y UBICACIÓN
+  ============================================================ -->
+  <section id="contacto">
+    <div class="contacto-grid">
+      <div class="fade-section">
+        <p class="contacto-name">RestaurantesUY</p>
+        <div class="contacto-details">
+          <p>Juan Carlos Gómez 1408, Ciudad Vieja, Montevideo</p>
+          <p><strong>2710 3344</strong></p>
+          <p>hola@restaurantesuy.com.uy</p>
+        </div>
+        <div class="hours-table">
+          <div class="hours-row">
+            <span class="day">Martes a viernes</span>
+            <span>12:30 y 20:30</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Sábado y domingo</span>
+            <span>12:30 y 21:00</span>
+          </div>
+          <div class="hours-row">
+            <span class="day">Lunes</span>
+            <span>Cerrado</span>
+          </div>
+        </div>
+        <p class="contacto-social">@restaurantesuy</p>
+        <p class="contacto-parking">Estacionamiento en Pérez Castellano a media cuadra</p>
+      </div>
+
+      <div class="fade-section">
+        <div class="map-placeholder">
+          <p>Ciudad Vieja, Montevideo</p>
+          <a class="map-link"
+             href="https://maps.google.com/?q=Juan+Carlos+Gomez+1408+Montevideo+Uruguay"
+             target="_blank"
+             rel="noopener noreferrer">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
+    <div class="footer-row">
+      <p class="footer-copy">© 2025 RestaurantesUY</p>
+      <ul class="footer-links">
+        <li><a href="#hero">Inicio</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#reservas">Reservas</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="footer-social">
+        <a href="https://instagram.com/restaurantesuy" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/59898444222" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE WHATSAPP
+  ============================================================ -->
+  <a class="whatsapp-float" href="https://wa.me/59898444222" target="_blank" rel="noopener noreferrer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    Reservas
+  </a>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ---- Header scroll ----
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ---- Hamburguesa mobile ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // ---- IntersectionObserver: nav activo según sección ----
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.header-nav a');
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ---- Fade-in de secciones ----
+    const fadeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-section').forEach(el => fadeObserver.observe(el));
+
+    // ---- Formulario de reserva → WhatsApp ----
+    const form = document.getElementById('reserva-form');
+    const requiredFields = ['nombre', 'telefono', 'fecha', 'hora', 'personas'];
+
+    function validateField(id) {
+      const el = document.getElementById(id);
+      const wrapper = document.getElementById('field-' + id);
+      if (!wrapper) return true;
+      const val = el.value.trim();
+      if (!val) {
+        wrapper.classList.add('error');
+        return false;
+      } else {
+        wrapper.classList.remove('error');
+        return true;
+      }
+    }
+
+    // Limpiar error al escribir
+    requiredFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', () => validateField(id));
+        el.addEventListener('change', () => validateField(id));
+      }
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      let valid = true;
+      requiredFields.forEach(id => {
+        if (!validateField(id)) valid = false;
+      });
+      if (!valid) return;
+
+      const nombre    = document.getElementById('nombre').value.trim();
+      const telefono  = document.getElementById('telefono').value.trim();
+      const fecha     = document.getElementById('fecha').value;
+      const hora      = document.getElementById('hora').value;
+      const personas  = document.getElementById('personas').value;
+      const coment    = document.getElementById('comentarios').value.trim();
+
+      // Formatear fecha legible
+      const [y, m, d] = fecha.split('-');
+      const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const fechaLegible = `${parseInt(d)} de ${meses[parseInt(m) - 1]} de ${y}`;
+
+      let msg = `Hola RestaurantesUY, quiero hacer una reserva:\n`;
+      msg += `Nombre: ${nombre}\n`;
+      msg += `Teléfono: ${telefono}\n`;
+      msg += `Fecha: ${fechaLegible}\n`;
+      msg += `Hora: ${hora}\n`;
+      msg += `Personas: ${personas}\n`;
+      if (coment) msg += `Comentarios: ${coment}\n`;
+
+      const url = `https://wa.me/59898444222?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+
+</body>
+</html>

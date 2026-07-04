@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Webs Digitales — Páginas web que venden por vos</title>
+<meta name="description" content="Diseñamos páginas web modernas, rápidas e interactivas para empresas en Uruguay. Barberías, gimnasios, restaurantes, veterinarias, farmacias y más. Contanos tu idea y la hacemos realidad." />
+<meta name="theme-color" content="#0A0A0A" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Webs Digitales — Páginas web que venden por vos" />
+<meta property="og:description" content="Diseñamos páginas web modernas e interactivas para empresas. Mirá nuestro portafolio y pedí la tuya." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://websdigitales.com" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #0A0A0A;
+  --bg-alt:      #101210;
+  --bg-card:     #141614;
+  --surface:     rgba(255,255,255,0.03);
+  --border:      rgba(255,255,255,0.08);
+  --text:        #F2F3F1;
+  --text-muted:  #9AA09A;
+  --green:       #16C784;
+  --green-soft:  #3BE39C;
+  --green-glow:  rgba(22,199,132,0.55);
+  --ff-display:  'Space Grotesk', system-ui, sans-serif;
+  --ff-body:     'Inter', system-ui, sans-serif;
+  --radius:      18px;
+  --maxw:        1180px;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-body);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+::selection { background: var(--green); color: #04150D; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0A0A0A; }
+::-webkit-scrollbar-thumb { background: #1f241f; border-radius: 20px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green); }
+
+/* ============================================================
+   LAYOUT HELPERS
+============================================================ */
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+section { position: relative; }
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--ff-display);
+  font-size: 0.8rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--green);
+  padding: 7px 14px; border: 1px solid var(--border);
+  border-radius: 100px; background: var(--surface);
+}
+.eyebrow::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 10px var(--green-glow); }
+.h-sec {
+  font-family: var(--ff-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.6vw, 3.3rem);
+  line-height: 1.08; letter-spacing: -0.02em; margin: 18px 0;
+}
+.sub-sec { color: var(--text-muted); font-size: 1.08rem; max-width: 560px; }
+.gradient-text {
+  background: linear-gradient(100deg, var(--green-soft), var(--green) 60%, #0d8f5e);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--ff-display); font-weight: 600; font-size: 1rem;
+  padding: 15px 30px; border-radius: 100px; cursor: pointer;
+  border: none; transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  position: relative; white-space: nowrap;
+}
+.btn-primary { background: var(--green); color: #04150D; box-shadow: 0 0 0 rgba(22,199,132,0); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px -8px var(--green-glow); background: var(--green-soft); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--green); color: var(--green); transform: translateY(-3px); }
+.btn svg { width: 18px; height: 18px; }
+
+/* ============================================================
+   BACKGROUND FX
+============================================================ */
+.bg-grid {
+  position: fixed; inset: 0; z-index: -2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+}
+.bg-orb {
+  position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.5;
+  pointer-events: none;
+}
+.orb-1 { width: 520px; height: 520px; background: radial-gradient(circle, rgba(22,199,132,0.35), transparent 70%); top: -180px; right: -120px; }
+.orb-2 { width: 480px; height: 480px; background: radial-gradient(circle, rgba(22,199,132,0.18), transparent 70%); bottom: 10%; left: -160px; }
+
+/* ============================================================
+   NAVBAR
+============================================================ */
+header.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  transition: background .3s ease, backdrop-filter .3s ease, border-color .3s ease;
+  border-bottom: 1px solid transparent;
+}
+header.nav.scrolled {
+  background: rgba(10,10,10,0.72); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.logo { display: flex; align-items: baseline; font-family: var(--ff-display); font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; }
+.logo .l-webs { color: var(--text); }
+.logo .l-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); margin: 0 4px; align-self: center; box-shadow: 0 0 12px var(--green-glow); }
+.logo .l-dig { color: var(--text-muted); font-weight: 400; }
+.nav-links { display: flex; align-items: center; gap: 34px; }
+.nav-links a { font-size: 0.95rem; color: var(--text-muted); transition: color .2s; position: relative; }
+.nav-links a:hover { color: var(--text); }
+.nav-links a::after { content:''; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--green); transition:width .25s; }
+.nav-links a:hover::after { width:100%; }
+.nav-cta { padding: 10px 22px; font-size: 0.92rem; }
+.burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.burger span { width: 24px; height: 2px; background: var(--text); transition: .3s; }
+
+/* ============================================================
+   HERO
+============================================================ */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; }
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+.hero h1 {
+  font-family: var(--ff-display); font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1.02; letter-spacing: -0.03em;
+}
+.hero p.lead { color: var(--text-muted); font-size: 1.18rem; margin: 26px 0 36px; max-width: 520px; }
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-stats { display: flex; gap: 38px; margin-top: 52px; }
+.hero-stats .stat .num { font-family: var(--ff-display); font-weight: 700; font-size: 2rem; color: var(--green); }
+.hero-stats .stat .lbl { font-size: 0.85rem; color: var(--text-muted); }
+
+/* Floating browser mockup */
+.mockup {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  border: 1px solid var(--border); background: var(--bg-card);
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.9), 0 0 0 1px rgba(22,199,132,0.06);
+  animation: floaty 6s ease-in-out infinite;
+}
+@keyframes floaty { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-14px); } }
+.mockup-bar { display: flex; align-items: center; gap: 7px; padding: 13px 16px; background: #0e100e; border-bottom: 1px solid var(--border); }
+.mockup-bar i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+.mockup-bar i:nth-child(1){ background:#ff5f56; } .mockup-bar i:nth-child(2){ background:#ffbd2e; } .mockup-bar i:nth-child(3){ background:#27c93f; }
+.mockup-bar .url { margin-left: 12px; font-size: 0.72rem; color: var(--text-muted); background: #050505; padding: 5px 14px; border-radius: 20px; flex: 1; }
+.mockup-body { padding: 26px; display: grid; gap: 16px; }
+.mk-hero { height: 120px; border-radius: 12px; background: linear-gradient(120deg, rgba(22,199,132,0.22), rgba(22,199,132,0.05)); position: relative; overflow: hidden; }
+.mk-hero::after { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); transform: translateX(-100%); animation: shimmer 2.6s infinite; }
+@keyframes shimmer { 100%{ transform: translateX(100%); } }
+.mk-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.mk-box { height: 68px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); }
+.mk-line { height: 12px; border-radius: 6px; background: var(--surface); }
+.mk-line.w60 { width: 60%; } .mk-line.w40 { width: 40%; }
+
+/* ============================================================
+   MARQUEE
+============================================================ */
+.marquee { overflow: hidden; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 22px 0; background: var(--bg-alt); }
+.marquee-track { display: flex; gap: 60px; width: max-content; animation: scroll-x 26s linear infinite; }
+.marquee-track span { font-family: var(--ff-display); font-weight: 600; font-size: 1.35rem; color: var(--text-muted); display: flex; align-items: center; gap: 60px; white-space: nowrap; }
+.marquee-track span::after { content:'✦'; color: var(--green); }
+@keyframes scroll-x { to { transform: translateX(-50%); } }
+
+/* ============================================================
+   GENERIC SECTION SPACING + REVEAL
+============================================================ */
+.section-pad { padding: 110px 0; }
+.sec-head { text-align: center; max-width: 640px; margin: 0 auto 60px; }
+.sec-head .sub-sec { margin: 0 auto; }
+.reveal { opacity: 0; transform: translateY(34px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ============================================================
+   SERVICES
+============================================================ */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px; transition: transform .3s ease, border-color .3s ease; position: relative; overflow: hidden;
+}
+.card::before { content:''; position:absolute; inset:0; background: radial-gradient(400px circle at var(--mx,50%) var(--my,50%), rgba(22,199,132,0.10), transparent 45%); opacity: 0; transition: opacity .3s; }
+.card:hover { transform: translateY(-6px); border-color: rgba(22,199,132,0.4); }
+.card:hover::before { opacity: 1; }
+.card .ico { width: 52px; height: 52px; border-radius: 13px; display: grid; place-items: center; background: rgba(22,199,132,0.12); border: 1px solid rgba(22,199,132,0.25); margin-bottom: 20px; }
+.card .ico svg { width: 26px; height: 26px; stroke: var(--green); }
+.card h3 { font-family: var(--ff-display); font-size: 1.28rem; font-weight: 600; margin-bottom: 10px; }
+.card p { color: var(--text-muted); font-size: 0.97rem; }
+
+/* ============================================================
+   PROCESS
+============================================================ */
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
+.step { padding: 28px 24px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); position: relative; }
+.step .n { font-family: var(--ff-display); font-weight: 700; font-size: 2.6rem; color: rgba(22,199,132,0.25); line-height: 1; }
+.step h4 { font-family: var(--ff-display); font-size: 1.1rem; margin: 10px 0 8px; }
+.step p { color: var(--text-muted); font-size: 0.92rem; }
+
+/* ============================================================
+   PORTFOLIO
+============================================================ */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.folio {
+  position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border);
+  background: var(--bg-card); cursor: pointer; display: block; transition: transform .35s ease, border-color .35s ease;
+  min-height: 300px;
+}
+.folio:hover { transform: translateY(-8px); border-color: rgba(22,199,132,0.5); }
+.folio-visual { height: 190px; position: relative; overflow: hidden; }
+.folio-visual .fake { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: transform .5s ease; }
+.folio:hover .folio-visual .fake { transform: scale(1.05); }
+.folio-visual .bar { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.12); }
+.folio-visual .big { flex: 1; border-radius: 10px; }
+.folio-tag { position: absolute; top: 14px; right: 14px; z-index: 3; font-size: 0.72rem; font-family: var(--ff-display); font-weight: 600; padding: 5px 12px; border-radius: 100px; background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); color: var(--green); }
+.folio-body { padding: 22px 24px 26px; }
+.folio-body h3 { font-family: var(--ff-display); font-size: 1.25rem; margin-bottom: 6px; }
+.folio-body p { color: var(--text-muted); font-size: 0.9rem; }
+.folio-open { display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; color: var(--green); font-weight: 600; font-size: 0.9rem; font-family: var(--ff-display); }
+.folio-open svg { width: 15px; height: 15px; transition: transform .25s; }
+.folio:hover .folio-open svg { transform: translate(3px,-3px); }
+
+/* palette variants for fake previews */
+.pv-barber .big { background: linear-gradient(135deg,#B8974A,#5c4a1f); }
+.pv-barber .bar { background: rgba(184,151,74,0.4); }
+.pv-farma .big { background: linear-gradient(135deg,#2ea6ff,#0b5c9e); }
+.pv-farma .bar { background: rgba(46,166,255,0.4); }
+.pv-gym .big { background: linear-gradient(135deg,#16C784,#0a6e49); }
+.pv-gym .bar { background: rgba(22,199,132,0.4); }
+.pv-resto .big { background: linear-gradient(135deg,#e0653b,#7a2d16); }
+.pv-resto .bar { background: rgba(224,101,59,0.4); }
+.pv-vet .big { background: linear-gradient(135deg,#9b7bff,#4b2fa8); }
+.pv-vet .bar { background: rgba(155,123,255,0.4); }
+
+/* ============================================================
+   FORM / CTA
+============================================================ */
+.cta-wrap { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 50px; align-items: center;
+  background: linear-gradient(150deg, var(--bg-card), var(--bg-alt));
+  border: 1px solid var(--border); border-radius: 26px; padding: 52px;
+  position: relative; overflow: hidden;
+}
+.cta-wrap::before { content:''; position:absolute; width:360px; height:360px; background: radial-gradient(circle, var(--green-glow), transparent 70%); top:-140px; left:-100px; filter: blur(50px); opacity:.4; }
+.cta-left { position: relative; z-index: 2; }
+.cta-left h2 { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.9rem,3.4vw,2.8rem); line-height: 1.1; letter-spacing: -0.02em; }
+.cta-left p { color: var(--text-muted); margin-top: 18px; font-size: 1.05rem; }
+.cta-bullets { list-style: none; margin-top: 26px; display: grid; gap: 12px; }
+.cta-bullets li { display: flex; align-items: center; gap: 11px; font-size: 0.97rem; }
+.cta-bullets li svg { width: 20px; height: 20px; stroke: var(--green); flex-shrink: 0; }
+
+form.lead-form { position: relative; z-index: 2; display: grid; gap: 16px; }
+.field { display: grid; gap: 7px; }
+.field label { font-size: 0.85rem; font-weight: 600; color: var(--text); font-family: var(--ff-display); letter-spacing: 0.02em; }
+.field label .req { color: var(--green); }
+.field input, .field select {
+  width: 100%; padding: 14px 16px; border-radius: 12px;
+  background: #0b0d0b; border: 1px solid var(--border); color: var(--text);
+  font-family: var(--ff-body); font-size: 0.98rem; transition: border-color .2s, box-shadow .2s;
+  appearance: none;
+}
+.field input::placeholder { color: #5c625c; }
+.field input:focus, .field select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,199,132,0.15); }
+.field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%239AA09A' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px; }
+.field select option { background: #0b0d0b; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-note { font-size: 0.82rem; color: var(--text-muted); text-align: center; }
+.form-msg { display: none; padding: 14px 18px; border-radius: 12px; font-size: 0.95rem; text-align: center; }
+.form-msg.ok { display: block; background: rgba(22,199,132,0.12); border: 1px solid rgba(22,199,132,0.4); color: var(--green-soft); }
+.form-msg.err { display: block; background: rgba(255,90,90,0.1); border: 1px solid rgba(255,90,90,0.35); color: #ff8b8b; }
+.lead-form .btn-primary { width: 100%; margin-top: 4px; }
+.lead-form .btn-primary.loading { opacity: 0.7; pointer-events: none; }
+
+/* ============================================================
+   FOOTER
+============================================================ */
+footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: var(--bg-alt); }
+.foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+.foot-grid p { color: var(--text-muted); font-size: 0.95rem; margin-top: 14px; max-width: 320px; }
+.foot-col h5 { font-family: var(--ff-display); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+.foot-col a { display: block; color: var(--text); margin-bottom: 10px; font-size: 0.95rem; transition: color .2s; }
+.foot-col a:hover { color: var(--green); }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 26px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.86rem; flex-wrap: wrap; gap: 12px; }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero { padding-top: 110px; }
+  .cards, .steps, .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .cta-wrap { grid-template-columns: 1fr; padding: 36px; }
+  .foot-grid { grid-template-columns: 1fr 1fr; }
+  .nav-links { position: fixed; inset: 72px 0 auto 0; flex-direction: column; background: rgba(10,10,10,0.97); backdrop-filter: blur(14px); padding: 30px 24px; gap: 22px; border-bottom: 1px solid var(--border); transform: translateY(-120%); transition: transform .35s ease; height: auto; }
+  .nav-links.open { transform: translateY(0); }
+  .burger { display: flex; }
+}
+@media (max-width: 560px) {
+  .cards, .steps, .portfolio-grid, .form-row, .foot-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+  .hero-cta { flex-direction: column; }
+  .hero-cta .btn { width: 100%; }
+  .cta-wrap { padding: 26px; }
+  .section-pad { padding: 80px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo" aria-label="Webs Digitales">
+      <span class="l-webs">webs</span><span class="l-dot"></span><span class="l-dig">digitales</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#portafolio">Portafolio</a>
+      <a href="#contacto" class="btn btn-primary nav-cta">Pedí tu web</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal in">
+      <span class="eyebrow">Diseño web · Uruguay</span>
+      <h1>Tu negocio merece una web que <span class="gradient-text">venda sola</span>.</h1>
+      <p class="lead">Creamos páginas web modernas, rápidas e interactivas hechas a medida de tu empresa. Vos contás la idea, nosotros la volvemos realidad.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn btn-primary">Pedí tu página
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#portafolio" class="btn btn-ghost">Ver portafolio</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">% a medida</div></div>
+        <div class="stat"><div class="num" data-count="5" data-suffix="+">0</div><div class="lbl">rubros diseñados</div></div>
+        <div class="stat"><div class="num" data-count="7" data-suffix=" días">0</div><div class="lbl">entrega promedio</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal in">
+      <div class="mockup">
+        <div class="mockup-bar"><i></i><i></i><i></i><span class="url">websdigitales.com</span></div>
+        <div class="mockup-body">
+          <div class="mk-hero"></div>
+          <div class="mk-line w60"></div>
+          <div class="mk-line w40"></div>
+          <div class="mk-row"><div class="mk-box"></div><div class="mk-box"></div><div class="mk-box"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Barberías</span><span>Gimnasios</span><span>Restaurantes</span><span>Veterinarias</span><span>Farmacias</span><span>Peluquerías</span><span>Estudios</span>
+    <span>Barberías</span><span>Gimnasios</span><span>Restaurantes</span><span>Veterinarias</span><span>Farmacias</span><span>Peluquerías</span><span>Estudios</span>
+  </div>
+</div>
+
+<!-- ============ SERVICIOS ============ -->
+<section class="section-pad" id="servicios">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2 class="h-sec">Todo lo que tu web necesita, <span class="gradient-text">sin vueltas</span>.</h2>
+      <p class="sub-sec">No entregamos plantillas genéricas. Cada página se diseña desde cero pensando en cómo tus clientes te encuentran y te eligen.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div>
+        <h3>Diseño a medida</h3>
+        <p>Una identidad visual única para tu marca. Colores, tipografías y estilo pensados para tu rubro, no para todos.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8 11-14h-7l1-6z"/></svg></div>
+        <h3>Rápidas y animadas</h3>
+        <p>Micro-interacciones, animaciones fluidas y tiempos de carga mínimos. Una experiencia que se siente premium.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+        <h3>100% responsive</h3>
+        <p>Se ve impecable en celular, tablet y computadora. La mayoría de tus clientes te va a visitar desde el teléfono.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Optimizadas para Google</h3>
+        <p>Estructura y buenas prácticas SEO para que te encuentren cuando buscan tu servicio en tu zona.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Contacto directo</h3>
+        <p>Botones a WhatsApp, formularios y reservas integradas para que el cliente te escriba en un toque.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ico"><svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Dominio y puesta online</h3>
+        <p>Nos encargamos de todo: dominio, hosting y publicación. Vos solo tenés que ver tu web en vivo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESO ============ -->
+<section class="section-pad" id="proceso" style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Cómo trabajamos</span>
+      <h2 class="h-sec">De la idea a tu web <span class="gradient-text">en 4 pasos</span>.</h2>
+      <p class="sub-sec">Simple, rápido y sin tecnicismos. Nosotros hacemos el trabajo pesado.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="n">01</div><h4>Contanos tu idea</h4><p>Nos escribís por el formulario con tu rubro y qué necesitás. Es gratis y sin compromiso.</p></div>
+      <div class="step reveal"><div class="n">02</div><h4>Diseñamos</h4><p>Creamos una propuesta a medida de tu marca y te la mostramos para ajustar detalles.</p></div>
+      <div class="step reveal"><div class="n">03</div><h4>Revisás</h4><p>Vemos juntos el resultado, hacemos los cambios que quieras hasta que quede perfecta.</p></div>
+      <div class="step reveal"><div class="n">04</div><h4>Online</h4><p>Publicamos tu web con dominio propio y queda funcionando para tus clientes.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTAFOLIO ============ -->
+<section class="section-pad" id="portafolio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Portafolio</span>
+      <h2 class="h-sec">Modelos que ya <span class="gradient-text">diseñamos</span>.</h2>
+      <p class="sub-sec">Hacé clic en cualquiera para abrirlo en vivo en una pestaña nueva y navegarlo como lo haría tu cliente.</p>
+    </div>
+    <div class="portfolio-grid">
+
+      <a class="folio reveal" href="demo-BarberiaUY.html" target="_blank" rel="noopener">
+        <span class="folio-tag">Barbería</span>
+        <div class="folio-visual pv-barber"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-body">
+          <h3>BarberUY</h3>
+          <p>Cortes que hablan por sí solos.</p>
+          <span class="folio-open">Ver en vivo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+        </div>
+      </a>
+
+      <a class="folio reveal" href="demo-FarmaciasUY.html" target="_blank" rel="noopener">
+        <span class="folio-tag">Farmacia</span>
+        <div class="folio-visual pv-farma"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-body">
+          <h3>FarmaciasUY</h3>
+          <p>Tu salud, cerca de casa.</p>
+          <span class="folio-open">Ver en vivo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+        </div>
+      </a>
+
+      <a class="folio reveal" href="demo-GymUY.html" target="_blank" rel="noopener">
+        <span class="folio-tag">Gimnasio</span>
+        <div class="folio-visual pv-gym"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-body">
+          <h3>GymUY</h3>
+          <p>Entrená en serio.</p>
+          <span class="folio-open">Ver en vivo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+        </div>
+      </a>
+
+      <a class="folio reveal" href="demo-RestaurantesUY.html" target="_blank" rel="noopener">
+        <span class="folio-tag">Restaurante</span>
+        <div class="folio-visual pv-resto"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-body">
+          <h3>RestaurantesUY</h3>
+          <p>Cocina de mercado, Montevideo.</p>
+          <span class="folio-open">Ver en vivo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+        </div>
+      </a>
+
+      <a class="folio reveal" href="demo-VeterinariasUY.html" target="_blank" rel="noopener">
+        <span class="folio-tag">Veterinaria</span>
+        <div class="folio-visual pv-vet"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-body">
+          <h3>VeterinariasUY</h3>
+          <p>Clínica veterinaria en Montevideo.</p>
+          <span class="folio-open">Ver en vivo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span>
+        </div>
+      </a>
+
+      <a class="folio reveal" href="#contacto" style="display:flex; align-items:center; justify-content:center; text-align:center;">
+        <div class="folio-body" style="padding:40px;">
+          <div class="ico" style="width:56px;height:56px;border-radius:14px;display:grid;place-items:center;background:rgba(22,199,132,0.12);border:1px solid rgba(22,199,132,0.25);margin:0 auto 18px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" style="width:28px;height:28px;"><path d="M12 5v14M5 12h14"/></svg>
+          </div>
+          <h3>¿El tuyo?</h3>
+          <p>Tu rubro puede ser el próximo. Contanos qué necesitás.</p>
+          <span class="folio-open" style="justify-content:center;">Empezar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO / FORM ============ -->
+<section class="section-pad" id="contacto">
+  <div class="wrap">
+    <div class="cta-wrap reveal">
+      <div class="cta-left">
+        <span class="eyebrow">Empecemos</span>
+        <h2>Contanos tu idea<br>y te la <span class="gradient-text">hacemos realidad</span>.</h2>
+        <p>Completá el formulario con lo que tenés en mente. Te respondemos con una propuesta a medida, sin compromiso.</p>
+        <ul class="cta-bullets">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Primera consulta gratis</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Diseño 100% personalizado</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Nos encargamos de dejarla online</li>
+        </ul>
+      </div>
+
+      <!-- Web3Forms: reemplazá el value del access_key por tu clave real -->
+      <form class="lead-form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="df00a366-86cf-41e3-bdc9-a2c45a7311ca" />
+        <input type="hidden" name="subject" value="Nueva solicitud de web desde websdigitales.com" />
+        <input type="hidden" name="from_name" value="Web Websdigitales" />
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="field">
+          <label for="f-email">Tu correo <span class="req">*</span></label>
+          <input type="email" id="f-email" name="email" placeholder="tunombre@correo.com" required />
+        </div>
+
+        <div class="field">
+          <label for="f-nombre">Nombre de tu página / negocio <span class="req">*</span></label>
+          <input type="text" id="f-nombre" name="nombre_pagina" placeholder="Ej: Barbería El Rey" required />
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="f-tipo">Tipo de página <span class="req">*</span></label>
+            <select id="f-tipo" name="tipo_pagina" required>
+              <option value="" disabled selected>Elegí una opción</option>
+              <option>Landing page (una sola página)</option>
+              <option>Página web completa (varias secciones)</option>
+              <option>Tienda online / e-commerce</option>
+              <option>Página con reservas / turnos</option>
+              <option>Todavía no lo sé</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-industria">Industria / rubro <span class="req">*</span></label>
+            <select id="f-industria" name="industria" required>
+              <option value="" disabled selected>Elegí tu rubro</option>
+              <option>Barbería</option>
+              <option>Peluquería</option>
+              <option>Gimnasio</option>
+              <option>Restaurante / Bar</option>
+              <option>Veterinaria</option>
+              <option>Farmacia</option>
+              <option>Estética / Spa</option>
+              <option>Estudio profesional</option>
+              <option>Comercio / Tienda</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f-msg">Contanos un poco más (opcional)</label>
+          <input type="text" id="f-msg" name="mensaje" placeholder="Qué te gustaría lograr con tu web" />
+        </div>
+
+        <div class="form-msg" id="formMsg"></div>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Enviar solicitud
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <p class="form-note">Te respondemos a tu correo en menos de 24 h. No compartimos tus datos.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <a href="#top" class="logo"><span class="l-webs">webs</span><span class="l-dot"></span><span class="l-dig">digitales</span></a>
+        <p>Diseñamos páginas web modernas e interactivas para empresas en Uruguay. Tu negocio, online y con estilo.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Navegación</h5>
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contacto</h5>
+        <a href="mailto:contacto@websdigitales.com">contacto@websdigitales.com</a>
+        <a href="#contacto">Pedí tu página</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year">2026</span> Webs Digitales · Uruguay</span>
+      <span>Hecho con <span style="color:var(--green)">●</span> por Webs Digitales</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Navbar scroll state ---- */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
+onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+
+/* ---- Mobile menu ---- */
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ---- Reveal on scroll ---- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.14 });
+document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4 * 0.08) + 's'; io.observe(el); });
+
+/* ---- Count up stats ---- */
+const countEls = document.querySelectorAll('[data-count]');
+const countIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    let cur = 0; const step = Math.max(1, Math.ceil(target / 40));
+    const tick = () => { cur += step; if (cur >= target) { el.textContent = target + suffix; } else { el.textContent = cur + suffix; requestAnimationFrame(tick); } };
+    tick(); countIO.unobserve(el);
+  });
+}, { threshold: 0.5 });
+countEls.forEach(el => countIO.observe(el));
+
+/* ---- Card cursor glow ---- */
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+});
+
+/* ---- Year ---- */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---- Form submit via Web3Forms (AJAX, sin recargar) ---- */
+const form = document.getElementById('leadForm');
+const msg = document.getElementById('formMsg');
+const btn = document.getElementById('submitBtn');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  msg.className = 'form-msg';
+  const key = form.access_key.value;
+  if (!key || key === 'TU_ACCESS_KEY_DE_WEB3FORMS') {
+    msg.className = 'form-msg err';
+    msg.textContent = 'El formulario todavía no está configurado. (Falta la clave de Web3Forms.)';
+    return;
+  }
+  btn.classList.add('loading'); btn.textContent = 'Enviando...';
+  try {
+    const data = new FormData(form);
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+    const json = await res.json();
+    if (json.success) {
+      form.reset();
+      msg.className = 'form-msg ok';
+      msg.textContent = '¡Listo! Recibimos tu solicitud. Te escribimos a tu correo muy pronto. 🎉';
+    } else {
+      throw new Error(json.message || 'error');
+    }
+  } catch (err) {
+    msg.className = 'form-msg err';
+    msg.textContent = 'Ups, algo falló. Escribinos directo a contacto@websdigitales.com';
+  } finally {
+    btn.classList.remove('loading');
+    btn.innerHTML = 'Enviar solicitud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+  }
+});
+</script>
+</body>
+</html>

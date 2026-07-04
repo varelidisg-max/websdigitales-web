@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VeterinariasUY — Clínica Veterinaria en Montevideo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       RESET Y BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #1A1A1A;
+      background: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img {
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    /* Compensar header sticky en salto de ancla */
+    section[id],
+    footer[id] {
+      scroll-margin-top: 70px;
+    }
+
+    /* ============================================================
+       VARIABLES
+    ============================================================ */
+    :root {
+      --white:        #FFFFFF;
+      --bg-secondary: #F5F7FA;
+      --bg-dark:      #1C2B3A;
+      --text-primary: #1A1A1A;
+      --text-secondary: #5A6478;
+      --accent:       #2C4A6E;
+      --accent-hover: #3D6491;
+      --border:       #DDE3EC;
+
+      --pad-v: 96px;
+    }
+
+    /* ============================================================
+       CONTENEDOR
+    ============================================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ============================================================
+       FADE-IN (IntersectionObserver)
+    ============================================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 550ms ease, transform 550ms ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ============================================================
+       1. HEADER STICKY
+    ============================================================ */
+    #site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: 70px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #DDE3EC;
+      transition: box-shadow 250ms ease;
+    }
+
+    #site-header.scrolled {
+      box-shadow: 0 1px 12px rgba(0, 0, 0, 0.07);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #1C2B3A;
+      letter-spacing: -0.02em;
+    }
+
+    /* Nav desktop */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .site-nav a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #5A6478;
+      text-decoration: none;
+      transition: color 150ms ease;
+      white-space: nowrap;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: #2C4A6E;
+    }
+
+    /* Derecha del header */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-phone {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #5A6478;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #FFFFFF;
+      background: #2C4A6E;
+      padding: 9px 20px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 150ms ease;
+    }
+
+    .btn-primary:hover {
+      background: #1C2B3A;
+    }
+
+    /* Hamburguesa */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      line-height: 0;
+    }
+
+    /* Menú mobile */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: #FFFFFF;
+      border-bottom: 1px solid #DDE3EC;
+      flex-direction: column;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: #1A1A1A;
+      padding: 15px 24px;
+      border-bottom: 1px solid #DDE3EC;
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-menu a:hover {
+      color: #2C4A6E;
+    }
+
+
+    /* ============================================================
+       2. HERO
+    ============================================================ */
+    #inicio {
+      position: relative;
+      height: 92vh;
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      margin-top: 70px;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?w=1600&q=80');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: #1C2B3A;
+      opacity: 0.62;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding-left: 8vw;
+      max-width: calc(640px + 8vw);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #A8C4E0;
+      border: 1px solid #3D6491;
+      background: rgba(44, 74, 110, 0.3);
+      border-radius: 3px;
+      padding: 5px 12px;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: clamp(44px, 5.5vw, 76px);
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn-solid {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #FFFFFF;
+      background: #2C4A6E;
+      border: 1px solid #2C4A6E;
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+
+    .hero-btn-solid:hover {
+      background: #1C2B3A;
+      border-color: #1C2B3A;
+    }
+
+    .hero-btn-outline {
+      display: inline-block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #FFFFFF;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 150ms ease, background 150ms ease;
+    }
+
+    .hero-btn-outline:hover {
+      border-color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-facts {
+      position: absolute;
+      bottom: 40px;
+      right: 8vw;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hero-fact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .hero-fact-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #2C4A6E;
+      flex-shrink: 0;
+    }
+
+
+    /* ============================================================
+       3. FRANJA DE CONFIANZA
+    ============================================================ */
+    #confianza {
+      background: #F5F7FA;
+      padding: 44px 0;
+    }
+
+    .trust-bar {
+      display: flex;
+      align-items: stretch;
+    }
+
+    .trust-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .trust-item + .trust-item {
+      border-left: 1px solid #DDE3EC;
+    }
+
+    .trust-item span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: #1C2B3A;
+      line-height: 1.4;
+    }
+
+
+    /* ============================================================
+       4. SERVICIOS
+    ============================================================ */
+    #servicios {
+      background: #FFFFFF;
+      padding: var(--pad-v) 0;
+    }
+
+    .servicios-header {
+      display: flex;
+      align-items: baseline;
+      gap: 48px;
+      margin-bottom: 20px;
+    }
+
+    .servicios-titulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      color: #1C2B3A;
+      letter-spacing: -0.02em;
+      flex-shrink: 0;
+    }
+
+    .servicios-desc {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #5A6478;
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .servicios-sep {
+      border: none;
+      border-top: 1px solid #DDE3EC;
+      margin-bottom: 0;
+    }
+
+    /* Grid de dos columnas de categorías */
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 56px;
+    }
+
+    .servicio-cat {
+      /* nada extra — las filas tienen su propio borde */
+    }
+
+    .cat-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #2C4A6E;
+      padding: 24px 0 10px;
+      border-top: 1px solid #DDE3EC;
+      margin-top: 24px;
+    }
+
+    .servicio-cat:nth-child(1) .cat-label,
+    .servicio-cat:nth-child(2) .cat-label {
+      margin-top: 0;
+    }
+
+    .servicio-fila {
+      display: grid;
+      grid-template-columns: 30% 50% 20%;
+      align-items: baseline;
+      padding: 13px 0;
+      border-bottom: 1px solid #DDE3EC;
+      transition: background 150ms ease;
+      cursor: default;
+    }
+
+    /* El hover extiende el fondo sin mover el layout */
+    .servicio-fila:hover {
+      background: #F5F7FA;
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-left: -12px;
+      margin-right: -12px;
+    }
+
+    .srv-nombre {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1C2B3A;
+    }
+
+    .srv-desc {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #5A6478;
+      line-height: 1.5;
+      padding: 0 16px;
+    }
+
+    .srv-precio {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #2C4A6E;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .servicios-nota {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #5A6478;
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #DDE3EC;
+    }
+
+
+    /* ============================================================
+       5. INSTALACIONES
+    ============================================================ */
+    #instalaciones {
+      background: #F5F7FA;
+      padding: var(--pad-v) 0;
+    }
+
+    .instalaciones-header {
+      margin-bottom: 36px;
+    }
+
+    .instalaciones-titulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #1C2B3A;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .instalaciones-sub {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #5A6478;
+    }
+
+    .instalaciones-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 320px 220px;
+      gap: 4px;
+    }
+
+    .instalaciones-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .instalaciones-features {
+      display: flex;
+      border-top: 1px solid #DDE3EC;
+      border-bottom: 1px solid #DDE3EC;
+      margin-top: 28px;
+    }
+
+    .inst-feat {
+      flex: 1;
+      padding: 18px 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #2C4A6E;
+      text-align: center;
+    }
+
+    .inst-feat + .inst-feat {
+      border-left: 1px solid #DDE3EC;
+    }
+
+
+    /* ============================================================
+       6. EL EQUIPO
+    ============================================================ */
+    #equipo {
+      background: #FFFFFF;
+      padding: var(--pad-v) 0;
+    }
+
+    .equipo-titulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #1C2B3A;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    .equipo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .vet-card {
+      border-bottom: 1px solid #DDE3EC;
+      padding-bottom: 28px;
+    }
+
+    .vet-foto {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+    }
+
+    .vet-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+
+    .vet-nombre {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 19px;
+      color: #1C2B3A;
+      margin-top: 16px;
+      margin-bottom: 5px;
+    }
+
+    .vet-especialidad {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 15px;
+      color: #5A6478;
+      margin-bottom: 7px;
+    }
+
+    .vet-matricula {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #2C4A6E;
+      letter-spacing: 0.02em;
+    }
+
+    .equipo-nota {
+      text-align: center;
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #5A6478;
+      margin-top: 40px;
+    }
+
+
+    /* ============================================================
+       7. TURNOS
+    ============================================================ */
+    #turnos {
+      background: #1C2B3A;
+      padding: var(--pad-v) 0;
+    }
+
+    .turnos-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .turnos-eyebrow {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #A8C4E0;
+      margin-bottom: 16px;
+    }
+
+    .turnos-titulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 40px;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .turnos-cuerpo {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .turnos-contacto {
+      display: flex;
+      gap: 40px;
+    }
+
+    .tc-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #A8C4E0;
+      margin-bottom: 4px;
+    }
+
+    .tc-valor {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #FFFFFF;
+    }
+
+    /* Formulario */
+    .form-wrap {
+      background: #243347;
+      padding: 36px;
+      border-radius: 6px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 12px;
+      color: #A8C4E0;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: #1C2B3A;
+      border: 1px solid #3A5070;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      padding: 9px 13px;
+      border-radius: 4px;
+      outline: none;
+      transition: border-color 150ms ease;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.28);
+    }
+
+    .form-control:focus {
+      border-color: #3D6491;
+    }
+
+    .form-control.field-error {
+      border-color: #C0392B;
+    }
+
+    .form-control option {
+      background: #1C2B3A;
+      color: #FFFFFF;
+    }
+
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%235A6478' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 32px;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 76px;
+    }
+
+    .field-err-msg {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      color: #C0392B;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .field-err-msg.visible {
+      display: block;
+    }
+
+    .btn-whatsapp {
+      display: block;
+      width: 100%;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: #FFFFFF;
+      background: #2C4A6E;
+      border: none;
+      border-radius: 4px;
+      padding: 13px;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 150ms ease;
+    }
+
+    .btn-whatsapp:hover {
+      background: #1C2B3A;
+    }
+
+
+    /* ============================================================
+       8. TESTIMONIOS
+    ============================================================ */
+    #testimonios {
+      background: #F5F7FA;
+      padding: var(--pad-v) 0;
+    }
+
+    .testimonios-titulo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 36px;
+      color: #1C2B3A;
+      letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+    }
+
+    .testimonio {
+      border-top: 1px solid #2C4A6E;
+      padding-top: 24px;
+    }
+
+    .testimonio-texto {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 17px;
+      color: #3A4A5C;
+      line-height: 1.75;
+      margin-bottom: 22px;
+    }
+
+    .testimonio-nombre {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: #1C2B3A;
+      margin-bottom: 2px;
+    }
+
+    .testimonio-dato {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #5A6478;
+    }
+
+
+    /* ============================================================
+       9. CONTACTO Y UBICACIÓN
+    ============================================================ */
+    #contacto {
+      background: #FFFFFF;
+      padding: var(--pad-v) 0;
+    }
+
+    .contacto-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .contacto-nombre {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: #1C2B3A;
+      margin-bottom: 24px;
+    }
+
+    .contacto-campo {
+      margin-bottom: 12px;
+    }
+
+    .contacto-campo-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5A6478;
+      margin-bottom: 2px;
+    }
+
+    .contacto-campo-valor {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #1A1A1A;
+    }
+
+    .horarios {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 28px;
+      margin-bottom: 16px;
+    }
+
+    .horarios td {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #1A1A1A;
+      padding: 10px 0;
+      border-bottom: 1px solid #DDE3EC;
+    }
+
+    .horarios td:last-child {
+      text-align: right;
+      color: #2C4A6E;
+      font-weight: 500;
+    }
+
+    .contacto-pie {
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #5A6478;
+    }
+
+    .mapa-placeholder {
+      background: #F5F7FA;
+      border: 1px solid #DDE3EC;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .mapa-dir {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      color: #5A6478;
+    }
+
+    .mapa-link {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #2C4A6E;
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .mapa-link:hover {
+      color: #1C2B3A;
+    }
+
+
+    /* ============================================================
+       10. FOOTER
+    ============================================================ */
+    #site-footer {
+      background: #1C2B3A;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 48px;
+      padding: 48px 0;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #FFFFFF;
+    }
+
+    .footer-tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #A8C4E0;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .footer-address {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #A8C4E0;
+    }
+
+    .footer-col-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5A6478;
+      margin-bottom: 16px;
+    }
+
+    .footer-nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-links a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #A8C4E0;
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .footer-nav-links a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-contact-item {
+      margin-bottom: 12px;
+    }
+
+    .footer-contact-label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #5A6478;
+      margin-bottom: 2px;
+    }
+
+    .footer-contact-value {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      color: #A8C4E0;
+    }
+
+    .footer-contact-value a {
+      color: #3D6491;
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .footer-contact-value a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #243347;
+      padding: 20px 0;
+    }
+
+    .footer-bottom p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #3A5070;
+    }
+
+
+    /* ============================================================
+       BOTÓN FLOTANTE WHATSAPP
+    ============================================================ */
+    .float-wa {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #2C4A6E;
+      color: #FFFFFF;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      transition: background 150ms ease;
+    }
+
+    .float-wa:hover {
+      background: #1C2B3A;
+      color: #FFFFFF;
+    }
+
+    .float-wa svg {
+      flex-shrink: 0;
+    }
+
+
+    /* ============================================================
+       RESPONSIVE — TABLET (768px – 1199px)
+    ============================================================ */
+    @media (max-width: 1199px) {
+      :root { --pad-v: 64px; }
+
+      .header-phone { display: none; }
+
+      /* Servicios: columna única */
+      .servicios-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .servicio-cat:nth-child(3) .cat-label,
+      .servicio-cat:nth-child(4) .cat-label {
+        margin-top: 24px;
+      }
+
+      /* Equipo: columna única */
+      .equipo-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .vet-card {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .vet-foto {
+        aspect-ratio: 3 / 4;
+      }
+
+      /* Turnos: columna única */
+      .turnos-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      /* Testimonios: columna única */
+      .testimonios-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      /* Contacto: columna única */
+      .contacto-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      /* Footer: 2 columnas */
+      .footer-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+
+    /* ============================================================
+       RESPONSIVE — MOBILE (< 768px)
+    ============================================================ */
+    @media (max-width: 767px) {
+      :root { --pad-v: 48px; }
+
+      .container { padding: 0 20px; }
+      .header-inner { padding: 0 20px; }
+
+      /* Ocultar nav desktop, mostrar hamburguesa */
+      .site-nav { display: none; }
+      .header-right .btn-primary { display: none; }
+      .hamburger { display: block; }
+
+      /* Hero */
+      .hero-content {
+        padding-left: 24px;
+        padding-right: 24px;
+        max-width: 100%;
+      }
+
+      .hero-facts { display: none; }
+
+      /* Trust bar: cuadrícula 2x */
+      .trust-bar {
+        flex-wrap: wrap;
+      }
+
+      .trust-item {
+        flex: none;
+        width: 50%;
+        padding: 14px 16px;
+        border-left: none !important;
+        border-bottom: 1px solid #DDE3EC;
+      }
+
+      .trust-item:nth-child(2n) { border-left: 1px solid #DDE3EC !important; }
+      .trust-item:nth-last-child(-n+1),
+      .trust-item:last-child { border-bottom: none; }
+
+      /* Servicios header: columna */
+      .servicios-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .servicios-titulo { font-size: 32px; }
+
+      /* Filas de servicio apiladas en mobile */
+      .servicio-fila {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 2px;
+        padding: 14px 0;
+      }
+
+      .servicio-fila:hover {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .srv-desc { padding: 2px 0; }
+
+      .srv-precio {
+        text-align: left;
+        color: #2C4A6E;
+        font-weight: 600;
+      }
+
+      /* Instalaciones: grid 2x2 */
+      .instalaciones-grid {
+        grid-template-rows: 180px 180px;
+      }
+
+      .instalaciones-titulo { font-size: 30px; }
+
+      /* Características en 2x2 */
+      .instalaciones-features { flex-wrap: wrap; }
+
+      .inst-feat {
+        flex: none;
+        width: 50%;
+        text-align: left;
+        padding: 14px 16px;
+      }
+
+      .inst-feat:nth-child(2) { border-left: 1px solid #DDE3EC; }
+      .inst-feat:nth-child(3) {
+        border-left: none;
+        border-top: 1px solid #DDE3EC;
+      }
+      .inst-feat:nth-child(4) {
+        border-left: 1px solid #DDE3EC;
+        border-top: 1px solid #DDE3EC;
+      }
+
+      /* Equipo: columna simple */
+      .equipo-titulo { font-size: 30px; }
+
+      .equipo-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .vet-card {
+        display: block;
+      }
+
+      .vet-foto {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+      }
+
+      /* Turnos */
+      .turnos-titulo { font-size: 32px; }
+      .form-wrap { padding: 24px; }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .turnos-contacto {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      /* Testimonios: columna */
+      .testimonios-titulo { font-size: 28px; }
+
+      .testimonios-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      /* Contacto */
+      .contacto-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      /* Footer */
+      .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 0;
+      }
+
+      .footer-bottom p { font-size: 11px; }
+
+      /* Botón flotante */
+      .float-wa {
+        bottom: 20px;
+        right: 16px;
+        padding: 10px 16px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HEADER
+  ============================================================ -->
+  <header id="site-header">
+    <div class="header-inner">
+
+      <a href="#inicio" class="logo" aria-label="VeterinariasUY — inicio">
+        <!-- Cruz médica SVG — proporciones finas, no de farmacia -->
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="7.5" y="0" width="3" height="18" rx="1" fill="#2C4A6E"/>
+          <rect x="0"   y="7.5" width="18" height="3" rx="1" fill="#2C4A6E"/>
+        </svg>
+        <span class="logo-text">VeterinariasUY</span>
+      </a>
+
+      <nav class="site-nav" id="siteNav" aria-label="Navegación principal">
+        <a href="#inicio"       data-nav="inicio">Inicio</a>
+        <a href="#servicios"    data-nav="servicios">Servicios</a>
+        <a href="#instalaciones" data-nav="instalaciones">Instalaciones</a>
+        <a href="#equipo"       data-nav="equipo">El Equipo</a>
+        <a href="#turnos"       data-nav="turnos">Turnos</a>
+        <a href="#contacto"     data-nav="contacto">Contacto</a>
+      </nav>
+
+      <div class="header-right">
+        <span class="header-phone">2 601 4433</span>
+        <a href="#turnos" class="btn-primary">Pedir turno</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false">
+          <svg width="24" height="20" viewBox="0 0 24 20" fill="none" aria-hidden="true">
+            <rect y="0"  width="24" height="2.5" rx="1.25" fill="#2C4A6E"/>
+            <rect y="8.75" width="24" height="2.5" rx="1.25" fill="#2C4A6E"/>
+            <rect y="17.5" width="24" height="2.5" rx="1.25" fill="#2C4A6E"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Menú desplegable mobile -->
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Menú mobile">
+    <a href="#inicio"        onclick="closeMobileMenu()">Inicio</a>
+    <a href="#servicios"     onclick="closeMobileMenu()">Servicios</a>
+    <a href="#instalaciones" onclick="closeMobileMenu()">Instalaciones</a>
+    <a href="#equipo"        onclick="closeMobileMenu()">El Equipo</a>
+    <a href="#turnos"        onclick="closeMobileMenu()">Turnos</a>
+    <a href="#contacto"      onclick="closeMobileMenu()">Contacto</a>
+  </nav>
+
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="inicio" aria-label="Presentación">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <span class="hero-badge">CLÍNICA VETERINARIA — MONTEVIDEO</span>
+      <h1 class="hero-title">La salud de tu mascota,<br>en manos que importan.</h1>
+      <p class="hero-sub">Clínica de primer nivel con veterinarios especializados, equipamiento de diagnóstico moderno y atención de urgencias las 24 horas.</p>
+      <div class="hero-buttons">
+        <a href="#turnos"    class="hero-btn-solid">Reservar turno</a>
+        <a href="#servicios" class="hero-btn-outline">Ver servicios</a>
+      </div>
+    </div>
+
+    <div class="hero-facts" aria-hidden="true">
+      <div class="hero-fact"><span class="hero-fact-dot"></span>Urgencias 24hs</div>
+      <div class="hero-fact"><span class="hero-fact-dot"></span>Estacionamiento propio</div>
+      <div class="hero-fact"><span class="hero-fact-dot"></span>Laboratorio in situ</div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FRANJA DE CONFIANZA
+  ============================================================ -->
+  <section id="confianza" aria-label="Datos de la clínica">
+    <div class="container">
+      <div class="trust-bar fade-in">
+        <div class="trust-item"><span>Fundada en 2009</span></div>
+        <div class="trust-item"><span>4 veterinarios especializados</span></div>
+        <div class="trust-item"><span>Urgencias 24 horas</span></div>
+        <div class="trust-item"><span>Laboratorio propio</span></div>
+        <div class="trust-item"><span>Más de 8.000 pacientes atendidos</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SERVICIOS
+  ============================================================ -->
+  <section id="servicios">
+    <div class="container">
+
+      <div class="servicios-header fade-in">
+        <h2 class="servicios-titulo">Servicios</h2>
+        <p class="servicios-desc">Atención completa para perros, gatos y animales pequeños.</p>
+      </div>
+      <hr class="servicios-sep">
+
+      <div class="servicios-grid fade-in">
+
+        <!-- Columna izquierda: Medicina general -->
+        <div class="servicio-cat">
+          <div class="cat-label">Medicina general</div>
+
+          <div class="servicio-fila">
+            <span class="srv-nombre">Consulta general</span>
+            <span class="srv-desc">Revisación clínica completa, diagnóstico y plan de tratamiento</span>
+            <span class="srv-precio">$690</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Consulta de urgencia</span>
+            <span class="srv-desc">Atención inmediata fuera de horario</span>
+            <span class="srv-precio">$1.100</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Vacunación</span>
+            <span class="srv-desc">Planes anuales para perros y gatos, con carnet</span>
+            <span class="srv-precio">$480</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Desparasitación</span>
+            <span class="srv-desc">Tratamiento interno y externo</span>
+            <span class="srv-precio">$390</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Control de peso y nutrición</span>
+            <span class="srv-desc">Evaluación y plan alimentario</span>
+            <span class="srv-precio">$520</span>
+          </div>
+        </div>
+
+        <!-- Columna derecha: Diagnóstico -->
+        <div class="servicio-cat">
+          <div class="cat-label">Diagnóstico</div>
+
+          <div class="servicio-fila">
+            <span class="srv-nombre">Radiografía digital</span>
+            <span class="srv-desc">Placas de tórax, abdomen y extremidades</span>
+            <span class="srv-precio">desde $890</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Ecografía</span>
+            <span class="srv-desc">Abdominal, cardíaca y obstétrica</span>
+            <span class="srv-precio">desde $1.100</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Análisis de laboratorio</span>
+            <span class="srv-desc">Hemograma, bioquímica, orina y más</span>
+            <span class="srv-precio">desde $650</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Electrocardiograma</span>
+            <span class="srv-desc">Evaluación cardiológica completa</span>
+            <span class="srv-precio">$780</span>
+          </div>
+        </div>
+
+        <!-- Columna izquierda: Cirugía -->
+        <div class="servicio-cat">
+          <div class="cat-label">Cirugía</div>
+
+          <div class="servicio-fila">
+            <span class="srv-nombre">Castración canina</span>
+            <span class="srv-desc">Procedimiento completo con anestesia y control posoperatorio</span>
+            <span class="srv-precio">desde $3.200</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Castración felina</span>
+            <span class="srv-desc">Procedimiento completo con anestesia y control posoperatorio</span>
+            <span class="srv-precio">desde $2.400</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Cirugía general</span>
+            <span class="srv-desc">Presupuesto según diagnóstico</span>
+            <span class="srv-precio">consultar</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Odontología veterinaria</span>
+            <span class="srv-desc">Limpieza y extracciones bajo anestesia</span>
+            <span class="srv-precio">desde $2.800</span>
+          </div>
+        </div>
+
+        <!-- Columna derecha: Otros -->
+        <div class="servicio-cat">
+          <div class="cat-label">Otros servicios</div>
+
+          <div class="servicio-fila">
+            <span class="srv-nombre">Peluquería y baño</span>
+            <span class="srv-desc">Incluye corte, secado y limpieza de oídos</span>
+            <span class="srv-precio">desde $780</span>
+          </div>
+          <div class="servicio-fila">
+            <span class="srv-nombre">Hospedaje veterinario</span>
+            <span class="srv-desc">Por noche, con control médico incluido</span>
+            <span class="srv-precio">desde $890</span>
+          </div>
+        </div>
+
+      </div><!-- /servicios-grid -->
+
+      <p class="servicios-nota fade-in">Los precios son orientativos y pueden variar según el peso del animal y complejidad del caso. Consultanos para un presupuesto exacto.</p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       INSTALACIONES
+  ============================================================ -->
+  <section id="instalaciones">
+    <div class="container">
+
+      <div class="instalaciones-header fade-in">
+        <h2 class="instalaciones-titulo">Instalaciones</h2>
+        <p class="instalaciones-sub">Equipamiento moderno para diagnóstico y tratamiento de precisión.</p>
+      </div>
+
+      <div class="instalaciones-grid fade-in">
+        <img src="https://images.unsplash.com/photo-1606425271394-c3ca9aa1fc06?w=700&q=80" alt="Sala de consulta">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=700&q=80" alt="Quirófano">
+        <img src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=700&q=80" alt="Sala de internación">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=700&q=80" alt="Laboratorio">
+      </div>
+
+      <div class="instalaciones-features fade-in">
+        <div class="inst-feat">Quirófano equipado</div>
+        <div class="inst-feat">Sala de internación</div>
+        <div class="inst-feat">Laboratorio in situ</div>
+        <div class="inst-feat">Sala de espera separada (perros / gatos)</div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       EL EQUIPO
+  ============================================================ -->
+  <section id="equipo">
+    <div class="container">
+
+      <h2 class="equipo-titulo fade-in">El equipo</h2>
+
+      <div class="equipo-grid">
+
+        <div class="vet-card fade-in">
+          <div class="vet-foto">
+            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="Dra. Lucía Herrera">
+          </div>
+          <div>
+            <div class="vet-nombre">Dra. Lucía Herrera</div>
+            <div class="vet-especialidad">Medicina interna y diagnóstico por imagen</div>
+            <div class="vet-matricula">MV 4.821</div>
+          </div>
+        </div>
+
+        <div class="vet-card fade-in">
+          <div class="vet-foto">
+            <img src="https://images.unsplash.com/photo-1612349316228-5942a9b489c2?w=500&q=80" alt="Dr. Santiago Álvarez">
+          </div>
+          <div>
+            <div class="vet-nombre">Dr. Santiago Álvarez</div>
+            <div class="vet-especialidad">Cirugía y ortopedia veterinaria</div>
+            <div class="vet-matricula">MV 3.947</div>
+          </div>
+        </div>
+
+        <div class="vet-card fade-in">
+          <div class="vet-foto">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="Dra. Valentina Cruz">
+          </div>
+          <div>
+            <div class="vet-nombre">Dra. Valentina Cruz</div>
+            <div class="vet-especialidad">Clínica de felinos y animales exóticos</div>
+            <div class="vet-matricula">MV 5.203</div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="equipo-nota fade-in">Todo nuestro equipo cuenta con formación de posgrado y actualización continua.</p>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TURNOS
+  ============================================================ -->
+  <section id="turnos">
+    <div class="container">
+      <div class="turnos-inner">
+
+        <!-- Columna izquierda: info -->
+        <div class="fade-in">
+          <div class="turnos-eyebrow">TURNOS</div>
+          <h2 class="turnos-titulo">Pedí tu turno</h2>
+          <p class="turnos-cuerpo">Confirmamos el turno por WhatsApp en menos de dos horas. Para urgencias, llamanos directamente al 2 601 4433 — atendemos las 24 horas.</p>
+          <div class="turnos-contacto">
+            <div>
+              <div class="tc-label">Teléfono</div>
+              <div class="tc-valor">2 601 4433</div>
+            </div>
+            <div>
+              <div class="tc-label">WhatsApp</div>
+              <div class="tc-valor">+598 98 112 233</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna derecha: formulario -->
+        <div class="fade-in">
+          <div class="form-wrap">
+            <form id="turnoForm" novalidate>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fTitular">Nombre del titular *</label>
+                  <input type="text" id="fTitular" class="form-control" placeholder="Tu nombre completo" required>
+                  <div class="field-err-msg" id="err-fTitular">Campo obligatorio</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fMascota">Nombre de la mascota *</label>
+                  <input type="text" id="fMascota" class="form-control" placeholder="Nombre de tu mascota" required>
+                  <div class="field-err-msg" id="err-fMascota">Campo obligatorio</div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fEspecie">Especie *</label>
+                  <select id="fEspecie" class="form-control" required>
+                    <option value="">Seleccioná</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Ave">Ave</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                  <div class="field-err-msg" id="err-fEspecie">Campo obligatorio</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fRaza">Raza (opcional)</label>
+                  <input type="text" id="fRaza" class="form-control" placeholder="Ej: Golden Retriever">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fMotivo">Motivo de consulta *</label>
+                <select id="fMotivo" class="form-control" required>
+                  <option value="">Seleccioná un motivo</option>
+                  <option value="Consulta general">Consulta general</option>
+                  <option value="Vacunación">Vacunación</option>
+                  <option value="Urgencia">Urgencia</option>
+                  <option value="Cirugía">Cirugía</option>
+                  <option value="Diagnóstico">Diagnóstico</option>
+                  <option value="Peluquería">Peluquería</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <div class="field-err-msg" id="err-fMotivo">Campo obligatorio</div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="fFecha">Fecha preferida *</label>
+                  <input type="date" id="fFecha" class="form-control" required>
+                  <div class="field-err-msg" id="err-fFecha">Campo obligatorio</div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="fHorario">Horario preferido *</label>
+                  <select id="fHorario" class="form-control" required>
+                    <option value="">Seleccioná un horario</option>
+                    <option value="Mañana (9:00–13:00)">Mañana (9:00–13:00)</option>
+                    <option value="Tarde (14:00–18:00)">Tarde (14:00–18:00)</option>
+                    <option value="Noche (18:00–20:00)">Noche (18:00–20:00)</option>
+                  </select>
+                  <div class="field-err-msg" id="err-fHorario">Campo obligatorio</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="fObs">Observaciones (opcional)</label>
+                <textarea id="fObs" class="form-control" rows="3" placeholder="Información adicional sobre la consulta..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-whatsapp">Confirmar por WhatsApp</button>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TESTIMONIOS
+  ============================================================ -->
+  <section id="testimonios">
+    <div class="container">
+
+      <h2 class="testimonios-titulo fade-in">Lo que dicen nuestros clientes</h2>
+
+      <div class="testimonios-grid">
+
+        <div class="testimonio fade-in">
+          <p class="testimonio-texto">Lo que más valoro es que explican todo con claridad. Cuando traje a Coco por primera vez me fui entendiendo exactamente qué tenía y cómo seguía el tratamiento.</p>
+          <div class="testimonio-nombre">Mariana F.</div>
+          <div class="testimonio-dato">Coco, Golden Retriever</div>
+        </div>
+
+        <div class="testimonio fade-in">
+          <p class="testimonio-texto">La Dra. Cruz conoce a los gatos de verdad. Sabe cómo manejarlos sin estresarlos. Para mí eso vale más que cualquier otra cosa.</p>
+          <div class="testimonio-nombre">Pablo R.</div>
+          <div class="testimonio-dato">Miso, gato persa</div>
+        </div>
+
+        <div class="testimonio fade-in">
+          <p class="testimonio-texto">Tuve una urgencia un domingo a las 2 de la mañana y me atendieron sin demora. Eso no se olvida.</p>
+          <div class="testimonio-nombre">Fernanda M.</div>
+          <div class="testimonio-dato">Thor, Labrador</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CONTACTO Y UBICACIÓN
+  ============================================================ -->
+  <section id="contacto">
+    <div class="container">
+      <div class="contacto-inner">
+
+        <!-- Info -->
+        <div class="fade-in">
+          <div class="contacto-nombre">VeterinariasUY</div>
+
+          <div class="contacto-campo">
+            <div class="contacto-campo-label">Dirección</div>
+            <div class="contacto-campo-valor">Bvar. Artigas 2156, Montevideo</div>
+          </div>
+          <div class="contacto-campo">
+            <div class="contacto-campo-label">Teléfono</div>
+            <div class="contacto-campo-valor">2 601 4433</div>
+          </div>
+          <div class="contacto-campo">
+            <div class="contacto-campo-label">WhatsApp</div>
+            <div class="contacto-campo-valor">+598 98 112 233</div>
+          </div>
+          <div class="contacto-campo">
+            <div class="contacto-campo-label">Email</div>
+            <div class="contacto-campo-valor">contacto@veterinariasuy.com.uy</div>
+          </div>
+
+          <table class="horarios">
+            <tbody>
+              <tr>
+                <td>Lunes a viernes</td>
+                <td>9:00 a 20:00</td>
+              </tr>
+              <tr>
+                <td>Sábado</td>
+                <td>9:00 a 14:00</td>
+              </tr>
+              <tr>
+                <td>Urgencias</td>
+                <td>24 horas todos los días</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p class="contacto-pie">Estacionamiento propio en el predio. Entrada por Gallinal.</p>
+        </div>
+
+        <!-- Mapa -->
+        <div class="fade-in">
+          <div class="mapa-placeholder">
+            <p class="mapa-dir">Bvar. Artigas 2156, Montevideo</p>
+            <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="mapa-link">Ver en Google Maps</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- Izquierda -->
+        <div>
+          <div class="footer-logo">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+              <rect x="7.5" y="0" width="3" height="18" rx="1" fill="#FFFFFF"/>
+              <rect x="0"   y="7.5" width="18" height="3" rx="1" fill="#FFFFFF"/>
+            </svg>
+            <span class="footer-logo-text">VeterinariasUY</span>
+          </div>
+          <p class="footer-tagline">Medicina veterinaria de referencia en Montevideo</p>
+          <p class="footer-address">Bvar. Artigas 2156, Montevideo</p>
+        </div>
+
+        <!-- Centro -->
+        <div>
+          <div class="footer-col-title">Navegación</div>
+          <nav class="footer-nav-links" aria-label="Pie de página">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#instalaciones">Instalaciones</a>
+            <a href="#equipo">El Equipo</a>
+            <a href="#turnos">Turnos</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+        </div>
+
+        <!-- Derecha -->
+        <div>
+          <div class="footer-col-title">Contacto</div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-label">Teléfono</div>
+            <div class="footer-contact-value">2 601 4433</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-label">WhatsApp</div>
+            <div class="footer-contact-value">+598 98 112 233</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-label">Email</div>
+            <div class="footer-contact-value">contacto@veterinariasuy.com.uy</div>
+          </div>
+          <div class="footer-contact-item">
+            <div class="footer-contact-label">Instagram</div>
+            <div class="footer-contact-value"><a href="#" rel="noopener">@veterinariasuy</a></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 VeterinariasUY — Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================================
+       BOTÓN FLOTANTE WHATSAPP
+  ============================================================ -->
+  <a href="https://wa.me/59898112233" target="_blank" rel="noopener noreferrer" class="float-wa" aria-label="Contactar por WhatsApp">
+    <!-- Ícono WhatsApp SVG -->
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M12 2C6.477 2 2 6.477 2 12c0 1.892.524 3.661 1.438 5.168L2.05 21.95a.75.75 0 00.918.91l4.88-1.28A9.954 9.954 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm-1.294 5.99c-.172-.407-.354-.415-.517-.422l-.44-.007c-.153 0-.4.057-.61.287-.21.23-.8.782-.8 1.906 0 1.124.82 2.21.934 2.364.115.153 1.59 2.556 3.93 3.48.548.236 1.003.377 1.346.482.565.174 1.079.15 1.485.09.453-.066 1.395-.57 1.591-1.12.196-.55.196-1.02.137-1.12-.059-.099-.214-.155-.45-.27-.236-.115-1.394-.688-1.61-.768-.215-.08-.372-.12-.528.12-.157.24-.606.768-.743.925-.136.157-.272.176-.507.06-.236-.116-.995-.366-1.895-1.167-.7-.624-1.173-1.394-1.31-1.63-.137-.235-.014-.362.103-.479.105-.105.236-.273.353-.41.118-.137.157-.235.236-.392.079-.157.04-.295-.02-.41-.058-.116-.528-1.272-.725-1.74z"
+        fill="white"/>
+    </svg>
+    Urgencias / Turnos
+  </a>
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ============================================================
+       HEADER — box-shadow al hacer scroll
+    ============================================================ */
+    const siteHeader = document.getElementById('site-header');
+
+    window.addEventListener('scroll', () => {
+      siteHeader.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+
+    /* ============================================================
+       HAMBURGUESA — menú mobile
+    ============================================================ */
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu   = document.getElementById('mobileMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.setAttribute('aria-expanded', isOpen);
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (!siteHeader.contains(e.target) && !mobileMenu.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+
+    /* ============================================================
+       INTERSECTIONOBSERVER — sección activa en nav
+    ============================================================ */
+    const navLinks = document.querySelectorAll('#siteNav a[data-nav]');
+    const sections = document.querySelectorAll('section[id]');
+
+    const navObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.nav === id);
+          });
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -65% 0px',
+      threshold: 0
+    });
+
+    sections.forEach(s => navObserver.observe(s));
+
+
+    /* ============================================================
+       INTERSECTIONOBSERVER — fade-in de secciones
+    ============================================================ */
+    const fadeEls = document.querySelectorAll('.fade-in');
+
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          fadeObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -32px 0px'
+    });
+
+    fadeEls.forEach(el => fadeObserver.observe(el));
+
+
+    /* ============================================================
+       FORMULARIO DE TURNO — validación + link WhatsApp
+    ============================================================ */
+    const REQUIRED_FIELDS = ['fTitular', 'fMascota', 'fEspecie', 'fMotivo', 'fFecha', 'fHorario'];
+
+    function setFieldError(fieldId, hasError) {
+      const field  = document.getElementById(fieldId);
+      const errMsg = document.getElementById('err-' + fieldId);
+      field.classList.toggle('field-error', hasError);
+      if (errMsg) errMsg.classList.toggle('visible', hasError);
+    }
+
+    function validateForm() {
+      let valid = true;
+      REQUIRED_FIELDS.forEach(id => {
+        const empty = !document.getElementById(id).value.trim();
+        setFieldError(id, empty);
+        if (empty) valid = false;
+      });
+      return valid;
+    }
+
+    // Limpiar error al interactuar
+    REQUIRED_FIELDS.forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input',  () => { if (el.value.trim()) setFieldError(id, false); });
+      el.addEventListener('change', () => { if (el.value.trim()) setFieldError(id, false); });
+    });
+
+    document.getElementById('turnoForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+      const titular = document.getElementById('fTitular').value.trim();
+      const mascota = document.getElementById('fMascota').value.trim();
+      const especie = document.getElementById('fEspecie').value;
+      const raza    = document.getElementById('fRaza').value.trim();
+      const motivo  = document.getElementById('fMotivo').value;
+      const horario = document.getElementById('fHorario').value;
+      const obs     = document.getElementById('fObs').value.trim();
+
+      // Formatear fecha DD/MM/AAAA
+      let fechaFmt = document.getElementById('fFecha').value;
+      if (fechaFmt) {
+        const [y, m, d] = fechaFmt.split('-');
+        fechaFmt = `${d}/${m}/${y}`;
+      }
+
+      let msg = `Hola, quiero solicitar un turno en VeterinariasUY.\n\n`;
+      msg += `*Titular:* ${titular}\n`;
+      msg += `*Mascota:* ${mascota} (${especie}${raza ? ', ' + raza : ''})\n`;
+      msg += `*Motivo:* ${motivo}\n`;
+      msg += `*Fecha preferida:* ${fechaFmt}\n`;
+      msg += `*Horario preferido:* ${horario}\n`;
+      if (obs) msg += `*Observaciones:* ${obs}\n`;
+
+      window.open(`https://wa.me/59898112233?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  </script>
+
+</body>
+</html>
