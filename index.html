@@ -258,11 +258,12 @@ header.nav.scrolled {
   min-height: 300px;
 }
 .folio:hover { transform: translateY(-8px); border-color: rgba(22,199,132,0.5); }
-.folio-visual { height: 190px; position: relative; overflow: hidden; }
-.folio-visual .fake { position: absolute; inset: 0; padding: 20px; display: flex; flex-direction: column; gap: 10px; transition: transform .5s ease; }
-.folio:hover .folio-visual .fake { transform: scale(1.05); }
-.folio-visual .bar { height: 12px; border-radius: 6px; background: rgba(255,255,255,0.12); }
-.folio-visual .big { flex: 1; border-radius: 10px; }
+.folio-visual { height: 200px; position: relative; overflow: hidden; background: #0b0d0b; }
+.folio-frame { position: absolute; inset: 0; overflow: hidden; transition: transform .6s ease; }
+.folio:hover .folio-frame { transform: scale(1.05); }
+.folio-frame iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 1000px; border: 0; pointer-events: none; transform-origin: top left; background: #0b0d0b; opacity: 0; transition: opacity .5s ease; }
+.folio-frame iframe.loaded { opacity: 1; }
+.folio-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,0) 60%, rgba(10,10,10,0.4)); pointer-events: none; }
 .folio-tag { position: absolute; top: 14px; right: 14px; z-index: 3; font-size: 0.72rem; font-family: var(--ff-display); font-weight: 600; padding: 5px 12px; border-radius: 100px; background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); border: 1px solid var(--border); color: var(--green); }
 .folio-body { padding: 22px 24px 26px; }
 .folio-body h3 { font-family: var(--ff-display); font-size: 1.25rem; margin-bottom: 6px; }
@@ -271,17 +272,7 @@ header.nav.scrolled {
 .folio-open svg { width: 15px; height: 15px; transition: transform .25s; }
 .folio:hover .folio-open svg { transform: translate(3px,-3px); }
 
-/* palette variants for fake previews */
-.pv-barber .big { background: linear-gradient(135deg,#B8974A,#5c4a1f); }
-.pv-barber .bar { background: rgba(184,151,74,0.4); }
-.pv-farma .big { background: linear-gradient(135deg,#2ea6ff,#0b5c9e); }
-.pv-farma .bar { background: rgba(46,166,255,0.4); }
-.pv-gym .big { background: linear-gradient(135deg,#16C784,#0a6e49); }
-.pv-gym .bar { background: rgba(22,199,132,0.4); }
-.pv-resto .big { background: linear-gradient(135deg,#e0653b,#7a2d16); }
-.pv-resto .bar { background: rgba(224,101,59,0.4); }
-.pv-vet .big { background: linear-gradient(135deg,#9b7bff,#4b2fa8); }
-.pv-vet .bar { background: rgba(155,123,255,0.4); }
+/* (las vistas previas ahora son iframes en vivo de cada demo) */
 
 /* ============================================================
    FORM / CTA
@@ -495,7 +486,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 
       <a class="folio reveal" href="demo-BarberiaUY.html" target="_blank" rel="noopener">
         <span class="folio-tag">Barbería</span>
-        <div class="folio-visual pv-barber"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-visual"><div class="folio-frame"><iframe src="demo-BarberiaUY.html" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true" title="Vista previa BarberUY"></iframe></div></div>
         <div class="folio-body">
           <h3>BarberUY</h3>
           <p>Cortes que hablan por sí solos.</p>
@@ -505,7 +496,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 
       <a class="folio reveal" href="demo-FarmaciasUY.html" target="_blank" rel="noopener">
         <span class="folio-tag">Farmacia</span>
-        <div class="folio-visual pv-farma"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-visual"><div class="folio-frame"><iframe src="demo-FarmaciasUY.html" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true" title="Vista previa FarmaciasUY"></iframe></div></div>
         <div class="folio-body">
           <h3>FarmaciasUY</h3>
           <p>Tu salud, cerca de casa.</p>
@@ -515,7 +506,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 
       <a class="folio reveal" href="demo-GymUY.html" target="_blank" rel="noopener">
         <span class="folio-tag">Gimnasio</span>
-        <div class="folio-visual pv-gym"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-visual"><div class="folio-frame"><iframe src="demo-GymUY.html" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true" title="Vista previa GymUY"></iframe></div></div>
         <div class="folio-body">
           <h3>GymUY</h3>
           <p>Entrená en serio.</p>
@@ -525,7 +516,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 
       <a class="folio reveal" href="demo-RestaurantesUY.html" target="_blank" rel="noopener">
         <span class="folio-tag">Restaurante</span>
-        <div class="folio-visual pv-resto"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-visual"><div class="folio-frame"><iframe src="demo-RestaurantesUY.html" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true" title="Vista previa RestaurantesUY"></iframe></div></div>
         <div class="folio-body">
           <h3>RestaurantesUY</h3>
           <p>Cocina de mercado, Montevideo.</p>
@@ -535,7 +526,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 
       <a class="folio reveal" href="demo-VeterinariasUY.html" target="_blank" rel="noopener">
         <span class="folio-tag">Veterinaria</span>
-        <div class="folio-visual pv-vet"><div class="fake"><div class="bar" style="width:50%"></div><div class="big"></div><div class="bar" style="width:70%"></div></div></div>
+        <div class="folio-visual"><div class="folio-frame"><iframe src="demo-VeterinariasUY.html" loading="lazy" scrolling="no" tabindex="-1" aria-hidden="true" title="Vista previa VeterinariasUY"></iframe></div></div>
         <div class="folio-body">
           <h3>VeterinariasUY</h3>
           <p>Clínica veterinaria en Montevideo.</p>
@@ -705,6 +696,24 @@ document.querySelectorAll('.card').forEach(card => {
 
 /* ---- Year ---- */
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---- Portfolio: vistas previas en vivo (escalar iframes) ---- */
+function scaleFolioFrames() {
+  document.querySelectorAll('.folio-frame').forEach(frame => {
+    const iframe = frame.querySelector('iframe');
+    if (!iframe || !frame.clientWidth) return;
+    const base = 1440;
+    const scale = frame.clientWidth / base;
+    iframe.style.transform = 'scale(' + scale + ')';
+    iframe.style.height = (frame.clientHeight / scale) + 'px';
+  });
+}
+document.querySelectorAll('.folio-frame iframe').forEach(f => {
+  f.addEventListener('load', () => { f.classList.add('loaded'); scaleFolioFrames(); });
+});
+window.addEventListener('load', scaleFolioFrames);
+window.addEventListener('resize', scaleFolioFrames);
+scaleFolioFrames();
 
 /* ---- Form submit via Web3Forms (AJAX, sin recargar) ---- */
 const form = document.getElementById('leadForm');
