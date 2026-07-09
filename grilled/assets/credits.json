@@ -1,0 +1,123 @@
+{
+  "concept": {
+    "src": "assets/img/concept.jpg",
+    "title": "Pizza in Oven DSC00179",
+    "creator": "kurmanstaff",
+    "creator_url": "https://www.flickr.com/photos/62558987@N07",
+    "license": "by",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/62558987@N07/11658303855",
+    "source": "flickr"
+  },
+  "pillar-fire": {
+    "src": "assets/img/pillar-fire.jpg",
+    "title": "Cacti Choirmaster",
+    "creator": "Tony Fischer Photography",
+    "creator_url": "https://www.flickr.com/photos/22714323@N06",
+    "license": "by",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/22714323@N06/4827948646",
+    "source": "flickr"
+  },
+  "pillar-cut": {
+    "src": "assets/img/pillar-cut.jpg",
+    "title": "DFC 1757 Close-up of freshly sliced raw beef kidneys piled together showing the deep red flesh and glossy surfaces",
+    "creator": "PattayaPatrol",
+    "creator_url": "https://www.flickr.com/people/PattayaPatrol",
+    "license": "by-sa",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=190867115",
+    "source": "wikimedia"
+  },
+  "pillar-time": {
+    "src": "assets/img/pillar-time.jpg",
+    "title": "Smoke From the Pit",
+    "creator": "Matt Brock ☀",
+    "creator_url": "https://www.flickr.com/photos/39653492@N07",
+    "license": "by-nc-sa",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/39653492@N07/6659612807",
+    "source": "flickr"
+  },
+  "gallery-3": {
+    "src": "assets/img/gallery-3.jpg",
+    "title": "Roasted Rib Eye 650g - Les Boucheries Parisiennes",
+    "creator": "avlxyz",
+    "creator_url": "https://www.flickr.com/photos/10559879@N00",
+    "license": "by-sa",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/10559879@N00/299663818",
+    "source": "flickr"
+  },
+  "gallery-4": {
+    "src": "assets/img/gallery-4.jpg",
+    "title": "Tokyo_5",
+    "creator": "hans-johnson",
+    "creator_url": "https://www.flickr.com/photos/69825860@N04",
+    "license": "by-nd",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by-nd/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/69825860@N04/42229902024",
+    "source": "flickr"
+  },
+  "gallery-5": {
+    "src": "assets/img/gallery-5.jpg",
+    "title": "Dying Fire at Night",
+    "creator": "sjrankin",
+    "creator_url": "https://www.flickr.com/photos/24354425@N03",
+    "license": "by-nc",
+    "license_version": "2.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/2.0/",
+    "foreign_landing_url": "https://www.flickr.com/photos/24354425@N03/23578524483",
+    "source": "flickr"
+  },
+  "gallery-1": {
+    "src": "assets/img/gallery-1.jpg",
+    "title": "A cooked beef steak closeup",
+    "creator": "Jakub Kapusnak",
+    "creator_url": "https://stocksnap.io/author/55747",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "foreign_landing_url": "https://www.rawpixel.com/image/447751/delicious-cooked-steak-closeup",
+    "source": "rawpixel"
+  },
+  "gallery-6": {
+    "src": "assets/img/gallery-6.jpg",
+    "title": "BBQ. public domain image Flickr",
+    "creator": "usbotschaftberlin",
+    "creator_url": "{\"result_count\":1,\"page_count\":1,\"page_size\":6,\"page\":1,\"results\":[{\"id\":\"288328ba-c4c3-46a1-9ae1-61be07c1b312\",\"title\":\"BBQ. public domain image Flickr\",\"indexed_on\":\"2023-02-01T00:17:30.850367Z\",\"foreign_landing_url\":\"https://www.rawpixel.com/image/8733470/bbq-public-domain-image-from-flickr\",\"url\":\"https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL2ZsNDEzMDU5NTEzMzUtaW1hZ2UuanBn.jpg\",\"creator\":\"usbotschaftberlin\",\"creator_url\":null,\"license\":\"cc0\",\"license_version\":\"1.0\",\"license_url\":\"https://creativecommons.org/publicdomain/zero/1.0/\",\"provider\":\"rawpixel\",\"source\":\"rawpixel\",\"category\":\"photograph\",\"filesize\":null,\"filetype\":\"jpg\",\"tags\":[{\"name\":\"bbq\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"bbq ribs\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"food\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"grilled beef\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"meat\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"ribs\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"},{\"name\":\"smoked ribs\",\"accuracy\":null,\"unstable__provider\":\"rawpixel\"}],\"attribution\":\"\\\"BBQ. public domain image Flickr\\\" by usbotschaftberlin is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.\",\"fields_matched\":[\"description\",\"title\",\"tags.name\"],\"mature\":false,\"height\":4480,\"width\":6720,\"thumbnail\":\"https://api.openverse.org/v1/images/288328ba-c4c3-46a1-9ae1-61be07c1b312/thumb/\",\"detail_url\":\"https://api.openverse.org/v1/images/288328ba-c4c3-46a1-9ae1-61be07c1b312/\",\"related_url\":\"https://api.openverse.org/v1/images/288328ba-c4c3-46a1-9ae1-61be07c1b312/related/\",\"unstable__sensitivity\":[]}]}",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "foreign_landing_url": "https://www.rawpixel.com/image/8733470/bbq-public-domain-image-from-flickr",
+    "source": "rawpixel"
+  },
+  "gallery-7": {
+    "src": "assets/img/gallery-7.jpg",
+    "title": "File:2018 Spring-Echo Self-Doctorial public Solo-performance of piano (5 days and 10 times) in 'Children's Corner' in the Cruise-ship restaurant - 1st.jpg",
+    "creator": "Jason M. C., Han",
+    "creator_url": "https://commons.wikimedia.org/wiki/User:Jason_M._C.,_Han",
+    "license": "by-sa",
+    "license_version": "4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "foreign_landing_url": "https://commons.wikimedia.org/w/index.php?curid=68956947",
+    "source": "wikimedia"
+  },
+  "hero-poster": {
+    "src": "assets/img/hero-poster.jpg",
+    "title": "Dark Night",
+    "creator": "Tao Wen",
+    "creator_url": "https://stocksnap.io/author/34947",
+    "license": "cc0",
+    "license_version": "1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "foreign_landing_url": "https://stocksnap.io/photo/dark-night-GX4CAUPRA7",
+    "source": "stocksnap"
+  }
+}
