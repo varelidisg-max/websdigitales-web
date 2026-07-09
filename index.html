@@ -77,6 +77,7 @@ body {
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 ::selection { background: var(--green); color: #04150D; }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 10px; }
@@ -106,8 +107,7 @@ section { position: relative; }
 }
 .sub-sec { color: var(--text-muted); font-size: 1.08rem; max-width: 560px; }
 .gradient-text {
-  background: linear-gradient(100deg, var(--green-soft), var(--green) 60%, #0d8f5e);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--green);
 }
 
 /* ============================================================
@@ -181,9 +181,9 @@ header.nav.scrolled {
 }
 .hero p.lead { color: var(--text-muted); font-size: 1.18rem; margin: 26px 0 36px; max-width: 520px; }
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-stats { display: flex; gap: 38px; margin-top: 52px; }
-.hero-stats .stat .num { font-family: var(--ff-display); font-weight: 700; font-size: 2rem; color: var(--green); }
-.hero-stats .stat .lbl { font-size: 0.85rem; color: var(--text-muted); }
+.hero-trust { display: flex; align-items: center; gap: 10px; margin-top: 36px; color: var(--text-muted); font-size: 0.94rem; }
+.hero-trust strong { color: var(--text); font-weight: 600; }
+.hero-trust::before { content: ''; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green-glow); }
 
 /* Floating browser mockup */
 .mockup {
@@ -239,15 +239,18 @@ header.nav.scrolled {
 .card .ico svg { width: 26px; height: 26px; stroke: var(--green); }
 .card h3 { font-family: var(--ff-display); font-size: 1.28rem; font-weight: 600; margin-bottom: 10px; }
 .card p { color: var(--text-muted); font-size: 0.97rem; }
+.card:first-child { grid-column: span 2; display: grid; grid-template-columns: 72px 1fr; gap: 0 28px; align-items: start; }
+.card:first-child .ico { margin-bottom: 0; margin-top: 4px; }
 
 /* ============================================================
    PROCESS
 ============================================================ */
-.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; counter-reset: step; }
-.step { padding: 28px 24px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); position: relative; }
-.step .n { font-family: var(--ff-display); font-weight: 700; font-size: 2.6rem; color: rgba(22,199,132,0.25); line-height: 1; }
-.step h4 { font-family: var(--ff-display); font-size: 1.1rem; margin: 10px 0 8px; }
-.step p { color: var(--text-muted); font-size: 0.92rem; }
+.steps { display: grid; gap: 0; }
+.step { display: grid; grid-template-columns: 88px 1fr; gap: 0 48px; padding: 40px 0; border-top: 1px solid var(--border); background: transparent; border-radius: 0; position: relative; align-items: start; }
+.step:last-child { border-bottom: 1px solid var(--border); }
+.step .n { font-family: var(--ff-display); font-weight: 700; font-size: clamp(3rem, 6vw, 4.5rem); color: var(--green); line-height: 1; padding-top: 4px; }
+.step h4 { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; }
+.step p { color: var(--text-muted); font-size: 0.94rem; }
 
 /* ============================================================
    PORTFOLIO
@@ -301,7 +304,7 @@ form.lead-form { position: relative; z-index: 2; display: grid; gap: 16px; }
   font-family: var(--ff-body); font-size: 0.98rem; transition: border-color .2s, box-shadow .2s;
   appearance: none;
 }
-.field input::placeholder { color: #5c625c; }
+.field input::placeholder { color: #7a827a; }
 .field input:focus, .field select:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(22,199,132,0.15); }
 .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%239AA09A' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 42px; }
 .field select option { background: #0b0d0b; }
@@ -330,7 +333,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .hero { padding-top: 110px; }
-  .cards, .steps, .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .cards, .portfolio-grid { grid-template-columns: 1fr 1fr; }
   .cta-wrap { grid-template-columns: 1fr; padding: 36px; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
   .nav-links { position: fixed; inset: 72px 0 auto 0; flex-direction: column; background: rgba(10,10,10,0.97); backdrop-filter: blur(14px); padding: 30px 24px; gap: 22px; border-bottom: 1px solid var(--border); transform: translateY(-120%); transition: transform .35s ease; height: auto; }
@@ -338,8 +341,11 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
   .burger { display: flex; }
 }
 @media (max-width: 560px) {
-  .cards, .steps, .portfolio-grid, .form-row, .foot-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 24px; }
+  .cards, .portfolio-grid, .form-row, .foot-grid { grid-template-columns: 1fr; }
+  .step { grid-template-columns: 1fr; gap: 4px; padding: 28px 0; }
+  .step .n { font-size: 2.8rem; padding-top: 0; }
+  .card:first-child { grid-column: auto; grid-template-columns: 1fr; }
+  .card:first-child .ico { margin-bottom: 20px; margin-top: 0; }
   .hero-cta { flex-direction: column; }
   .hero-cta .btn { width: 100%; }
   .cta-wrap { padding: 26px; }
@@ -349,6 +355,21 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
   * { animation: none !important; scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ============================================================
+   FONDO LÍQUIDO ANIMADO (WebGL) — hero + cinta
+============================================================ */
+.hero-liquid { position: relative; isolation: isolate; }
+#liquid-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: -2; display: block; background: #04120c;
+}
+.hero-liquid-overlay {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(10,10,10,0.30), rgba(10,10,10,0.55));
+}
+/* La cinta se vuelve translúcida para que el gradiente se vea a través */
+.hero-liquid .marquee { background: rgba(10,10,10,0.35); }
 </style>
 </head>
 <body>
@@ -369,9 +390,14 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
       <a href="#portafolio">Portafolio</a>
       <a href="#contacto" class="btn btn-primary nav-cta">Pedí tu web</a>
     </nav>
-    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
+
+<!-- ============ HERO + CINTA con fondo líquido animado ============ -->
+<div class="hero-liquid">
+<canvas id="liquid-bg" aria-hidden="true"></canvas>
+<div class="hero-liquid-overlay"></div>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top">
@@ -386,11 +412,7 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
         </a>
         <a href="#portafolio" class="btn btn-ghost">Ver portafolio</a>
       </div>
-      <div class="hero-stats">
-        <div class="stat"><div class="num" data-count="100">0</div><div class="lbl">% a medida</div></div>
-        <div class="stat"><div class="num" data-count="5" data-suffix="+">0</div><div class="lbl">rubros diseñados</div></div>
-        <div class="stat"><div class="num" data-count="7" data-suffix=" días">0</div><div class="lbl">entrega promedio</div></div>
-      </div>
+      <p class="hero-trust">Diseño a medida · Entrega en <strong>7 días</strong> · Primera consulta gratis</p>
     </div>
 
     <div class="hero-visual reveal in">
@@ -414,12 +436,12 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
     <span>Barberías</span><span>Gimnasios</span><span>Restaurantes</span><span>Veterinarias</span><span>Farmacias</span><span>Peluquerías</span><span>Estudios</span>
   </div>
 </div>
+</div><!-- /.hero-liquid -->
 
 <!-- ============ SERVICIOS ============ -->
 <section class="section-pad" id="servicios">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Qué hacemos</span>
       <h2 class="h-sec">Todo lo que tu web necesita, <span class="gradient-text">sin vueltas</span>.</h2>
       <p class="sub-sec">No entregamos plantillas genéricas. Cada página se diseña desde cero pensando en cómo tus clientes te encuentran y te eligen.</p>
     </div>
@@ -462,7 +484,6 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 <section class="section-pad" id="proceso" style="background:var(--bg-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Cómo trabajamos</span>
       <h2 class="h-sec">De la idea a tu web <span class="gradient-text">en 4 pasos</span>.</h2>
       <p class="sub-sec">Simple, rápido y sin tecnicismos. Nosotros hacemos el trabajo pesado.</p>
     </div>
@@ -479,7 +500,6 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 <section class="section-pad" id="portafolio">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Portafolio</span>
       <h2 class="h-sec">Modelos que ya <span class="gradient-text">diseñamos</span>.</h2>
       <p class="sub-sec">Hacé clic en cualquiera para abrirlo en vivo en una pestaña nueva y navegarlo como lo haría tu cliente.</p>
     </div>
@@ -668,7 +688,10 @@ onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 /* ---- Mobile menu ---- */
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
-burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+burger.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
 /* ---- Reveal on scroll ---- */
@@ -676,19 +699,6 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.14 });
 document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4 * 0.08) + 's'; io.observe(el); });
-
-/* ---- Count up stats ---- */
-const countEls = document.querySelectorAll('[data-count]');
-const countIO = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '';
-    let cur = 0; const step = Math.max(1, Math.ceil(target / 40));
-    const tick = () => { cur += step; if (cur >= target) { el.textContent = target + suffix; } else { el.textContent = cur + suffix; requestAnimationFrame(tick); } };
-    tick(); countIO.unobserve(el);
-  });
-}, { threshold: 0.5 });
-countEls.forEach(el => countIO.observe(el));
 
 /* ---- Card cursor glow ---- */
 document.querySelectorAll('.card').forEach(card => {
@@ -753,6 +763,143 @@ form.addEventListener('submit', async (e) => {
     btn.innerHTML = 'Enviar solicitud <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
   }
 });
+</script>
+
+<!-- ============ FONDO LÍQUIDO ANIMADO (WebGL2, JS puro) ============ -->
+<script>
+(function () {
+  var canvas = document.getElementById("liquid-bg");
+  if (!canvas) return;
+  var COLORS = ["#04120c", "#062b1c", "#0a5c3c", "#16C784", "#093524"];
+  var gl = canvas.getContext("webgl2", { alpha: true, premultipliedAlpha: false, antialias: false, powerPreference: "default" });
+  if (!gl) { canvas.style.background = COLORS[0]; return; }
+
+  var PARAMS = { speed:0.5, scale:0.5, seed:8, turbAmp:0.5, turbFreq:0.6, turbIter:9, waveFreq:2.2, distBias:0.05, jellify:0, ditherMode:1, dither:0.05, exposure:1.15, contrast:1.1, saturation:1.1, loop:0, maxDpr:2 };
+
+  var VS = `#version 300 es
+precision highp float;
+in vec2 a_position;
+in vec2 a_texCoord;
+out vec2 v_uv;
+void main() { v_uv = a_texCoord; gl_Position = vec4(a_position, 0.0, 1.0); }`;
+
+  var FS = `#version 300 es
+precision highp float;
+in vec2 v_uv;
+out vec4 fragColor;
+#define NUM_COLORS 8
+uniform vec4 u_colors[NUM_COLORS];
+uniform int u_colors_length;
+uniform float u_seed; uniform float u_speed; uniform float u_loop; uniform float u_scale;
+uniform float u_turbAmp; uniform float u_turbFreq; uniform float u_turbIter; uniform float u_waveFreq;
+uniform float u_distBias; uniform float u_jellify; uniform float u_ditherMode; uniform float u_dither;
+uniform float u_exposure; uniform float u_contrast; uniform float u_saturation;
+uniform float u_time; uniform vec2 u_resolution; uniform float u_pixelRatio;
+const float GOLDEN_ANGLE = 2.3999632;
+const float TAU = 6.28318530;
+uvec3 hash3(uvec3 v){ v = v*1664525u+1013904223u; v.x+=v.y*v.z; v.y+=v.z*v.x; v.z+=v.x*v.y; v^=v>>16u; v.x+=v.y*v.z; v.y+=v.z*v.x; v.z+=v.x*v.y; return v; }
+vec3 seedRandom(float s){ uvec3 h=uvec3(floatBitsToUint(s),floatBitsToUint(s*1.5+7.31),floatBitsToUint(s*2.7+13.37)); h=hash3(h); return vec3(h)/float(0xFFFFFFFFu); }
+vec3 toLinear(vec3 c){ return pow(c, vec3(2.2)); }
+vec3 toSrgb(vec3 c){ return pow(clamp(c,0.0,1.0), vec3(0.4545)); }
+vec3 linearToOklab(vec3 c){ float l=0.4122214708*c.r+0.5363325363*c.g+0.0514459929*c.b; float m=0.2119034982*c.r+0.6806995451*c.g+0.1073969566*c.b; float s=0.0883024619*c.r+0.2817188376*c.g+0.6299787005*c.b; l=pow(max(l,0.0),1.0/3.0); m=pow(max(m,0.0),1.0/3.0); s=pow(max(s,0.0),1.0/3.0); return vec3(0.2104542553*l+0.7936177850*m-0.0040720468*s, 1.9779984951*l-2.4285922050*m+0.4505937099*s, 0.0259040371*l+0.7827717662*m-0.8086757660*s); }
+vec3 oklabToLinear(vec3 c){ float l=c.x+0.3963377774*c.y+0.2158037573*c.z; float m=c.x-0.1055613458*c.y-0.0638541728*c.z; float s=c.x-0.0894841775*c.y-1.2914855480*c.z; l=l*l*l; m=m*m*m; s=s*s*s; return vec3(4.0767416621*l-3.3077115913*m+0.2309699292*s, -1.2684380046*l+2.6097574011*m-0.3413193965*s, -0.0041960863*l-0.7034186147*m+1.7076147010*s); }
+vec3 oklabToLch(vec3 lab){ return vec3(lab.x, length(lab.yz), atan(lab.z, lab.y)); }
+vec3 lchToOklab(vec3 lch){ return vec3(lch.x, lch.y*cos(lch.z), lch.y*sin(lch.z)); }
+vec3 mixLch(vec3 lab0, vec3 lab1, float t){ vec3 a=oklabToLch(lab0); vec3 b=oklabToLch(lab1); if(a.y<0.05)a.z=b.z; if(b.y<0.05)b.z=a.z; float dh=b.z-a.z; if(dh>3.14159265)dh-=6.28318530; if(dh<-3.14159265)dh+=6.28318530; return lchToOklab(vec3(mix(a.x,b.x,t), mix(a.y,b.y,t), a.z+dh*t)); }
+vec3 getColor(int idx){ if(u_colors_length<1) return vec3(0.0); int i=clamp(idx,0,u_colors_length-1); return u_colors[i].rgb; }
+vec3 paletteN(float t, int count){ if(count<1) return vec3(0.0); if(count<2) return toLinear(getColor(0)); float seg=1.0/float(count-1); t=clamp(t,0.0,1.0); int idx=min(int(floor(t/seg)),count-2); float lt=clamp((t-float(idx)*seg)/seg,0.0,1.0); vec3 l0=linearToOklab(toLinear(getColor(idx))); vec3 l1=linearToOklab(toLinear(getColor(idx+1))); return oklabToLinear(mixLch(l0,l1,lt)); }
+float IGN(vec2 uv){ return fract(52.9829189*fract(dot(uv, vec2(0.06711056,0.00583715)))); }
+float quickNoise(vec2 I){ return fract(sin(dot(I, vec2(12.9898,78.233)))*43758.5453); }
+float getDither(vec2 I, float mode){ if(mode<0.5) return 0.5; if(mode<1.5) return IGN(I); return quickNoise(I); }
+vec3 softGamutMap(vec3 rgb){ float maxC=max(rgb.r,max(rgb.g,rgb.b)); float minC=min(rgb.r,min(rgb.g,rgb.b)); if(minC>=0.0 && maxC<=1.0) return rgb; vec3 lab=linearToOklab(max(rgb,0.0)); float L=clamp(lab.x,0.0,1.0); float C=length(lab.yz); float h=atan(lab.z,lab.y); float maxChroma=0.4*(1.0-pow(abs(2.0*L-1.0),2.0)); if(C>maxChroma*0.7){ float knee=maxChroma*0.7; C=knee+(maxChroma-knee)*tanh((C-knee)/(maxChroma-knee+0.001)); } return clamp(oklabToLinear(vec3(L, C*cos(h), C*sin(h))),0.0,1.0); }
+vec3 applyContrastSaturation(vec3 rgb, float contrast, float saturation){ vec3 lab=linearToOklab(rgb); float C=length(lab.yz); float h=atan(lab.z,lab.y); lab.x=clamp((lab.x-0.5)*contrast+0.5,0.0,1.0); C*=saturation; lab.y=C*cos(h); lab.z=C*sin(h); return oklabToLinear(lab); }
+void main(){
+  vec2 fragCoord=v_uv*u_resolution; vec2 r=u_resolution; vec2 p=(fragCoord*2.0-r)/r.y;
+  int colorCount=u_colors_length;
+  if(colorCount<1){ fragColor=vec4(0.0,0.0,0.0,1.0); return; }
+  float t=u_time*0.3;
+  float looping=step(0.5,u_loop);
+  float phase=TAU*u_time/max(u_loop,0.01);
+  float radius=u_loop*u_speed*0.3/TAU;
+  float tA=sin(phase)*radius; float tB=(1.0-cos(phase))*radius;
+  vec3 so=seedRandom(u_seed); vec3 so2=seedRandom(u_seed+100.0);
+  float sa=u_seed*GOLDEN_ANGLE; vec2 sp=(so2.xy-0.5)*TAU;
+  float cs=cos(sa); float sn=sin(sa); p=mat2(cs,-sn,sn,cs)*p;
+  float dither=getDither(floor(fragCoord/u_pixelRatio), u_ditherMode);
+  float totalVal=0.0; float totalWeight=0.0;
+  int turbIter=int(u_turbIter); float freq=1.0/max(u_turbFreq,0.01);
+  for(float i=0.0;i<4.0;i++){
+    float eph=i/4.0; vec2 q=p*u_scale; float sq=eph*eph;
+    if(u_jellify>0.5){ q.yx*=mix(1.0,0.5,1.0-exp(-sq)); }
+    float a=sp.x; float d=sp.y;
+    for(int j=2;j<13;j++){
+      if(j>=turbIter) break;
+      float fj=float(j);
+      float t1=mix(t*u_speed,tA,looping); float t2=mix(t*u_speed,tB,looping);
+      q+=u_turbAmp*sin(q.yx/freq*fj+t1+vec2(a,d)+so.xy*fj)/fj;
+      a+=cos(fj+d*1.2+q.x*2.0-t1+so2.z+t2*0.3*looping);
+      d+=sin(fj*q.y+a+so.z+t1+so2.y+t2*0.3*looping);
+    }
+    float v=0.5+0.5*sin(length(q.yx+vec2(a,d)*0.2)*u_waveFreq+i*i+so.x);
+    float w=smoothstep(0.0,0.5,eph)*smoothstep(1.0,0.5,eph);
+    totalVal+=v*w; totalWeight+=w;
+  }
+  float val=totalVal/totalWeight;
+  val=clamp((val-0.3)/0.4,0.0,1.0);
+  val=pow(val,exp(-u_distBias));
+  val=clamp(val+(dither-0.5)*u_dither,0.0,1.0);
+  vec3 col=paletteN(val,colorCount);
+  col*=u_exposure;
+  col=applyContrastSaturation(col,u_contrast,u_saturation);
+  col=softGamutMap(col);
+  col=toSrgb(col);
+  fragColor=vec4(col,1.0);
+}`;
+
+  function compile(src, type){ var s=gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){ console.error("shader:", gl.getShaderInfoLog(s)); } return s; }
+  var prog=gl.createProgram();
+  gl.attachShader(prog, compile(VS, gl.VERTEX_SHADER));
+  gl.attachShader(prog, compile(FS, gl.FRAGMENT_SHADER));
+  gl.linkProgram(prog); gl.useProgram(prog);
+  var vao=gl.createVertexArray(); gl.bindVertexArray(vao);
+  var pb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, pb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]), gl.STATIC_DRAW);
+  var pl=gl.getAttribLocation(prog,"a_position"); gl.enableVertexAttribArray(pl); gl.vertexAttribPointer(pl,2,gl.FLOAT,false,0,0);
+  var tb=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, tb); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0,0,1,0,0,1,0,1,1,0,1,1]), gl.STATIC_DRAW);
+  var tl=gl.getAttribLocation(prog,"a_texCoord"); gl.enableVertexAttribArray(tl); gl.vertexAttribPointer(tl,2,gl.FLOAT,false,0,0);
+  var U={}; ["u_colors","u_colors_length","u_seed","u_speed","u_loop","u_scale","u_turbAmp","u_turbFreq","u_turbIter","u_waveFreq","u_distBias","u_jellify","u_ditherMode","u_dither","u_exposure","u_contrast","u_saturation","u_time","u_resolution","u_pixelRatio"].forEach(function(n){ U[n]=gl.getUniformLocation(prog,n); });
+
+  function hexToRgba(hex){ var c=hex.replace("#",""); if(c.length===3){ c=c.split("").map(function(x){return x+x;}).join(""); } return [parseInt(c.substr(0,2),16)/255, parseInt(c.substr(2,2),16)/255, parseInt(c.substr(4,2),16)/255, 1]; }
+  var MAX=8; var buf=new Float32Array(MAX*4); var last=COLORS[COLORS.length-1];
+  for(var k=0;k<MAX;k++){ var rgba=hexToRgba(k<COLORS.length?COLORS[k]:last); buf[k*4]=rgba[0]; buf[k*4+1]=rgba[1]; buf[k*4+2]=rgba[2]; buf[k*4+3]=rgba[3]; }
+  var colorCount=Math.min(Math.max(COLORS.length,1),MAX);
+
+  var bw=0,bh=0,dpr=1;
+  function resize(){ dpr=Math.min(Math.max(PARAMS.maxDpr,0.5), window.devicePixelRatio||1); var w=Math.max(1,Math.floor(canvas.clientWidth*dpr)); var h=Math.max(1,Math.floor(canvas.clientHeight*dpr)); if(w!==bw||h!==bh){ bw=w; bh=h; canvas.width=w; canvas.height=h; gl.viewport(0,0,w,h); return true; } return false; }
+  resize();
+  if(typeof ResizeObserver!=="undefined"){ new ResizeObserver(function(){ if(resize()) draw(); }).observe(canvas); }
+
+  function draw(){ if(gl.isContextLost()) return; gl.useProgram(prog); gl.bindVertexArray(vao); gl.clearColor(0,0,0,0); gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform4fv(U.u_colors, buf); gl.uniform1i(U.u_colors_length, colorCount);
+    gl.uniform1f(U.u_seed, PARAMS.seed); gl.uniform1f(U.u_speed, PARAMS.speed); gl.uniform1f(U.u_loop, PARAMS.loop); gl.uniform1f(U.u_scale, PARAMS.scale);
+    gl.uniform1f(U.u_turbAmp, PARAMS.turbAmp); gl.uniform1f(U.u_turbFreq, PARAMS.turbFreq); gl.uniform1f(U.u_turbIter, PARAMS.turbIter); gl.uniform1f(U.u_waveFreq, PARAMS.waveFreq);
+    gl.uniform1f(U.u_distBias, PARAMS.distBias); gl.uniform1f(U.u_jellify, PARAMS.jellify?1:0); gl.uniform1f(U.u_ditherMode, PARAMS.ditherMode); gl.uniform1f(U.u_dither, PARAMS.dither);
+    gl.uniform1f(U.u_exposure, PARAMS.exposure); gl.uniform1f(U.u_contrast, PARAMS.contrast); gl.uniform1f(U.u_saturation, PARAMS.saturation);
+    gl.uniform1f(U.u_time, clock); gl.uniform2f(U.u_resolution, bw, bh); gl.uniform1f(U.u_pixelRatio, dpr);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
+  var clock=0, prev=0, raf=0, running=false;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var onScreen=true, tabVis=true;
+  function canRun(){ return !reduce && onScreen && tabVis && !gl.isContextLost(); }
+  function tick(now){ if(!running) return; raf=requestAnimationFrame(tick); var d=(now-prev)/1000; prev=now; clock+=Math.min(d,0.1)*PARAMS.speed; draw(); }
+  function start(){ if(running||!canRun()) return; running=true; prev=performance.now(); raf=requestAnimationFrame(tick); }
+  function stop(){ running=false; if(raf) cancelAnimationFrame(raf); raf=0; }
+  if(typeof IntersectionObserver!=="undefined"){ new IntersectionObserver(function(es){ onScreen=es.some(function(e){return e.isIntersecting;}); if(canRun()) start(); else stop(); }, {threshold:0}).observe(canvas); }
+  document.addEventListener("visibilitychange", function(){ tabVis=document.visibilityState!=="hidden"; if(canRun()) start(); else stop(); });
+  canvas.addEventListener("webglcontextlost", function(e){ e.preventDefault(); stop(); }, false);
+  if(canRun()) start(); else draw();
+})();
 </script>
 </body>
 </html>
