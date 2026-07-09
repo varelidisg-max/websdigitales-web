@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grilled — Parrilla de alta gama · Montevideo</title>
+  <meta name="description" content="Cortes madurados, brasa de quebracho, cocción lenta. Rambla República del Perú 1234, Montevideo. Martes a domingo, 20:00–01:00.">
+  <meta property="og:title" content="Grilled — Parrilla · Montevideo">
+  <meta property="og:description" content="El fuego como lengua materna. Brasa de quebracho, cortes madurados, cocción lenta.">
+  <meta property="og:image" content="assets/img/hero-poster.webp">
+  <meta property="og:type" content="restaurant">
+
+  <link rel="preload" as="image" href="assets/img/hero-poster.webp" fetchpriority="high">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter:wght@300;400;500&display=swap">
+
+  <link rel="stylesheet" href="styles.css?v=20260709">
+</head>
+<body>
+
+  <a href="#carta" class="skip-link">Ir a la carta</a>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" data-cursor-root aria-hidden="true">
+    <span class="cursor-dot"></span>
+    <span class="cursor-ring"></span>
+  </div>
+
+  <!-- ════════════ SPLASH ════════════ -->
+  <div class="splash" data-splash aria-hidden="true">
+    <div class="splash-inner">
+      <span class="splash-logo">Grilled</span>
+      <span class="splash-line" aria-hidden="true"></span>
+    </div>
+  </div>
+
+  <!-- ════════════ NAV ════════════ -->
+  <header class="nav" id="site-nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-brand" aria-label="Grilled — inicio">Grilled</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#concepto" class="nav-link">Historia</a>
+        <a href="#carta"    class="nav-link">Carta</a>
+        <a href="#galeria"  class="nav-link">Galería</a>
+        <a href="#info"     class="nav-link">Info</a>
+      </nav>
+      <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile nav fullscreen -->
+  <div class="nav-mobile" id="nav-mobile" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+    <button class="nav-mobile-close" aria-label="Cerrar menú">
+      <span></span><span></span>
+    </button>
+    <nav>
+      <a href="#concepto">Historia</a>
+      <a href="#carta">Carta</a>
+      <a href="#galeria">Galería</a>
+      <a href="#info">Info</a>
+    </nav>
+    <p class="nav-mobile-footer">Rambla República del Perú 1234 · Montevideo</p>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ════════════════════════════════════════════════════════
+         HERO — VIDEO LOOP
+    ════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero" aria-label="Portada">
+      <div class="hero-media">
+        <video
+          class="hero-video"
+          autoplay muted loop playsinline
+          preload="metadata"
+          poster="assets/img/hero-poster.webp"
+          aria-hidden="true">
+          <source src="assets/video/hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-tint"  aria-hidden="true"></div>
+      </div>
+      <div class="hero-vignette" aria-hidden="true"></div>
+      <div class="hero-grain"   aria-hidden="true"></div>
+
+      <div class="hero-content">
+        <p class="hero-kicker">Montevideo&ensp;·&ensp;Brasa de quebracho</p>
+        <h1 class="hero-title">
+          <em>Grilled</em>
+        </h1>
+        <p class="hero-loc">
+          Rambla República del Perú 1234&emsp;·&emsp;Mar–Dom&ensp;20:00–01:00
+        </p>
+        <div class="hero-actions">
+          <a href="#carta" class="btn btn-primary">Ver la carta</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll" aria-hidden="true">
+        <span class="hero-scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- Marquee separator 1 -->
+    <div class="marquee marquee-sep" aria-hidden="true">
+      <div class="marquee-track" data-marquee>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         CONCEPTO / HISTORIA
+    ════════════════════════════════════════════════════════ -->
+    <section class="section-concepto" id="concepto" aria-label="El restaurante">
+      <div class="container">
+
+        <div class="concepto-header">
+          <span class="section-kicker" data-reveal>El restaurante</span>
+          <h2 class="concepto-title" data-scatter>El fuego como lengua materna.</h2>
+        </div>
+
+        <p class="concepto-body" data-reveal>
+          Hay una forma de cocinar que no se aprende: se hereda. Grilled nace de esa certeza —
+          de que el fuego transforma, que el tiempo importa, que un buen corte no necesita más
+          que brasa de quebracho y sal. Sin atajos. Sin concesiones. Una cocina que respeta
+          el origen del producto y la paciencia del proceso.
+        </p>
+
+        <figure class="concepto-figura" data-reveal>
+          <img src="assets/img/concept.webp"
+               alt="Brasas de quebracho ardiendo en la parrilla de Grilled"
+               loading="lazy" decoding="async">
+        </figure>
+
+        <div class="concepto-pilares">
+
+          <article class="pilar" data-reveal>
+            <figure class="pilar-img">
+              <img src="assets/img/pillar-fire.webp"
+                   alt="Llamas de quebracho en la parrilla"
+                   loading="lazy" decoding="async">
+            </figure>
+            <div class="pilar-texto">
+              <h3 class="pilar-titulo">El fuego</h3>
+              <p>Solo quebracho. La madera más densa del continente arde lento, alcanza una temperatura
+                 estable y cede al corte un humo que ningún gas puede imitar.</p>
+            </div>
+          </article>
+
+          <article class="pilar" data-reveal>
+            <figure class="pilar-img">
+              <img src="assets/img/pillar-cut.webp"
+                   alt="Corte de bife con marmoleo"
+                   loading="lazy" decoding="async">
+            </figure>
+            <div class="pilar-texto">
+              <h3 class="pilar-titulo">El corte</h3>
+              <p>Trabajamos con frigoríficos de selección propia. Cada corte llega con nombre,
+                 peso y origen. El marmoleo no se improvisa: se elige desde el principio.</p>
+            </div>
+          </article>
+
+          <article class="pilar" data-reveal>
+            <figure class="pilar-img">
+              <img src="assets/img/pillar-time.webp"
+                   alt="Humo y tiempo en la cocción lenta"
+                   loading="lazy" decoding="async">
+            </figure>
+            <div class="pilar-texto">
+              <h3 class="pilar-titulo">El tiempo</h3>
+              <p>Maduración en seco, cocción lenta, reposo en tabla. El tiempo es el único ingrediente
+                 que no podemos sustituir y el que más resistencia oponen quienes no entienden de oficio.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee separator 2 -->
+    <div class="marquee marquee-sep" aria-hidden="true">
+      <div class="marquee-track" data-marquee>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+        <span>Fuego</span><span class="mq-dot">·</span>
+        <span>Quebracho</span><span class="mq-dot">·</span>
+        <span>Brasa</span><span class="mq-dot">·</span>
+        <span>Maduración</span><span class="mq-dot">·</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════
+         LA CARTA
+    ════════════════════════════════════════════════════════ -->
+    <section class="section-carta" id="carta" aria-label="La carta">
+      <div class="container">
+
+        <div class="carta-encabezado" data-reveal>
+          <span class="section-kicker">La propuesta</span>
+          <h2 class="carta-titulo">La carta</h2>
+          <p class="carta-aviso">Temporada actual&ensp;·&ensp;Disponibilidad sujeta a provisión</p>
+        </div>
+
+        <!-- PARA EMPEZAR -->
+        <div class="carta-seccion" data-reveal>
+          <h3 class="carta-cat">Para empezar</h3>
+          <ul class="carta-lista" role="list">
+            <li class="carta-plato" data-reveal style="--stagger:0">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Provoleta a la parrilla</span>
+                <span class="carta-plato-desc">Provolone fundido sobre piedra, orégano y aceite de oliva ahumado.</span>
+              </div>
+              <span class="carta-plato-precio">$580</span>
+            </li>
+            <li class="carta-plato" data-reveal style="--stagger:1">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Chorizo de la casa</span>
+                <span class="carta-plato-desc">Elaboración propia, siete días de curado, pan de masa madre.</span>
+              </div>
+              <span class="carta-plato-precio">$520</span>
+            </li>
+            <li class="carta-plato" data-reveal style="--stagger:2">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Mollejas al limón</span>
+                <span class="carta-plato-desc">Doradas a fuego lento, limón asado, sal marina.</span>
+              </div>
+              <span class="carta-plato-precio">$760</span>
+            </li>
+            <li class="carta-plato" data-reveal style="--stagger:3">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Empanadas de osobuco</span>
+                <span class="carta-plato-desc">Ocho horas de cocción, masa fina. Tres unidades.</span>
+              </div>
+              <span class="carta-plato-precio">$640</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DE LA PARRILLA -->
+        <div class="carta-seccion carta-seccion-parrilla" data-reveal>
+          <h3 class="carta-cat">De la parrilla</h3>
+          <ul class="carta-lista" role="list">
+            <li class="carta-plato carta-plato-destacado" data-reveal data-tilt style="--stagger:0">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Bife de chorizo</span>
+                <span class="carta-plato-meta">350 g&ensp;·&ensp;Maduración 21 días&ensp;·&ensp;Brasa de quebracho</span>
+              </div>
+              <span class="carta-plato-precio">$1.380</span>
+            </li>
+            <li class="carta-plato carta-plato-destacado" data-reveal data-tilt style="--stagger:1">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Ojo de bife</span>
+                <span class="carta-plato-meta">400 g&ensp;·&ensp;Alto marmoleo&ensp;·&ensp;Sal Maldon</span>
+              </div>
+              <span class="carta-plato-precio">$1.520</span>
+            </li>
+            <li class="carta-plato carta-plato-destacado" data-reveal data-tilt style="--stagger:2">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Asado de tira</span>
+                <span class="carta-plato-meta">Corte ancho&ensp;·&ensp;Tres horas al fuego&ensp;·&ensp;Provisión limitada</span>
+              </div>
+              <span class="carta-plato-precio">$1.240</span>
+            </li>
+            <li class="carta-plato" data-reveal style="--stagger:3">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Vacío</span>
+                <span class="carta-plato-meta">Fibra tierna&ensp;·&ensp;Sellado a la llama&ensp;·&ensp;Chimichurri de la casa</span>
+              </div>
+              <span class="carta-plato-precio">$1.180</span>
+            </li>
+            <li class="carta-plato" data-reveal style="--stagger:4">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Lomo</span>
+                <span class="carta-plato-meta">300 g&ensp;·&ensp;El corte más magro&ensp;·&ensp;Manteca de hierbas</span>
+              </div>
+              <span class="carta-plato-precio">$1.640</span>
+            </li>
+            <li class="carta-plato carta-plato-especial" data-reveal style="--stagger:5">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Cordero patagónico</span>
+                <span class="carta-plato-meta">A las brasas&ensp;·&ensp;Romero fresco&ensp;·&ensp;Para dos</span>
+              </div>
+              <span class="carta-plato-precio">$2.980</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GUARNICIONES + POSTRES en columnas -->
+        <div class="carta-doble" data-reveal>
+
+          <div class="carta-seccion">
+            <h3 class="carta-cat">Guarniciones</h3>
+            <ul class="carta-lista" role="list">
+              <li class="carta-plato" data-reveal style="--stagger:0">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Papas al rescoldo</span>
+                  <span class="carta-plato-desc">Cocidas entre brasas, piel crocante.</span>
+                </div>
+                <span class="carta-plato-precio">$420</span>
+              </li>
+              <li class="carta-plato" data-reveal style="--stagger:1">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Ensalada de estación</span>
+                  <span class="carta-plato-desc">Hojas verdes, tomate de campo, vinagreta cítrica.</span>
+                </div>
+                <span class="carta-plato-precio">$390</span>
+              </li>
+              <li class="carta-plato" data-reveal style="--stagger:2">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Vegetales asados</span>
+                  <span class="carta-plato-desc">Morrón, zucchini y cebolla morada a la parrilla.</span>
+                </div>
+                <span class="carta-plato-precio">$410</span>
+              </li>
+              <li class="carta-plato" data-reveal style="--stagger:3">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Puré ahumado</span>
+                  <span class="carta-plato-desc">Papa, manteca noisette, un punto de humo.</span>
+                </div>
+                <span class="carta-plato-precio">$440</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="carta-seccion">
+            <h3 class="carta-cat">Postres</h3>
+            <ul class="carta-lista" role="list">
+              <li class="carta-plato" data-reveal style="--stagger:0">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Flan con dulce de leche</span>
+                  <span class="carta-plato-desc">Receta de siempre, crema batida a mano.</span>
+                </div>
+                <span class="carta-plato-precio">$380</span>
+              </li>
+              <li class="carta-plato" data-reveal style="--stagger:1">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Panqueque de dulce de leche</span>
+                  <span class="carta-plato-desc">Flameado en mesa, helado de crema.</span>
+                </div>
+                <span class="carta-plato-precio">$460</span>
+              </li>
+              <li class="carta-plato" data-reveal style="--stagger:2">
+                <div class="carta-plato-info">
+                  <span class="carta-plato-nom">Chocolate y sal</span>
+                  <span class="carta-plato-desc">Coulant tibio, helado de vainilla, escamas de sal.</span>
+                </div>
+                <span class="carta-plato-precio">$490</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- VINOS -->
+        <div class="carta-seccion carta-vinos" data-reveal>
+          <h3 class="carta-cat">Para acompañar — selección de vinos</h3>
+          <ul class="carta-lista" role="list">
+            <li class="carta-plato carta-plato-vino" data-reveal style="--stagger:0">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Tannat Reserva</span>
+                <span class="carta-plato-desc">El tinto de la casa. Cuerpo y estructura.</span>
+              </div>
+              <span class="carta-plato-precio carta-precio-vino">
+                <span>Copa $340</span>
+                <span>Botella $1.680</span>
+              </span>
+            </li>
+            <li class="carta-plato carta-plato-vino" data-reveal style="--stagger:1">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Malbec de altura</span>
+                <span class="carta-plato-desc">Fruta madura, taninos suaves.</span>
+              </div>
+              <span class="carta-plato-precio carta-precio-vino">
+                <span>Copa $360</span>
+                <span>Botella $1.780</span>
+              </span>
+            </li>
+            <li class="carta-plato carta-plato-vino" data-reveal style="--stagger:2">
+              <div class="carta-plato-info">
+                <span class="carta-plato-nom">Albariño</span>
+                <span class="carta-plato-desc">Fresco y mineral, para las entradas.</span>
+              </div>
+              <span class="carta-plato-precio carta-precio-vino">
+                <span>Copa $320</span>
+                <span>Botella $1.540</span>
+              </span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════
+         GALERÍA — HORIZONTAL PINNED
+    ════════════════════════════════════════════════════════ -->
+    <section class="section-galeria showcase" id="galeria" aria-label="Galería fotográfica">
+      <div class="galeria-header" data-reveal>
+        <span class="section-kicker">El ambiente</span>
+        <h2 class="galeria-titulo">Imágenes del fuego</h2>
+      </div>
+      <div class="galeria-track" data-showcase>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-1.webp"  alt="Carne asada a la parrilla"      loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-3.webp"  alt="Ojo de bife madurado"           loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/pillar-fire.webp" alt="Llamas de quebracho"           loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-4.webp"  alt="Humo y brasa en la parrilla"    loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-5.webp"  alt="Brasas encendidas de quebracho" loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-6.webp"  alt="Costillas a la brasa"           loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/gallery-7.webp"  alt="Ambiente del restaurante de noche" loading="lazy" decoding="async">
+        </figure>
+        <figure class="galeria-item">
+          <img src="assets/img/concept.webp"    alt="Brasas y parrilla"              loading="lazy" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════════
+         INFO / UBICACIÓN
+    ════════════════════════════════════════════════════════ -->
+    <section class="section-info" id="info" aria-label="Información y ubicación">
+      <div class="container">
+        <div class="info-grid">
+
+          <div class="info-datos" data-reveal>
+            <span class="section-kicker">Dónde estamos</span>
+            <h2 class="info-titulo">Información</h2>
+            <dl class="info-lista">
+              <div class="info-fila">
+                <dt>Dirección</dt>
+                <dd>Rambla República del Perú 1234<br>Montevideo, Uruguay</dd>
+              </div>
+              <div class="info-fila">
+                <dt>Horarios</dt>
+                <dd>
+                  Martes a domingo<br>
+                  20:00&ensp;–&ensp;01:00<br>
+                  <span class="info-cerrado">Lunes cerrado</span>
+                </dd>
+              </div>
+              <div class="info-fila">
+                <dt>Reservas</dt>
+                <dd>Sin reservas — por orden de llegada</dd>
+              </div>
+              <div class="info-fila">
+                <dt>Instagram</dt>
+                <dd>
+                  <a href="https://instagram.com/grilled" target="_blank" rel="noopener noreferrer" class="info-link">
+                    @grilled
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="info-mapa" data-reveal aria-hidden="true">
+            <div class="mapa-placeholder">
+              <svg class="mapa-pin" viewBox="0 0 24 32" fill="none" aria-hidden="true">
+                <path d="M12 0C7.582 0 4 3.582 4 8c0 6 8 16 8 16s8-10 8-16c0-4.418-3.582-8-8-8z" fill="var(--accent)"/>
+                <circle cx="12" cy="8" r="3" fill="var(--bg)"/>
+              </svg>
+              <span class="mapa-label">Rambla República del Perú 1234</span>
+              <span class="mapa-sub">Montevideo, Uruguay</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ════════════ FOOTER ════════════ -->
+  <footer class="footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <span class="footer-logo">Grilled</span>
+        <p class="footer-tagline">Brasa de quebracho&ensp;·&ensp;Montevideo</p>
+      </div>
+      <nav class="footer-nav" aria-label="Pie de página">
+        <a href="#concepto">Historia</a>
+        <a href="#carta">Carta</a>
+        <a href="#galeria">Galería</a>
+        <a href="#info">Info</a>
+      </nav>
+      <div class="footer-legal">
+        <p>© 2026 Grilled</p>
+        <p>
+          Imágenes bajo Creative Commons.&ensp;
+          <a href="creditos.html" class="footer-credits-link">Créditos fotográficos →</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ════════════ SCRIPTS ════════════ -->
+  <script defer src="lib/gsap.min.js?v=20260709"></script>
+  <script defer src="lib/ScrollTrigger.min.js?v=20260709"></script>
+  <script defer src="lib/manifest.js?v=20260709"></script>
+  <script defer src="main.js?v=20260709"></script>
+</body>
+</html>

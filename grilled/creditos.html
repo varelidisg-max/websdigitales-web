@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créditos fotográficos — Grilled</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@300..500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260709">
+  <style>
+    .credits-page {
+      padding-top: calc(var(--nav-h) + 3rem);
+      padding-bottom: 6rem;
+    }
+    .credits-title {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-variation-settings: "opsz" 72, "wght" 350, "SOFT" 70;
+      color: var(--cream);
+      margin-bottom: .5rem;
+    }
+    .credits-subtitle {
+      font-size: .875rem;
+      color: var(--cream-3);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2.5rem;
+    }
+    .credits-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .credits-table th {
+      text-align: left;
+      font-size: .6875rem;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: .75rem 1rem .75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .credits-table td {
+      vertical-align: top;
+      padding: 1rem 1rem 1rem 0;
+      border-bottom: 1px solid var(--line-2);
+      font-size: .875rem;
+      color: var(--cream-2);
+    }
+    .credits-table td:first-child {
+      width: clamp(4rem, 8vw, 7rem);
+    }
+    .credits-table td img {
+      width: clamp(4rem, 8vw, 7rem);
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+    .credits-table td a {
+      color: var(--gold);
+      border-bottom: 1px solid rgba(196,154,91,.3);
+      transition: color .2s, border-color .2s;
+    }
+    .credits-table td a:hover { color: var(--cream); border-color: var(--cream); }
+    .cred-title { font-weight: 500; color: var(--cream); margin-bottom: .25rem; }
+    .cred-lic {
+      display: inline-block;
+      font-size: .6875rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(197,48,30,.08);
+      padding: .1rem .4rem;
+      border-radius: 2px;
+      margin-top: .35rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .8125rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--cream-3);
+      margin-bottom: 2.5rem;
+      transition: color .3s;
+    }
+    .back-link:hover { color: var(--cream); }
+    .back-arrow { font-style: normal; }
+    .overflow-table { overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Ir al contenido</a>
+
+  <!-- NAV -->
+  <header class="nav is-scrolled" role="banner">
+    <div class="nav-container">
+      <a href="index.html" class="nav-brand">Grilled</a>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="index.html#concepto" class="nav-link">Concepto</a>
+        <a href="index.html#carta"    class="nav-link">La Carta</a>
+        <a href="index.html#galeria"  class="nav-link">Galería</a>
+        <a href="index.html#info"     class="nav-link">Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="credits-page">
+    <div class="container">
+      <a href="index.html" class="back-link">
+        <span class="back-arrow">←</span> Volver al inicio
+      </a>
+      <h1 class="credits-title">Créditos</h1>
+      <p class="credits-subtitle">
+        Las imágenes utilizadas en este sitio web provienen de Openverse
+        y se usan bajo sus respectivas licencias Creative Commons.
+        Se agradece el trabajo de cada autor.
+      </p>
+
+      <div class="overflow-table">
+        <table class="credits-table">
+          <thead>
+            <tr>
+              <th>Imagen</th>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Licencia</th>
+              <th>Fuente</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td><img src="assets/img/hero-poster.webp" alt="Hero poster" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Dark Night</div>
+                Portada del video hero
+              </td>
+              <td>
+                <a href="https://stocksnap.io/author/34947" target="_blank" rel="noopener">Tao Wen</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC0 1.0</span><br>
+                <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://stocksnap.io/photo/dark-night-GX4CAUPRA7" target="_blank" rel="noopener">StockSnap</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/concept.webp" alt="Concepto" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Pizza in Oven DSC00179</div>
+                Sección Concepto / Historia
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/62558987@N07" target="_blank" rel="noopener">kurmanstaff</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/62558987@N07/11658303855" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/pillar-fire.webp" alt="Fuego" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Cacti Choirmaster</div>
+                Pilar — El Fuego
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/22714323@N06" target="_blank" rel="noopener">Tony Fischer Photography</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/22714323@N06/4827948646" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/pillar-cut.webp" alt="El corte" loading="lazy"></td>
+              <td>
+                <div class="cred-title">DFC 1757 — Raw beef</div>
+                Pilar — El Corte
+              </td>
+              <td>
+                <a href="https://www.flickr.com/people/PattayaPatrol" target="_blank" rel="noopener">PattayaPatrol</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-SA 4.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://commons.wikimedia.org/w/index.php?curid=190867115" target="_blank" rel="noopener">Wikimedia Commons</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/pillar-time.webp" alt="El tiempo" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Smoke From the Pit</div>
+                Pilar — El Tiempo
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/39653492@N07" target="_blank" rel="noopener">Matt Brock ☀</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-NC-SA 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/39653492@N07/6659612807" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-1.webp" alt="Galería 1" loading="lazy"></td>
+              <td>
+                <div class="cred-title">A cooked beef steak closeup</div>
+                Galería
+              </td>
+              <td>
+                <a href="https://stocksnap.io/author/55747" target="_blank" rel="noopener">Jakub Kapusnak</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC0 1.0</span><br>
+                <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.rawpixel.com/image/447751/delicious-cooked-steak-closeup" target="_blank" rel="noopener">rawpixel</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-3.webp" alt="Galería 3" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Roasted Rib Eye 650g</div>
+                Galería
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/10559879@N00" target="_blank" rel="noopener">avlxyz</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-SA 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/10559879@N00/299663818" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-4.webp" alt="Galería 4" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Tokyo_5</div>
+                Galería
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/69825860@N04" target="_blank" rel="noopener">hans-johnson</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-ND 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-nd/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/69825860@N04/42229902024" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-5.webp" alt="Galería 5" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Dying Fire at Night</div>
+                Galería
+              </td>
+              <td>
+                <a href="https://www.flickr.com/photos/24354425@N03" target="_blank" rel="noopener">sjrankin</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-NC 2.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-nc/2.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.flickr.com/photos/24354425@N03/23578524483" target="_blank" rel="noopener">Flickr</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-6.webp" alt="Galería 6" loading="lazy"></td>
+              <td>
+                <div class="cred-title">BBQ public domain image</div>
+                Galería
+              </td>
+              <td>usbotschaftberlin</td>
+              <td>
+                <span class="cred-lic">CC0 1.0</span><br>
+                <a href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://www.rawpixel.com/image/8733470/bbq-public-domain-image-from-flickr" target="_blank" rel="noopener">rawpixel</a></td>
+            </tr>
+
+            <tr>
+              <td><img src="assets/img/gallery-7.webp" alt="Galería 7" loading="lazy"></td>
+              <td>
+                <div class="cred-title">Spring-Echo — Restaurante</div>
+                Galería
+              </td>
+              <td>
+                <a href="https://commons.wikimedia.org/wiki/User:Jason_M._C.,_Han" target="_blank" rel="noopener">Jason M. C., Han</a>
+              </td>
+              <td>
+                <span class="cred-lic">CC BY-SA 4.0</span><br>
+                <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Ver licencia</a>
+              </td>
+              <td><a href="https://commons.wikimedia.org/w/index.php?curid=68956947" target="_blank" rel="noopener">Wikimedia Commons</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <a href="index.html" class="footer-logo">Grilled</a>
+          <span class="footer-tagline">Rambla República del Perú 1234, Montevideo</span>
+        </div>
+        <nav class="footer-nav" aria-label="Pie de página">
+          <a href="index.html">Inicio</a>
+          <a href="creditos.html">Créditos</a>
+        </nav>
+        <div class="footer-legal">
+          Imágenes bajo licencias CC via Openverse.<br>
+          &copy; Grilled 2026.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
