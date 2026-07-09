@@ -239,8 +239,6 @@ header.nav.scrolled {
 .card .ico svg { width: 26px; height: 26px; stroke: var(--green); }
 .card h3 { font-family: var(--ff-display); font-size: 1.28rem; font-weight: 600; margin-bottom: 10px; }
 .card p { color: var(--text-muted); font-size: 0.97rem; }
-.card:first-child { grid-column: span 2; display: grid; grid-template-columns: 72px 1fr; gap: 0 28px; align-items: start; }
-.card:first-child .ico { margin-bottom: 0; margin-top: 4px; }
 
 /* ============================================================
    PROCESS
@@ -248,9 +246,9 @@ header.nav.scrolled {
 .steps { display: grid; gap: 0; }
 .step { display: grid; grid-template-columns: 88px 1fr; gap: 0 48px; padding: 40px 0; border-top: 1px solid var(--border); background: transparent; border-radius: 0; position: relative; align-items: start; }
 .step:last-child { border-bottom: 1px solid var(--border); }
-.step .n { font-family: var(--ff-display); font-weight: 700; font-size: clamp(3rem, 6vw, 4.5rem); color: var(--green); line-height: 1; padding-top: 4px; }
-.step h4 { font-family: var(--ff-display); font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; }
-.step p { color: var(--text-muted); font-size: 0.94rem; }
+.step .n { grid-column: 1; grid-row: 1 / span 2; font-family: var(--ff-display); font-weight: 700; font-size: clamp(3rem, 6vw, 4.5rem); color: var(--green); line-height: 1; padding-top: 4px; }
+.step h4 { grid-column: 2; font-family: var(--ff-display); font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; }
+.step p { grid-column: 2; color: var(--text-muted); font-size: 0.94rem; max-width: 60ch; }
 
 /* ============================================================
    PORTFOLIO
@@ -343,9 +341,8 @@ footer { border-top: 1px solid var(--border); padding: 60px 0 34px; background: 
 @media (max-width: 560px) {
   .cards, .portfolio-grid, .form-row, .foot-grid { grid-template-columns: 1fr; }
   .step { grid-template-columns: 1fr; gap: 4px; padding: 28px 0; }
-  .step .n { font-size: 2.8rem; padding-top: 0; }
-  .card:first-child { grid-column: auto; grid-template-columns: 1fr; }
-  .card:first-child .ico { margin-bottom: 20px; margin-top: 0; }
+  .step .n, .step h4, .step p { grid-column: 1; }
+  .step .n { grid-row: auto; font-size: 2.8rem; padding-top: 0; }
   .hero-cta { flex-direction: column; }
   .hero-cta .btn { width: 100%; }
   .cta-wrap { padding: 26px; }
